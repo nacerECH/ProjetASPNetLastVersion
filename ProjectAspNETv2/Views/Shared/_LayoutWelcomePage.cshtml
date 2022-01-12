@@ -107,41 +107,43 @@
                                         <!--====== Dropdown ======-->
 
                                         <span class="js-menu-toggle"></span>
-                                        <ul style="width:120px">
-                                            <li>
+                                        @*<ul style="width:120px">
+                                                <li>
 
-                                                <a href="dashboard.html">
-                                                    <i class="fas fa-user-circle u-s-m-r-6"></i>
+                                                    <a href="dashboard.html">
+                                                        <i class="fas fa-user-circle u-s-m-r-6"></i>
 
-                                                    <span>Account</span>
-                                                </a>
-                                            </li>
-                                            <li>
+                                                        <span>Account</span>
+                                                    </a>
+                                                </li>
+                                                <li>
 
-                                                <a href="@Url.Action("Signup", "Welcome")">
-                                                    <i class="fas fa-user-plus u-s-m-r-6"></i>
+                                                    <a href="@Url.Action("Signup", "Welcome")">
+                                                        <i class="fas fa-user-plus u-s-m-r-6"></i>
 
-                                                    <span>Signup</span>
-                                                </a>
-                                            </li>
-                                            <li>
+                                                        <span>Signup</span>
+                                                    </a>
+                                                </li>
+                                                <li>
 
-                                                <a href="@Url.Action("Signin", "Welcome")">
-                                                    <i class="fas fa-lock u-s-m-r-6"></i>
+                                                    <a href="@Url.Action("Signin", "Welcome")">
+                                                        <i class="fas fa-lock u-s-m-r-6"></i>
 
-                                                    <span>Signin</span>
-                                                </a>
-                                            </li>
-                                            <li>
+                                                        <span>Signin</span>
+                                                    </a>
+                                                </li>
+                                                <li>
 
-                                                <a href="signup.html">
-                                                    <i class="fas fa-lock-open u-s-m-r-6"></i>
+                                                    <a href="signup.html">
+                                                        <i class="fas fa-lock-open u-s-m-r-6"></i>
 
-                                                    <span>Signout</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                                        <span>Signout</span>
+                                                    </a>
+                                                </li>
+                                            </ul>*@
                                         <!--====== End - Dropdown ======-->
+                                        @Html.Partial("_LoginPartial")
+
                                     </li>
                                     <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Settings">
 
