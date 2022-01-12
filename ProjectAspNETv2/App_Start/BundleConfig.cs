@@ -24,7 +24,17 @@ namespace ProjectAspNETv2
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/theme/css/vendor.css",
+                      "~/Content/theme/css/utility.css",
+                      "~/Content/theme/css/app.css"
+                      ));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                     "~/Content/theme/js/vendor.js",
+                     "~/Content/theme/js/jquery.shopnav.js",
+                     "~/Content/theme/js/app.js"));
         }
     }
 }
