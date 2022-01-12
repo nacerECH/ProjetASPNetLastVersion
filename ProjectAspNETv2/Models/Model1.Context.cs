@@ -13,10 +13,10 @@ namespace ProjectAspNETv2.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities3 : DbContext
+    public partial class Entities4 : DbContext
     {
-        public Entities3()
-            : base("name=Entities3")
+        public Entities4()
+            : base("name=Entities4")
         {
         }
     
@@ -33,7 +33,8 @@ namespace ProjectAspNETv2.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ContactSupport> ContactSupports { get; set; }
-        public virtual DbSet<Historque> Historques { get; set; }
+        public virtual DbSet<Historique> Historiques { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Produit> Produits { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Proprietaire> Proprietaires { get; set; }

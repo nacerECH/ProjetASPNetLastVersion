@@ -17,7 +17,8 @@ namespace ProjectAspNETv2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produit()
         {
-            this.Historques = new HashSet<Historque>();
+            this.Historiques = new HashSet<Historique>();
+            this.Images = new HashSet<Image>();
         }
     
         public int Id { get; set; }
@@ -38,7 +39,9 @@ namespace ProjectAspNETv2.Models
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Historque> Historques { get; set; }
+        public virtual ICollection<Historique> Historiques { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
         public virtual Promotion Promotion { get; set; }
         public virtual Proprietaire Proprietaire { get; set; }
     }

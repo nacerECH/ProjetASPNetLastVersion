@@ -18,7 +18,7 @@ namespace ProjectAspNETv2.Models
         public Proprietaire()
         {
             this.ContactSupports = new HashSet<ContactSupport>();
-            this.Historques = new HashSet<Historque>();
+            this.Historiques = new HashSet<Historique>();
             this.Produits = new HashSet<Produit>();
         }
     
@@ -37,7 +37,7 @@ namespace ProjectAspNETv2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContactSupport> ContactSupports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Historque> Historques { get; set; }
+        public virtual ICollection<Historique> Historiques { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produit> Produits { get; set; }
     }

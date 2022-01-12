@@ -12,15 +12,12 @@ namespace ProjectAspNETv2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Historque
+    public partial class Image
     {
         public int Id { get; set; }
-        public string operation { get; set; }
-        public Nullable<System.DateTime> operation_date { get; set; }
-        public Nullable<int> proprietaireId { get; set; }
+        public string PathName { get; set; }
         public Nullable<int> produitId { get; set; }
     
         public virtual Produit Produit { get; set; }
-        public virtual Proprietaire Proprietaire { get; set; }
     }
 }
