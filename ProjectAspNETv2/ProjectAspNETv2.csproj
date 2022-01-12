@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProprietaireController.cs" />
+    <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -321,6 +322,12 @@
     <Content Include="Views\Proprietaire\Product.cshtml" />
     <Content Include="Views\Proprietaire\Products.cshtml" />
     <Content Include="Views\Proprietaire\Support.cshtml" />
+    <Content Include="Views\Shared\_LayoutWelcomePage.cshtml" />
+    <Content Include="Views\Welcome\Index.cshtml" />
+    <Content Include="Views\Welcome\Signup.cshtml" />
+    <Content Include="Views\Welcome\Signin.cshtml" />
+    <Content Include="Views\Welcome\Shop.cshtml" />
+    <Content Include="Views\Welcome\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
