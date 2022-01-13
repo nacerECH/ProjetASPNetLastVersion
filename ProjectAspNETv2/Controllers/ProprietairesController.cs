@@ -53,16 +53,34 @@ namespace ProjectAspNETv2.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,isCompany,Tel,Adresse,Ville,imageFile")] Proprietaire proprietaire)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,isCompany,Logo,Tel,Adresse,Ville")] Proprietaire proprietaire, HttpPostedFileBase Logo)
         {
             if (ModelState.IsValid)
             {
-                string fileName = Path.GetFileNameWithoutExtension(proprietaire.imageFile.FileName);
-                string extension = Path.GetExtension(proprietaire.imageFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                proprietaire.Logo = "~/PropImages/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/PropImages/"), fileName);
-                proprietaire.imageFile.SaveAs(fileName);
+                try
+                {
+                    if(Logo != null)
+                    {
+                        //string fileName = Path.GetFileName(Logo.FileName);
+                        //string extension = Path.GetExtension(Logo.FileName);
+                        //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        //fileName = Path.Combine(Server.MapPath("~/PropImages/"), fileName);
+                        //proprietaire.Logo = "~/PropImages/" + fileName;
+                        
+                        /*Logo.SaveAs(fileName);*/
+
+                        /*string path = Path.Combine(Server.MapPath("~/PropImages"), Path.GetFileName(Logo.FileName));
+                        Logo.SaveAs(path);*/
+                    }
+                    ViewBag.FileStatus = "File uploaded successfully.";
+                }
+                catch (Exception e)
+                {
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+
+                /**/
+                proprietaire.UserId = User.Identity.GetUserId();
                 db.Proprietaires.Add(proprietaire);
 
                 await db.SaveChangesAsync();
