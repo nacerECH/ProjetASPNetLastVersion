@@ -12,6 +12,7 @@ namespace ProjectAspNETv2.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Web;
 
     public partial class Proprietaire
@@ -33,9 +34,12 @@ namespace ProjectAspNETv2.Models
         public string Ville { get; set; }
 
         [DisplayName("Choisir une image")]
+
+        [DataType(DataType.Upload)]
+        [Required(ErrorMessage = "Please choose file to upload.")]
         public string Logo { get; set; }
 
-        public HttpPostedFileBase imageFile { get; set; }
+       
         public Nullable<bool> isHonored { get; set; }
         public Nullable<bool> isBlocked { get; set; }
     
