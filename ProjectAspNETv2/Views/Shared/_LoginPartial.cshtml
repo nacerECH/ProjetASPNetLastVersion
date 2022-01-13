@@ -1,22 +1,67 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
+
+    @*<ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>*@
+
+    <ul style="width:120px">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Index", "Admin" , new {id = 1 }))">
+                    <i class="fas fa-user-circle u-s-m-r-6"></i>
+                    <span>Account</span>
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", "Proprietaire" ,  new {id = 1 })">
+                    <i class="fas fa-user-circle u-s-m-r-6"></i>
+                    <span>Account</span>
+                </a>
+            }
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="fas fa-lock-open u-s-m-r-6"></i>
+                    <span>Signout</span>
+                </a>}
+        </li>
     </ul>
-    }
+
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    @*<ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>*@
+    <ul style="width:120px">
+        <li>
+            <a href="@Url.Action("Register", "Account")">
+                <i class="fas fa-user-plus u-s-m-r-6"></i>
+
+                <span>Signup</span>
+            </a>
+        </li>
+        <li>
+
+            <a href="@Url.Action("Login", "Account")">
+                <i class="fas fa-lock u-s-m-r-6"></i>
+
+                <span>Signin</span>
+            </a>
+        </li>
+
     </ul>
 }
