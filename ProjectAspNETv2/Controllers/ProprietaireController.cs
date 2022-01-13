@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ProjectAspNETv2.Controllers
 {
+    [Authorize(Roles ="Marchand")]
     public class ProprietaireController : Controller
     {
         // GET: Proprietaire
