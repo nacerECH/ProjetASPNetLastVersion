@@ -66,11 +66,11 @@ namespace ProjectAspNETv2.Controllers
                         //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                         //fileName = Path.Combine(Server.MapPath("~/PropImages/"), fileName);
                         //proprietaire.Logo = "~/PropImages/" + fileName;
-
+                        
                         /*Logo.SaveAs(fileName);*/
 
-                        string path = Path.Combine(Server.MapPath("~/PropImages"), Path.GetFileName(Logo.FileName));
-                        Logo.SaveAs(path);
+                        /*string path = Path.Combine(Server.MapPath("~/PropImages"), Path.GetFileName(Logo.FileName));
+                        Logo.SaveAs(path);*/
                     }
                     ViewBag.FileStatus = "File uploaded successfully.";
                 }
