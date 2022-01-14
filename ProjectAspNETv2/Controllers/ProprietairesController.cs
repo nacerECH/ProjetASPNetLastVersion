@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using ProjectAspNETv2.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 namespace ProjectAspNETv2.Controllers
 {
@@ -53,17 +55,43 @@ namespace ProjectAspNETv2.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,isCompany,Tel,Adresse,Ville,imageFile")] Proprietaire proprietaire)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,isCompany,Logo,Tel,Adresse,Ville")] Proprietaire proprietaire, HttpPostedFileBase Logo)
         {
+
             if (ModelState.IsValid)
             {
-                string fileName = Path.GetFileNameWithoutExtension(proprietaire.imageFile.FileName);
-                string extension = Path.GetExtension(proprietaire.imageFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                proprietaire.Logo = "~/PropImages/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/PropImages/"), fileName);
-                proprietaire.imageFile.SaveAs(fileName);
+                
+
+                try
+                {
+                    if (Logo != null && Logo.ContentLength > 0)
+                    {
+
+                        string extension = Path.GetExtension(Logo.FileName);
+                        var filename = DateTime.Now.ToString("yymmssfff") + extension;
+                        filename = Path.Combine(Server.MapPath("~/propimages/"), filename);
+                        Logo.SaveAs(filename);
+                        proprietaire.Logo = filename;
+                        ViewBag.FileStatus = "File uploaded successfully.";
+                    } else
+                    {
+                        ViewBag.FileStatus = "Error while file uploading.";
+                        ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", proprietaire.UserId);
+                        return View(proprietaire);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+
+                /**/
+                proprietaire.UserId = User.Identity.GetUserId();
                 db.Proprietaires.Add(proprietaire);
+
+                var userManager = new UserManager<ApplicationUser, string>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var result = userManager.AddToRole(User.Identity.GetUserId(), "Marchand");
 
                 await db.SaveChangesAsync();
                 ModelState.Clear();

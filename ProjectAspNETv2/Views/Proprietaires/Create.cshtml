@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm(new {enctype = "multipart/form-data" })) 
+@using (Html.BeginForm("Create", "Proprietaires", null, FormMethod.Post,   new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -28,10 +28,10 @@
     </div>
 
     <div class="form-group">
-        
-         @Html.Label("Full Name", htmlAttributes: new { @class = "control-label col-md-2" })
+
+        @Html.Label("Full Name", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Your Name" } })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -41,34 +41,35 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "control-label col-md-2", placeholder = "0xxxxxxxxx" })
+        @Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control", placeholder = "0xxxxxxxxx" } })
             @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2", palceholder = "Adresse CIN" })
+        @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", palceholder = "Adresse CIN" } })
             @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ville, htmlAttributes: new { @class = "control-label col-md-2", placeholder = "exemple : Fes" })
+        @Html.LabelFor(model => model.Ville, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Ville, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Ville, new { htmlAttributes = new { @class = "form-control", placeholder = "exemple : Fes" } })
             @Html.ValidationMessageFor(model => model.Ville, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Logo ,  htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="file" name="imageFile" class="btn btn-primary" required />
-
+            @Html.TextBoxFor(model => model.Logo,  htmlAttributes : new { @class = "form-control", @type = "file" } )
+            @*<input type="file" id="file" name="file" />*@ 
+            @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -79,6 +80,12 @@
             <input type="submit" value="S'inscrire'" class="btn btn-default" />
         </div>
     </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 text-success">
+            @ViewBag.FileStatus
+        </div>
+    </div>
+
 </div>
 }
 
