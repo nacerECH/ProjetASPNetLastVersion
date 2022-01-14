@@ -332,20 +332,16 @@
     <Content Include="Views\Welcome\Signin.cshtml" />
     <Content Include="Views\Welcome\Shop.cshtml" />
     <Content Include="Views\Welcome\Product.cshtml" />
-
     <Content Include="Views\Admin\ProductConfirmation.cshtml" />
     <Content Include="Views\Proprietaire\ProductsRef.cshtml" />
-
     <Content Include="Views\Proprietaires\Create.cshtml" />
     <Content Include="Views\Proprietaires\Delete.cshtml" />
     <Content Include="Views\Proprietaires\Details.cshtml" />
     <Content Include="Views\Proprietaires\Edit.cshtml" />
     <Content Include="Views\Proprietaires\Index.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="PropImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

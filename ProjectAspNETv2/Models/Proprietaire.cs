@@ -35,7 +35,7 @@ namespace ProjectAspNETv2.Models
 
         [DisplayName("Choisir une image")]
 
-        [DataType(DataType.Upload)]
+        //[DataType(DataType.Upload)]
         [Required(ErrorMessage = "Please choose file to upload.")]
         public string Logo { get; set; }
 

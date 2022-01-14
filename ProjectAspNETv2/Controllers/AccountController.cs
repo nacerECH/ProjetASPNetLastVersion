@@ -160,9 +160,8 @@ namespace ProjectAspNETv2.Controllers
                 {
 
 
-                    var currentUser = UserManager.FindByName(user.UserName);
-
-                    var roleresult = UserManager.AddToRole(currentUser.Id, "Marchand");
+                    //var currentUser = UserManager.FindByName(user.UserName);
+                    //var roleresult = UserManager.AddToRole(currentUser.Id, "Marchand");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
 
