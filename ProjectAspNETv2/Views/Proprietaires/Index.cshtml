@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Index";
+
+    Layout = "~/Views/Shared/_LayoutPageDashboard1.cshtml";
 }
 
 <h2>Index</h2>
@@ -41,7 +43,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
