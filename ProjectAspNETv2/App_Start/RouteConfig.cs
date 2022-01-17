@@ -30,6 +30,12 @@ namespace ProjectAspNETv2
                url: "{controller}/{action}/{id}",
                defaults: new { controller = "Proprietaire", action = "Index", id = UrlParameter.Optional }
            );
+
+            routes.MapRoute(
+             name: "vendeur2",
+             url: "{controller}/{action}/{id}",
+             defaults: new { controller = "Admin", action = "Bloc", id = UrlParameter.Optional }
+         );
         }
     }
 }

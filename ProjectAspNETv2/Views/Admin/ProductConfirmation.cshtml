@@ -16,238 +16,67 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
 
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
 
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
+    @foreach (var item in ViewBag.MyList)
+    {
 
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card card-social">
+                <div class="card-block border-bottom">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">
+                        </div>
+                        <div class="col text-right">
+                            <h3>@item.price DH</h3>
+                            <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @ViewBag.Dic[@item.Id] </h5>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="card-block">
+                    <div class="row align-items-center justify-content-center card-active">
+                        <div class="col-6">
+                            <h6 class="text-center m-b-10">
+
+                                @using (Html.BeginForm("Confirm_Reject_Product", "Admin", FormMethod.Post))
+                                {
+
+                                    <input type="hidden" name="id" id="id2" value="@item.Id" />
+
+                                    <input type="hidden" name="etat" id="etst" value="Confirm" />
+                                    <input class="btn btn-primary" type="submit" value="Confirm" />
+
+                                }
+                            </h6>
+
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-center  m-b-10">
+
+                                @using (Html.BeginForm("Confirm_Reject_Product", "Admin", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="id" id="id2" value="@item.Id" />
+
+                                    <input type="hidden" name="etat" id="etst" value="Reject" />
+                                   
+                                    <input  class="btn btn-danger" type="submit" value="Reject" />
+
+                                }
+                            </h6>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-
-
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
-
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
-
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
-
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
-
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
-
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
-
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> NIKE </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-block">
-                <div class="row align-items-center justify-content-center card-active">
-                    <div class="col-6">
-                        <h6 class="text-center m-b-10">   <button class="btn btn-primary" type="button">Confirm</button>   </h6>
-
-                    </div>
-                    <div class="col-6">
-                        <h6 class="text-center  m-b-10">   <button class="btn btn-danger" type="button">Reject</button>  </h6>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 
 
-
+    }
 
 
 </div>

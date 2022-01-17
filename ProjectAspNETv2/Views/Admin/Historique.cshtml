@@ -5,6 +5,9 @@
 }
 
 
+
+
+
 <!--[ Recent Users ] start-->
 <div class="col-xl-12 col-md-12">
     <div class="card Recent-Users">
@@ -40,73 +43,55 @@
 
                     </thead>
                     <tbody>
-                        <tr class="unread">
 
 
-                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                            <td>
-                                <h6 class="mb-1">EFTMarket</h6>
-                                
-                            </td>
-
-                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                            <td>
-                                <h6 class="mb-1">Produit N:45</h6>
-                                <p class="m-0">Lorem Ipsum is simply…</p>
-                            </td>
-                            <td>
-                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>Supprimer </h6>
-                            </td>
-                            <td>
-                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
-                            </td>
-                            <td><a href="#!" class="label theme-bg2 text-white f-12">Retirer</a></td>
-                        </tr>
-                        <tr class="unread">
-                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                            <td>
-                                <h6 class="mb-1"> Bill Gates </h6>
-                               
-                            </td>
-
-                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                            <td>
-                                <h6 class="mb-1">Produit N:45</h6>
-                                <p class="m-0">Lorem Ipsum is simply…</p>
-                            </td>
-                            <td>
-                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> Ajouter </h6>
-                            </td>
-                            <td>
-                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
-                            </td>
-                            <td><a href="#!" class="label theme-bg2 text-white f-12">Retirer</a></td>
-                        </tr>
-
-                        <tr class="unread">
-
-                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                            <td>
-                                <h6 class="mb-1"> TXMarket </h6>
-                            </td>
+                        @foreach (var item in ViewBag.Operations)
+                        {
 
 
-                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                            <td>
-                                <h6 class="mb-1">Produit N:45</h6>
-                                <p class="m-0">Lorem Ipsum is simply…</p>
-                            </td>
-                            <td>
-                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> Editer </h6>
-                            </td>
-                            <td>
-                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
-                            </td>
-                            <td><a href="#!" class="label theme-bg2 text-white f-12">Retirer</a></td>
-                        </tr>
+                            <tr class="unread">
 
 
-                    </tbody>
+                                <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
+                                <td>
+                                    <h6 class="mb-1"> @ViewBag.Dic1[@item.Id]</h6>
+
+                                </td>
+
+                                <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
+                                <td>
+                                    <h6 class="mb-1"> @ViewBag.Dic2[@item.Id] </h6>
+                                    <p class="m-0">Lorem Ipsum is simply…</p>
+                                </td>
+                                <td>
+                                    <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>@item.operation </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>@item.operation_date</h6>
+                                </td>
+                                <td>
+
+
+                                    @using (Html.BeginForm("DeleteOperation", "Admin", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="id" id="id" value="@item.Id" />
+
+                                        
+
+                                        <input class="label theme-bg2 text-white f-12" type="submit" value="Supprimer" />
+
+
+                                    }
+
+
+
+                                </td>
+                            </tr>
+
+                        }
+
+
+                        </tbody>
                 </table>
             </div>
         </div>

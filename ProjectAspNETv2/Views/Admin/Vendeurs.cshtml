@@ -1,7 +1,10 @@
 ﻿
+
+
 @{
     ViewBag.Title = "Vendeurs";
     Layout = "~/Views/Shared/_LayoutPageDashboard1.cshtml";
+
 }
 
 
@@ -30,234 +33,160 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>User</th>
-                        <th>Activity</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th class="text-right"></th>
+                        <th>Proprietaire</th>
+                        <th>isCompany</th>
+                        <th>Tel</th>
+                        <th>Ville</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">3:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                    </tr>
+
+                    
+                            @foreach (var item in ViewBag.MyList) { 
 
                     <tr>
                         <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="assets/images/user/avatar-2.jpg" alt="activity-user">Albert Andersen</h6>
+                            <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item.Name </h6>   </a>
                         </td>
                         <td>
-                            <h6 class="m-0">Jumps over the lazy</h6>
+                            <h6 class="m-0">  @item.isCompany</h6>
                         </td>
                         <td>
-                            <h6 class="m-0">2:37 PM</h6>
+                            <h6 class="m-0"> @item.Tel)</h6>
                         </td>
                         <td>
-                            <h6 class="m-0 text-c-red">Missed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-3.jpg")" alt="activity-user">Silje Larsen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">Dog the quick brown</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">10:23 AM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-purple">Delayed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">4:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
+                            <h6 class="m-0 text-c-green"> @item.Ville </h6>
                         </td>
                         <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+                        <td>  <a href="#!" class="label theme-bg2 text-white f-12">Regler</a> </td>
                     </tr>
+                            }
+                            
+                       
+
+
+
                 </tbody>
             </table>
 
         </div>
+
         <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div style="display:flex ; width : 100% ; justify-content: end;">
-                <button type="button" class="btn btn-primary" title="btn btn-primary" data-toggle="tooltip">Ajouter</button>
-            </div>
+           
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>User</th>
-                        <th>Activity</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th class="text-right"></th>
+                        <th>Proprietaire</th>
+                        <th>isCompany</th>
+                        <th>Tel</th>
+                        <th>Ville</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">Albert Andersen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">Jumps over the lazy</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">2:37 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-red">Missed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">3:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">4:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-3.jpg")" alt="activity-user">Silje Larsen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">Dog the quick brown</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">10:23 AM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-purple">Delayed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
-                    </tr>
+                    @foreach (var item2 in ViewBag.MyList3)
+                    {
+
+
+                        <tr>
+                            <td>
+                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item2.Name </h6>   </a>
+                            </td>
+                            <td>
+                                <h6 class="m-0">  @item2.isCompany</h6>
+                            </td>
+                            <td>
+                                <h6 class="m-0"> @item2.Tel</h6>
+                            </td>
+                            <td>
+                                <h6 class="m-0 text-c-green"> @item2.Ville </h6>
+                            </td>
+                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+                            <td>
+                                @using (Html.BeginForm("BD", "Admin", FormMethod.Post))
+                                {
+
+                                   
+
+                                    if (@item2.isBlocked == true)
+                                    {
+                                        <input type="hidden" name="id" id="id2" value="@item2.Id" />
+
+                                        <input type="hidden" name="etat" id="etst" value="isBloc" />
+
+                                        <input class="label theme-bg2 text-white f-12" type="submit" value="Debloquer" />
+                                    }
+
+
+                                }
+                            </td>
+                        </tr>
+                    }
+
+
                 </tbody>
             </table>
 
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            <div style="display:flex ; width : 100% ; justify-content: end;">
-                <button type="button" class="btn btn-primary" title="btn btn-primary" data-toggle="tooltip">Ajouter</button>
-            </div>
+            
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>User</th>
-                        <th>Activity</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th class="text-right"></th>
+                        <th>Proprietaire</th>
+                        <th>isCompany</th>
+                        <th>Tel</th>
+                        <th>Ville</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-3.jpg")" alt="activity-user">Silje Larsen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">Dog the quick brown</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">10:23 AM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-purple">Delayed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">3:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-3.jpg")" alt="activity-user">Albert Andersen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">Jumps over the lazy</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">2:37 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-red">Missed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">4:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                    </tr>
+
+                    @foreach (var item2 in ViewBag.MyList2)
+                    {
+
+
+                        <tr>
+                            <td>
+                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item2.Name </h6>   </a>
+                            </td>
+                            <td>
+                                <h6 class="m-0">  @item2.isCompany</h6>
+                            </td>
+                            <td>
+                                <h6 class="m-0"> @item2.Tel)</h6>
+                            </td>
+                            <td>
+                                <h6 class="m-0 text-c-green"> @item2.Ville </h6>
+                            </td>
+                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+                            <td>
+
+                                @using (Html.BeginForm("HD", "Admin", FormMethod.Post))
+                                {
+
+
+
+                                    if (@item2.isHonored == true)
+                                    {
+                                        <input type="hidden" name="id" id="id2" value="@item2.Id" />
+
+                                        <input type="hidden" name="etat" id="etst" value="isHon" />
+
+                                        <input class="label theme-bg2 text-white f-12" type="submit" value="Retirer" />
+                                    }
+
+
+                                }
+
+                            </td>
+                        </tr>
+                    }
+
+
                 </tbody>
             </table>
         </div>
@@ -265,74 +194,86 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>User</th>
-                        <th>Activity</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th class="text-right"></th>
+                        <th>Proprietaire</th>
+                        <th>isCompany</th>
+                        <th>Tel</th>
+                        <th>Ville</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">Silje Larsen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">Dog the quick brown</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">10:23 AM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-purple">Delayed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">3:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">Albert Andersen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">Jumps over the lazy</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">2:37 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-red">Missed</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">Ida Jorgensen</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">The quick brown fox</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0">4:28 PM</h6>
-                        </td>
-                        <td>
-                            <h6 class="m-0 text-c-green">Done</h6>
-                        </td>
-                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                    </tr>
+
+
+
+                    @foreach (var item in ViewBag.MyList)
+                    {
+
+
+                        <tr>
+                            <td>
+                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item.Name </h6>   </a>
+                            </td>
+                            <td>
+                                <h6 class="m-0">  @item.isCompany</h6>
+                            </td>
+                            <td>
+                                <h6 class="m-0"> @item.Tel)</h6>
+                            </td>
+                            <td>
+                                <h6 class="m-0 text-c-green"> @item.Ville </h6>
+                            </td>
+                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+                            
+
+                            <td>
+
+
+
+                                @using (Html.BeginForm("BD", "Admin", FormMethod.Post))
+                                {
+
+                                    if (@item.isBlocked == true)
+                                    {
+                                        <input type="hidden" name="id" id="id2" value="@item.Id" />
+
+                                        <input type="hidden" name="etat" id="etst" value="isBloc" />
+
+
+                                        <input class="label theme-bg2 text-white f-12" type="submit" value="Debloquer" />
+                                    }
+
+                                    if (@item.isBlocked == false)
+                                    {
+                                        <input type="hidden" name="id" id="id2" value="@item.Id" />
+
+                                        <input type="hidden" name="etat" id="etst" value="isDBloc" />
+
+                                        <input class="label theme-bg2 text-white f-12" type="submit" value="Bloquer" />
+                                    }
+
+
+                                }
+
+                                @using (Html.BeginForm("HD", "Admin", FormMethod.Post))
+                                {
+
+
+
+                                    if (@item.isHonored == false)
+                                    {
+                                        <input type="hidden" name="id" id="id2" value="@item.Id" />
+
+                                        <input type="hidden" name="etat" id="etst" value="isNHon" />
+
+                                        <input class="label theme-bg2 text-white f-12" type="submit" value="Add fovoris" />
+                                    }
+
+
+                                }
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
