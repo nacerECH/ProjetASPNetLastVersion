@@ -18,14 +18,86 @@ namespace ProjectAspNETv2.Controllers
 
         private Entities4 db = new Entities4();
 
-  
-            public ActionResult Index() {
+        [HttpGet]
+        public ActionResult Index() {
 
             // var userID = User.Identity.GetUserId();
 
+            var data = db.Produits.ToList();
+            var data2 = new List<Produit>();
+            var data3 = new List<Produit>();
+            var ProductsToday = new List<Produit>();
+            var ProductsWeek = new List<Produit>();
+
+            foreach (Produit p in data)
+            {
+
+                TimeSpan dif = (TimeSpan)(DateTime.Now - p.createdAt);
+
+                double jr = dif.TotalDays;
+
+                if (jr <= 30)
+                {
+                    data2.Add(p);
+                }
+
+                if (jr <= 7)
+                {
+                    ProductsWeek.Add(p);
+                }
+
+                if (jr <= 1)
+                {
+                    ProductsToday.Add(p);
+                }
+
+
+
+            }
+
+            int i = data.Count();
+            data3.Add(data[i-1]);
+            data3.Add(data[i - 2]);
+            data3.Add(data[i - 3]);
+
+
+            Dictionary<int, string> dic = new Dictionary<int, string>();
+
+            int id;
+            string NomS;
+            foreach (Produit p in data3)
+            {
+                id = p.Id;
+                int idS = (int)p.propreitaireId;
+                Proprietaire pp = db.Proprietaires.Find(idS);
+                NomS = pp.Name;
+
+                dic.Add(id, NomS);
+
+            }
+
+
+            // get top products (based on views)
+           
+            var items = db.Produits.OrderByDescending(u => u.vues).Take(3).ToList();
+
+
+
+            ViewBag.ProdMois = data2.Count();
+            ViewBag.RecentProducts = data3;
+            ViewBag.Dic = dic;
+            ViewBag.TopProducts = items;
+
+            ViewBag.prp = db.Proprietaires.Count();
+            ViewBag.produits = db.Produits.Count();
+
+            ViewBag.ProductsToday = ProductsToday;
+            ViewBag.ProductsWeek = ProductsWeek;
+            ViewBag.AllProducts = data;
+
             return View("Home");
 
-        }
+            }
         
            
             
@@ -187,7 +259,7 @@ namespace ProjectAspNETv2.Controllers
             {
 
           
-                var data = context.Produits.Where(p => p.status=="2").ToList();
+                var data = context.Produits.Where(p => p.status=="1").ToList();
                 
 
                 Dictionary<int, string> dic = new Dictionary<int, string>();
@@ -236,7 +308,7 @@ namespace ProjectAspNETv2.Controllers
             {
                 if (etat == "Confirm")
                 {
-                    p.status = "1";
+                    p.status = "2";
                 }
                 if (etat == "Reject")
                 {

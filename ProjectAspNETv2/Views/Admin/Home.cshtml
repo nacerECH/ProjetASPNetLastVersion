@@ -16,7 +16,7 @@
                         <h6 class="mb-4">Les vendeurs abonnes </h6>
                         <div class="row d-flex align-items-center">
                             <div class="col-9">
-                                <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>249</h3>
+                                <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>@ViewBag.prp </h3>
                             </div>
 
                             <div class="col-3 text-right">
@@ -37,7 +37,7 @@
                         <h6 class="mb-4">Les produits ajoutes</h6>
                         <div class="row d-flex align-items-center">
                             <div class="col-9">
-                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i> 2 942 </h3>
+                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i> @ViewBag.produits </h3>
                             </div>
                             <div class="col-3 text-right">
                                 <p class="m-b-0">36%</p>
@@ -54,10 +54,10 @@
             <div class="col-md-12 col-xl-4">
                 <div class="card yearly-sales">
                     <div class="card-block">
-                        <h6 class="mb-4"> les proprietaires abonnes ce mois </h6>
+                        <h6 class="mb-4"> les produits ajoutes ce mois </h6>
                         <div class="row d-flex align-items-center">
                             <div class="col-9">
-                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>17 </h3>
+                                <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i> @ViewBag.ProdMois </h3>
                             </div>
                             <div class="col-3 text-right">
                                 <p class="m-b-0">80%</p>
@@ -75,66 +75,40 @@
             <div class="col-xl-8 col-md-6">
                 <div class="card Recent-Users">
                     <div class="card-header">
-                        <h5>Les proprietaire abonnes recement</h5>
+                        <h5>Les prrsuits ajoutees recement</h5>
                     </div>
                     <div class="card-block px-0 py-3">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <tbody>
-                                    <tr class="unread">
-                                        <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                                        <td>
-                                            <h6 class="mb-1"> TestMarket </h6>
-                                            <p class="m-0">Lorem Ipsum is simply…</p>
-                                        </td>
-                                        <td>
-                                            <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>Vu : 90 </h6>
-                                        </td>
 
-                                        <td>
-                                            <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> 12 Produits </h6>
-                                        </td>
+                                    @foreach (var item in ViewBag.RecentProducts)
+                                    {
 
+                                        <tr class="unread">
+                                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
+                                            <td>
+                                                <h6 class="mb-1"> @item.name </h6>
+                                                <p class="m-0"> @item.description_ </p>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> @item.vues Vues</h6>
+                                            </td>
 
-                                    </tr>
-
-
-                                    <tr class="unread">
-                                        <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                                        <td>
-                                            <h6 class="mb-1"> TestMarket </h6>
-                                            <p class="m-0">Lorem Ipsum is simply…</p>
-                                        </td>
-                                        <td>
-                                            <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>Vu : 90 </h6>
-                                        </td>
-
-                                        <td>
-                                            <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> 12 Produits </h6>
-                                        </td>
+                                            <td>
+                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> @ViewBag.Dic[@item.Id] </h6>
+                                            </td>
 
 
-                                    </tr>
+                                        </tr>
+                                    }
 
-                                    <tr class="unread">
-                                        <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
-                                        <td>
-                                            <h6 class="mb-1"> TestMarket </h6>
-                                            <p class="m-0">Lorem Ipsum is simply…</p>
-                                        </td>
-                                        <td>
-                                            <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>Vu : 90 </h6>
-                                        </td>
+                                        
 
-                                        <td>
-                                            <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> 12 Produits </h6>
-                                        </td>
+      
 
 
-                                    </tr>
-
-
-                                </tbody>
+                                    </tbody>
                             </table>
                         </div>
                     </div>
@@ -171,8 +145,8 @@
                                 <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">
                             </div>
                             <div class="col text-right">
-                                <h3>XFMarket </h3>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  178 </h5>
+                                <h3> @ViewBag.TopProducts[0].name </h3>
+                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[0].vues </h5>
                             </div>
                         </div>
                     </div>
@@ -188,8 +162,8 @@
                                 <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">
                             </div>
                             <div class="col text-right">
-                                <h3>TestMarket </h3>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  150 </h5>
+                                <h3>@ViewBag.TopProducts[1].name </h3>
+                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[1].vues </h5>
                             </div>
                         </div>
                     </div>
@@ -205,8 +179,8 @@
                                 <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">
                             </div>
                             <div class="col text-right">
-                                <h3> NacerMarket </h3>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  104 </h5>
+                                <h3> @ViewBag.TopProducts[2].name </h3>
+                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[2].vues </h5>
                             </div>
                         </div>
                     </div>
@@ -241,66 +215,59 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @foreach (var item2 in ViewBag.ProductsToday)
+                                {
                                 <tr>
                                     <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
+                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user"> @item2.name</h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">140 DH</h6>
+                                        <h6 class="m-0"> @item2.price </h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">3:28 PM</h6>
+                                        <h6 class="m-0"> @item2.createdAt</h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">65</h6>
+                                        <h6 class="m-0"> @item2.vues </h6>
                                     </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                </tr>
+                                    @if (@item2.status == "3")
+                                    {
 
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">Produit N: 145</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">1700 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">2:37 PM</h6>
-                                    </td>
+                                        <td>
+                                            <h6 class="m-0 text-c-red">  refused </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
 
-                                    <td>
-                                        <h6 class="m-0">17</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-red">Refusee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">140 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">3:28 PM</h6>
-                                    </td>
 
-                                    <td>
-                                        <h6 class="m-0">25 </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+                                    }
+                                    @if (@item2.status == "1")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                    }@if (@item2.status == "2")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-c-green">  confirmed </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                    }
+
                                 </tr>
 
 
-                            </tbody>
+                                }
+
+
+                                </tbody>
                         </table>
 
                     </div>
@@ -318,102 +285,56 @@
                             </thead>
                             <tbody>
 
+
+
+                                @foreach (var item2 in ViewBag.ProductsWeek)
+                                {
                                 <tr>
                                     <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
+                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user"> @item2.name</h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">140 DH</h6>
+                                        <h6 class="m-0"> @item2.price </h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">3:28 PM</h6>
+                                        <h6 class="m-0"> @item2.createdAt</h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">65</h6>
+                                        <h6 class="m-0"> @item2.vues </h6>
                                     </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+                                    @if (@item2.status == "3")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-c-red">  refused </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
+
+
+                                    }
+                                    @if (@item2.status == "1")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                    }@if (@item2.status == "2")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-c-green">  confirmed </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                    }
                                 </tr>
 
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">Produit N: 145</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">1700 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">2:37 PM</h6>
-                                    </td>
 
-                                    <td>
-                                        <h6 class="m-0">17</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-red">Refusee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">140 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">3:28 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">25 </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">Produit N:06</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">180 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">3:28 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">11 </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">140 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">3:28 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">08 </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                </tr>
+                                }
 
                             </tbody>
                         </table>
@@ -433,139 +354,56 @@
                             </thead>
                             <tbody>
 
+
+
+                                @foreach (var item2 in ViewBag.AllProducts)
+                                {
                                 <tr>
                                     <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
+                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user"> @item2.name</h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">140 DH</h6>
+                                        <h6 class="m-0"> @item2.price </h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">3:28 PM</h6>
+                                        <h6 class="m-0"> @item2.createdAt</h6>
                                     </td>
                                     <td>
-                                        <h6 class="m-0">65</h6>
+                                        <h6 class="m-0"> @item2.vues </h6>
                                     </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+                                    @if (@item2.status == "3")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-c-red">  refused </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
+
+
+                                    }
+                                    @if (@item2.status == "1")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                    }@if (@item2.status == "2")
+                                    {
+
+                                        <td>
+                                            <h6 class="m-0 text-c-green">  confirmed </h6>
+                                        </td>
+                                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                    }
                                 </tr>
 
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">Produit N: 145</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">1700 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">2:37 PM</h6>
-                                    </td>
 
-                                    <td>
-                                        <h6 class="m-0">17</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-red">Refusee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">140 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">3:28 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">25 </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">Produit N: 145</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">8700 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">2:37 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">17</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-red">Refusee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">Produit N: 145</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">800 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">2:37 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">17</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-red">Refusee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">Produit N:06</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">180 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">3:28 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">11 </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">Produit N:14</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">140 DH</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0">3:28 PM</h6>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="m-0">08 </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0 text-c-green">Acceptee</h6>
-                                    </td>
-                                    <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                </tr>
+                                }
 
                             </tbody>
                         </table>
