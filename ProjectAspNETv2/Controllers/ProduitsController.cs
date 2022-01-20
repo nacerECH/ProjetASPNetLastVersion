@@ -21,7 +21,10 @@ namespace ProjectAspNETv2.Controllers
 
         public ActionResult Index()
         {
-            var produits = db.Produits.Include(p => p.Category).Include(p => p.Promotion).Include(p => p.Proprietaire).Include(p => p.Images);
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id);
+            var produits = prop.Produits;
+            //var produits = db.Produits.Include(p => p.Category).Include(p => p.Promotion).Include(p => p.Proprietaire).Include(p => p.Images);
             return View(produits.ToList());
         }
 
@@ -144,7 +147,7 @@ namespace ProjectAspNETv2.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,description_,price,name,quantity,vues,status,livrable,garantee,promoId,propreitaireId,categoryId,createdAt,updatedAt,isConfirmed")] Produit produit)
+        public ActionResult Edit([Bind(Include = "Id,description_,price,name,livrable,garantee,categoryId")] Produit produit)
         {
             if (ModelState.IsValid)
             {
@@ -153,8 +156,6 @@ namespace ProjectAspNETv2.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.categoryId = new SelectList(db.Categories, "CatId", "Name", produit.categoryId);
-            ViewBag.promoId = new SelectList(db.Promotions, "Id", "Name", produit.promoId);
-            ViewBag.propreitaireId = new SelectList(db.Proprietaires, "Id", "Name", produit.propreitaireId);
             return View(produit);
         }
 
@@ -179,6 +180,14 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Produit produit = db.Produits.Find(id);
+            var images = produit.Images;
+            //foreach(var image in images)
+            //{
+            //    //var i = image;
+            //    //db.Images.Remove(i);
+            //    //db.SaveChanges();
+
+            //}
             db.Produits.Remove(produit);
             db.SaveChanges();
             return RedirectToAction("Index");
