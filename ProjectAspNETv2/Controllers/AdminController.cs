@@ -148,15 +148,33 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetSellers()
         {
-            using (var context = new Entities1())
+            
+                // Return the list of data from the database
+                var data = db.Proprietaires.ToList();
+            var supportMsg = db.ContactSupports.ToList();
+
+
+            Dictionary<int, string> dicMP = new Dictionary<int, string>();
+
+            int id;
+            string NomS;
+            foreach (ContactSupport cs in supportMsg)
             {
+                id = (int)cs.Id;
+                
 
-                // Return the list of data from the database
-                var data = context.Proprietaires.ToList();
+                
+                int idS = (int)cs.marchandId;
+                Proprietaire pp = db.Proprietaires.Find(idS);
+                NomS = pp.Name;
+
+                dicMP.Add(id, NomS);
+
+            }
 
 
-                // Return the list of data from the database
-                var data2 = new List<Proprietaire>();
+            // Return the list of data from the database
+            var data2 = new List<Proprietaire>();
                 var data3 = new List<Proprietaire>();
 
                 for (int i = 0; i < data.Count(); i++)
@@ -176,9 +194,12 @@ namespace ProjectAspNETv2.Controllers
                 ViewBag.MyList = data;
                 ViewBag.MyList2 = data2;
                 ViewBag.MyList3 = data3;
+            ViewBag.ProbList = supportMsg;
+            ViewBag.DicMP = dicMP;
 
-                return View("Vendeurs");
-            }
+
+            return View("Vendeurs");
+            
         }
 
 

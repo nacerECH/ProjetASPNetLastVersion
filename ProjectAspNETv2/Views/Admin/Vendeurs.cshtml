@@ -34,29 +34,29 @@
                 <thead>
                     <tr>
                         <th>Proprietaire</th>
-                        <th>isCompany</th>
-                        <th>Tel</th>
-                        <th>Ville</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Message</th>
                         
                     </tr>
                 </thead>
                 <tbody>
 
                     
-                            @foreach (var item in ViewBag.MyList) { 
+                            @foreach (var item in ViewBag.ProbList) { 
 
                     <tr>
                         <td>
-                            <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item.Name </h6>   </a>
+                            <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">  @ViewBag.DicMP[@item.Id]   </h6>   </a>
                         </td>
                         <td>
-                            <h6 class="m-0">  @item.isCompany</h6>
+                            <h6 class="m-0">  @item.Email</h6>
                         </td>
                         <td>
-                            <h6 class="m-0"> @item.Tel)</h6>
+                            <h6 class="m-0"> @item.subject</h6>
                         </td>
                         <td>
-                            <h6 class="m-0 text-c-green"> @item.Ville </h6>
+                            <h6 class="m-0 text-c-green"> @item.message </h6>
                         </td>
                         <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
 
