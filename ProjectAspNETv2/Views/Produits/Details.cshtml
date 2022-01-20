@@ -1,0 +1,137 @@
+﻿@model ProjectAspNETv2.Models.Produit
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPageDashboard2.cshtml";
+}
+
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ breadcrumb ] end -->
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Details de produit</h5>
+                    </div>
+                    <div class="card-block pb-2 table-border-style">
+                        <div>
+                            <h5 class="mb-2">Images</h5>
+                            <div class="row mb-3">
+                                @foreach (var image in Model.Images)
+                                {
+                                    <div class="col-4 p-2">
+                                        <img class="w-100 h-100" src="@Url.Content(image.PathName)" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="mb-2">
+                                        @Html.DisplayNameFor(model => model.name)
+                                    </h5>
+                                    <div>
+                                        @Html.DisplayFor(model => model.name)
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <h5 class="mb-2">
+                                        @Html.DisplayNameFor(model => model.categoryId)
+                                    </h5>
+                                    <div>
+                                        @Html.DisplayFor(model => model.Category.Name)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <h5 class="mb-2">
+                                @Html.DisplayNameFor(model => model.description_)
+                            </h5>
+                            <div>
+                                @Html.DisplayFor(model => model.description_)
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    @Html.DisplayNameFor(model => model.price)
+                                </h5>
+                                <div>
+                                    @Html.DisplayFor(model => model.price)
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    @Html.DisplayNameFor(model => model.garantee)
+                                </h5>
+                                <div>
+                                    @if ((bool)Model.livrable == true)
+                                    {
+                                        <span>Avec</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Sans</span>
+
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    @Html.DisplayNameFor(model => model.livrable)
+                                </h5>
+                                <div>
+                                    @if ((bool)Model.livrable == true)
+                                    {
+                                        <span>Possible</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Non</span>
+
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row mt-5" style="justify-content : end;">
+                            <div style="width : fit-content;">
+                                <div style="display:inline-block;">
+                                    <button class="btn btn-primary" type="button">
+                                        <a href="@Url.Action("Index" , "Produits")" style="display: inline-block; color : #fff ; text-decoration : none;">Liste</a>
+
+                                    </button>
+                                </div>
+                                <div style="display:inline-block;">
+                                    <button class="btn btn-secondary" type="button">
+                                        <a href="@Url.Action("Edit" , "Produits" , new { id = Model.Id } ) " style="display: inline-block; color : #fff ; text-decoration : none;">Modifier</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+

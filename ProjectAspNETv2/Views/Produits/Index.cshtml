@@ -1,0 +1,148 @@
+﻿@model IEnumerable<ProjectAspNETv2.Models.Produit>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageDashboard2.cshtml";
+}
+
+
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ breadcrumb ] end -->
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Liste des produits</h5>
+                    </div>
+                    <div class="px-3">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">Trouver</button>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button">
+                                    <a href="@Url.Action("Create" , "Produits")" style="display: inline-block; color : #fff ; text-decoration : none;">Ajouter</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Image
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.price)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.status)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.livrable)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.garantee)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.createdAt)
+                                        </th>
+
+                                        <th>
+                                            Categorie
+                                        </th>
+
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td style="padding:3px;">
+                                                <img style="max-width:100%;max-height:100%;" src="@Url.Content(@item.Images.First().PathName)" />
+
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.price)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.status)
+                                            </td>
+                                            <td>
+                                                @*@Html.DisplayFor(modelItem => item.livrable)*@
+                                                @if ((bool)@item.livrable == true)
+                                                {
+                                                    <span>Possible</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Non</span>
+
+                                                }
+                                            </td>
+                                            <td>
+                                                @*@Html.DisplayFor(modelItem => item.garantee)*@
+                                                @if ((bool)@item.garantee == true)
+                                                {
+                                                    <span>Avec</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Sans</span>
+
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.createdAt)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Category.Name)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>

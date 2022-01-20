@@ -11,7 +11,9 @@ namespace ProjectAspNETv2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Produit
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,19 +22,49 @@ namespace ProjectAspNETv2.Models
             this.Historiques = new HashSet<Historique>();
             this.Images = new HashSet<Image>();
             this.Vues = new HashSet<Vue>();
+            this.quantity = 1;
+            this.status = "1";
         }
     
         public int Id { get; set; }
+
+        [StringLength(250, ErrorMessage = "la description du produit doit avoir entre 4 et 250 caracteres", MinimumLength = 3)]
+        [Display(Name = "Description")]
+        [Required(ErrorMessage = "la description est obligatoire")]
         public string description_ { get; set; }
+
+        [Range(0, float.MaxValue, ErrorMessage = "le prix doit etre superieur a 0 ")]
+        [Required(ErrorMessage = "le prix est obligatoire")]
+        [Display(Name = "Prix")]
         public Nullable<decimal> price { get; set; }
+
+        [StringLength(100, ErrorMessage = "le titre du produit doit avoir entre 4 et 100 caracteres", MinimumLength = 3)]
+        [Display(Name = "Titre")]
+        [Required(ErrorMessage = "Le Titre est obligatoire")]
         public string name { get; set; }
+
         public Nullable<int> quantity { get; set; }
+
         public string status { get; set; }
+
+        [Display(Name = "Livraison")]
+        [Required(ErrorMessage = "Svp selectionner une valeur")]
         public Nullable<bool> livrable { get; set; }
+
+        [Display(Name = "Garantie")]
+        [Required(ErrorMessage = "Svp selectionner une valeur")]
         public Nullable<bool> garantee { get; set; }
         public Nullable<int> promoId { get; set; }
+
         public Nullable<int> propreitaireId { get; set; }
+
+
+        [Required(ErrorMessage = "Svp selectionner une categorie")]
+        [Display(Name = "Categorie")]
         public Nullable<int> categoryId { get; set; }
+
+
+        [Display(Name = "Date d'ajout")]
         public Nullable<System.DateTime> createdAt { get; set; }
     
         public virtual Category Category { get; set; }

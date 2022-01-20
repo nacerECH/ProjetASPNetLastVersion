@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProduitsController.cs" />
     <Compile Include="Controllers\ProprietaireController.cs" />
     <Compile Include="Controllers\ProprietairesController.cs" />
     <Compile Include="Controllers\WelcomeController.cs" />
@@ -342,9 +343,15 @@
     <Content Include="Views\Proprietaires\Details.cshtml" />
     <Content Include="Views\Proprietaires\Edit.cshtml" />
     <Content Include="Views\Proprietaires\Index.cshtml" />
+    <Content Include="Views\Produits\Create.cshtml" />
+    <Content Include="Views\Produits\Delete.cshtml" />
+    <Content Include="Views\Produits\Details.cshtml" />
+    <Content Include="Views\Produits\Edit.cshtml" />
+    <Content Include="Views\Produits\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="propimages\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
