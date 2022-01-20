@@ -12,7 +12,7 @@ namespace ProjectAspNETv2.Controllers
     [Authorize(Roles ="Marchand")]
     public class ProprietaireController : Controller
     {
-        private Entities db = new Entities();
+        private Entities1 db = new Entities1();
 
 
         [HttpGet]

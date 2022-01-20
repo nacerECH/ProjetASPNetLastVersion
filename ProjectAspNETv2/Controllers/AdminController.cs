@@ -17,7 +17,7 @@ namespace ProjectAspNETv2.Controllers
     {
 
 
-        private Entities db = new Entities();
+        private Entities1 db = new Entities1();
 
         [HttpGet]
         public ActionResult Index() {
@@ -148,7 +148,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetSellers()
         {
-            using (var context = new Entities())
+            using (var context = new Entities1())
             {
 
                 // Return the list of data from the database
@@ -252,7 +252,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetAllProducts()
         {
-            using (var context = new Entities())
+            using (var context = new Entities1())
             {
 
                
@@ -291,7 +291,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet]
         public ActionResult GetProductsNoConfirmed()
         {
-            using (var context = new Entities())
+            using (var context = new Entities1())
             {
 
           
@@ -366,7 +366,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetStatistics()
         {
-            using (var context = new Entities())
+            using (var context = new Entities1())
             {
 
                 
@@ -436,7 +436,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetHistorique()
         {
-            using (var context = new Entities())
+            using (var context = new Entities1())
             {
                 Dictionary<int, string> dic = new Dictionary<int, string>();
                 Dictionary<int, string> dic2 = new Dictionary<int, string>();
