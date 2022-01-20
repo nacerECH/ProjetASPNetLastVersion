@@ -147,10 +147,11 @@ namespace ProjectAspNETv2.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,description_,price,name,livrable,garantee,categoryId")] Produit produit)
+        public ActionResult Edit([Bind(Include = "Id,description_,createdAt,propreitaireId,price,name,livrable,garantee,categoryId")] Produit produit)
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(produit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
