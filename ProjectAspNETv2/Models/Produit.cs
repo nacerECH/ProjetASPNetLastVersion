@@ -19,6 +19,7 @@ namespace ProjectAspNETv2.Models
         {
             this.Historiques = new HashSet<Historique>();
             this.Images = new HashSet<Image>();
+            this.Vues = new HashSet<Vue>();
         }
     
         public int Id { get; set; }
@@ -26,7 +27,6 @@ namespace ProjectAspNETv2.Models
         public Nullable<decimal> price { get; set; }
         public string name { get; set; }
         public Nullable<int> quantity { get; set; }
-        public Nullable<int> vues { get; set; }
         public string status { get; set; }
         public Nullable<bool> livrable { get; set; }
         public Nullable<bool> garantee { get; set; }
@@ -34,8 +34,6 @@ namespace ProjectAspNETv2.Models
         public Nullable<int> propreitaireId { get; set; }
         public Nullable<int> categoryId { get; set; }
         public Nullable<System.DateTime> createdAt { get; set; }
-        public Nullable<System.DateTime> updatedAt { get; set; }
-        public bool isConfirmed { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,5 +42,7 @@ namespace ProjectAspNETv2.Models
         public virtual ICollection<Image> Images { get; set; }
         public virtual Promotion Promotion { get; set; }
         public virtual Proprietaire Proprietaire { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vue> Vues { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace ProjectAspNETv2.Controllers
 {
     public class ProprietairesController : Controller
     {
-        private Entities4 db = new Entities4();
+        private Entities db = new Entities();
         
 
         // GET: Proprietaires

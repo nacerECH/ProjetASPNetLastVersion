@@ -7,16 +7,38 @@
 
 <h2>Support</h2>
 
-<form>
+
+
+
+@using (Html.BeginForm("SendMessageToSupport", "Proprietaire", FormMethod.Post))
+{
+
+<div class="form-group">
+    <label> Email </label>
+
+    
+    @Html.TextBox("email", null, new { type = "email", @class="form-control", placeholder="Email" })
+</div>
+
     <div class="form-group">
         <label>Subject</label>
-        <input type="text" class="form-control" placeholder="Text">
+        
+
+        @Html.TextBox("subject", null, new { type = "text", @class = "form-control", placeholder = "Sublect" })
     </div>
 
     <div class="form-group">
-        <label for="exampleFormControlTextarea1">Message</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="message">Message</label>
+        @Html.TextBox("message", null,new { @class="form-control",  @rows="3"  })
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+
+
+    <input class="label theme-bg2 text-white f-12" type="submit" value="Envoyer" />
+
+
+}
+
+
+

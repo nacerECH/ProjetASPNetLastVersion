@@ -16,92 +16,50 @@
 
 
 <div class="row">
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1199 DH</h3>
-                        <h5 class="text-c-purple mb-0"> La Date:  <span class="text-muted">22/07/2022</span>  </h5>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>112 DH</h3>
-                        <h5 class="text-c-purple mb-0"> La Date:  <span class="text-muted">22/07/2022</span>  </h5>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>11,200</h3>
-                        <h5 class="text-c-purple mb-0"> La Date:  <span class="text-muted">22/07/2022</span>  </h5>
+    @foreach (var item in ViewBag.MyList)
+    {
+
+
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card card-social">
+                <div class="card-block border-bottom">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
+                        </div>
+                        <div class="col text-right">
+                            <h3>1199 DH</h3>
+                            <h5 class="text-c-purple mb-0"> La Date:  <span class="text-muted">22/07/2022</span>  </h5>
+
+
+                            @if (@item.status == "3")
+                            {
+
+                                <h6 class="m-0 text-c-red"> <i class="fas fa-circle text-c-red f-10"></i>  refused </h6>
+
+
+                            }
+                            @if (@item.status == "1")
+                            {
+                                
+                                <h6 class="m-0 text-primary"> <i class="fas fa-circle text-primary f-10"></i>  en attente de confirmation </h6>
+
+                            }
+                        </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
+
+
+
+
+    }
+
+
     </div>
-
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>11,55 DH</h3>
-                        <h5 class="text-c-purple mb-0"> La Date:  <span class="text-muted">22/07/2022</span>  </h5>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3>1120 DH</h3>
-                        <h5 class="text-c-purple mb-0"> La Date:  <span class="text-muted">22/07/2022</span>  </h5>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</div>
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -16,7 +17,7 @@ namespace ProjectAspNETv2.Controllers
     {
 
 
-        private Entities4 db = new Entities4();
+        private Entities db = new Entities();
 
         [HttpGet]
         public ActionResult Index() {
@@ -24,6 +25,25 @@ namespace ProjectAspNETv2.Controllers
             // var userID = User.Identity.GetUserId();
 
             var data = db.Produits.ToList();
+            var vues = db.Vues.ToList();
+
+            Dictionary<int, int> dicVP= new Dictionary<int, int>();
+
+            int idd;
+            int val;
+            foreach (Vue v in vues)
+            {
+                idd = v.product_id;
+                
+                Vue pp = db.Vues.Find((int)v.id);
+                val = (int)pp.value;
+
+                dicVP.Add(idd, val);
+
+            }
+
+
+
             var data2 = new List<Produit>();
             var data3 = new List<Produit>();
             var ProductsToday = new List<Produit>();
@@ -79,14 +99,29 @@ namespace ProjectAspNETv2.Controllers
 
             // get top products (based on views)
            
-            var items = db.Produits.OrderByDescending(u => u.vues).Take(3).ToList();
+           var items0 = db.Vues.OrderByDescending(u => u.value).Take(3).ToList();
 
+            int id1 = items0[0].product_id;
+            int id2 = items0[1].product_id;
+            int id3 = items0[2].product_id;
 
+            Produit p1 = db.Produits.Find(id1);
+            Produit p2 = db.Produits.Find(id2);
+            Produit p3 = db.Produits.Find(id3);
+
+            var items = new List<Produit>();
+            items.Add(p1);
+            items.Add(p2);
+            items.Add(p3);
+
+            
 
             ViewBag.ProdMois = data2.Count();
             ViewBag.RecentProducts = data3;
             ViewBag.Dic = dic;
+            ViewBag.DicVP = dicVP;
             ViewBag.TopProducts = items;
+            ViewBag.TopProductsVues = items0;
 
             ViewBag.prp = db.Proprietaires.Count();
             ViewBag.produits = db.Produits.Count();
@@ -94,6 +129,7 @@ namespace ProjectAspNETv2.Controllers
             ViewBag.ProductsToday = ProductsToday;
             ViewBag.ProductsWeek = ProductsWeek;
             ViewBag.AllProducts = data;
+            
 
             return View("Home");
 
@@ -112,7 +148,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetSellers()
         {
-            using (var context = new Entities4())
+            using (var context = new Entities())
             {
 
                 // Return the list of data from the database
@@ -216,7 +252,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetAllProducts()
         {
-            using (var context = new Entities4())
+            using (var context = new Entities())
             {
 
                
@@ -255,7 +291,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet]
         public ActionResult GetProductsNoConfirmed()
         {
-            using (var context = new Entities4())
+            using (var context = new Entities())
             {
 
           
@@ -330,7 +366,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetStatistics()
         {
-            using (var context = new Entities4())
+            using (var context = new Entities())
             {
 
                 
@@ -400,7 +436,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetHistorique()
         {
-            using (var context = new Entities4())
+            using (var context = new Entities())
             {
                 Dictionary<int, string> dic = new Dictionary<int, string>();
                 Dictionary<int, string> dic2 = new Dictionary<int, string>();

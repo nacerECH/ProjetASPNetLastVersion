@@ -118,7 +118,6 @@
           <Property Name="price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="quantity" Type="int" />
-          <Property Name="vues" Type="int" />
           <Property Name="status" Type="nvarchar" MaxLength="50" />
           <Property Name="livrable" Type="bit" />
           <Property Name="garantee" Type="bit" />
@@ -126,8 +125,6 @@
           <Property Name="propreitaireId" Type="int" />
           <Property Name="categoryId" Type="int" />
           <Property Name="createdAt" Type="datetime" />
-          <Property Name="updatedAt" Type="datetime" />
-          <Property Name="isConfirmed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -153,6 +150,16 @@
           <Property Name="Logo" Type="text" />
           <Property Name="isHonored" Type="bit" />
           <Property Name="isBlocked" Type="bit" />
+          <Property Name="created_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Vues">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="value" Type="int" />
         </EntityType>
         <Association Name="FK__Admin__UserId__4F47C5E3">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
@@ -262,6 +269,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Vues__product_id__76619304">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Vues" Type="Self.Vues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vues">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -333,6 +352,7 @@
           <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proprietaire" EntityType="Self.Proprietaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vues" EntityType="Self.Vues" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Admin__UserId__4F47C5E3" Association="Self.FK__Admin__UserId__4F47C5E3">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Admin" EntitySet="Admin" />
@@ -368,6 +388,10 @@
           <AssociationSet Name="FK__Proprieta__UserI__5CD6CB2B" Association="Self.FK__Proprieta__UserI__5CD6CB2B">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Proprietaire" EntitySet="Proprietaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vues__product_id__76619304" Association="Self.FK__Vues__product_id__76619304">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Vues" EntitySet="Vues" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -510,7 +534,6 @@
           <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="quantity" Type="Int32" />
-          <Property Name="vues" Type="Int32" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="livrable" Type="Boolean" />
           <Property Name="garantee" Type="Boolean" />
@@ -518,13 +541,12 @@
           <Property Name="propreitaireId" Type="Int32" />
           <Property Name="categoryId" Type="Int32" />
           <Property Name="createdAt" Type="DateTime" Precision="3" />
-          <Property Name="updatedAt" Type="DateTime" Precision="3" />
-          <Property Name="isConfirmed" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Produit__categor__3C34F16F" FromRole="Produit" ToRole="Category" />
           <NavigationProperty Name="Historiques" Relationship="Self.FK__Historiqu__produ__29221CFB" FromRole="Produit" ToRole="Historique" />
           <NavigationProperty Name="Images" Relationship="Self.FK__Images__produitI__625A9A57" FromRole="Produit" ToRole="Images" />
           <NavigationProperty Name="Promotion" Relationship="Self.FK__Produit__promoId__05D8E0BE" FromRole="Produit" ToRole="Promotion" />
           <NavigationProperty Name="Proprietaire" Relationship="Self.FK__Produit__proprei__04E4BC85" FromRole="Produit" ToRole="Proprietaire" />
+          <NavigationProperty Name="Vues" Relationship="Self.FK__Vues__product_id__76619304" FromRole="Produit" ToRole="Vues" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -551,10 +573,21 @@
           <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="isHonored" Type="Boolean" />
           <Property Name="isBlocked" Type="Boolean" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Proprieta__UserI__5CD6CB2B" FromRole="Proprietaire" ToRole="AspNetUsers" />
           <NavigationProperty Name="ContactSupports" Relationship="Self.FK__ContactSu__march__5FB337D6" FromRole="Proprietaire" ToRole="ContactSupport" />
           <NavigationProperty Name="Historiques" Relationship="Self.FK__Historiqu__propr__2A164134" FromRole="Proprietaire" ToRole="Historique" />
           <NavigationProperty Name="Produits" Relationship="Self.FK__Produit__proprei__04E4BC85" FromRole="Proprietaire" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Vue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="value" Type="Int32" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK__Vues__product_id__76619304" FromRole="Vues" ToRole="Produit" />
         </EntityType>
         <Association Name="FK__Admin__UserId__4F47C5E3">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
@@ -692,11 +725,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Vues__product_id__76619304">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Vues" Type="Self.Vue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vues">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Entities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
@@ -710,6 +755,7 @@
           <EntitySet Name="Produits" EntityType="Self.Produit" />
           <EntitySet Name="Promotions" EntityType="Self.Promotion" />
           <EntitySet Name="Proprietaires" EntityType="Self.Proprietaire" />
+          <EntitySet Name="Vues" EntityType="Self.Vue" />
           <AssociationSet Name="FK__Admin__UserId__4F47C5E3" Association="Self.FK__Admin__UserId__4F47C5E3">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Admin" EntitySet="Admins" />
@@ -754,6 +800,10 @@
             <End Role="Proprietaire" EntitySet="Proprietaires" />
             <End Role="Produit" EntitySet="Produits" />
           </AssociationSet>
+          <AssociationSet Name="FK__Vues__product_id__76619304" Association="Self.FK__Vues__product_id__76619304">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="Vues" EntitySet="Vues" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -764,7 +814,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities4">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="Model.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -876,7 +926,6 @@
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="vues" ColumnName="vues" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="livrable" ColumnName="livrable" />
                 <ScalarProperty Name="garantee" ColumnName="garantee" />
@@ -884,8 +933,6 @@
                 <ScalarProperty Name="propreitaireId" ColumnName="propreitaireId" />
                 <ScalarProperty Name="categoryId" ColumnName="categoryId" />
                 <ScalarProperty Name="createdAt" ColumnName="createdAt" />
-                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
-                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -913,6 +960,17 @@
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="isHonored" ColumnName="isHonored" />
                 <ScalarProperty Name="isBlocked" ColumnName="isBlocked" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vues">
+            <EntityTypeMapping TypeName="Model.Vue">
+              <MappingFragment StoreEntitySet="Vues">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="value" ColumnName="value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

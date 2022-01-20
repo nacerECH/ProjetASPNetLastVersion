@@ -11,10 +11,7 @@ namespace ProjectAspNETv2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web;
-
+    
     public partial class Proprietaire
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,20 +25,14 @@ namespace ProjectAspNETv2.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string UserId { get; set; }
-        public Nullable<bool> isCompany { get; set; } = false;
+        public Nullable<bool> isCompany { get; set; }
         public string Tel { get; set; }
         public string Adresse { get; set; }
         public string Ville { get; set; }
-
-        [DisplayName("Choisir une image")]
-
-        //[DataType(DataType.Upload)]
-        [Required(ErrorMessage = "Please choose file to upload.")]
         public string Logo { get; set; }
-
-       
         public Nullable<bool> isHonored { get; set; }
         public Nullable<bool> isBlocked { get; set; }
+        public Nullable<System.DateTime> created_at { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
