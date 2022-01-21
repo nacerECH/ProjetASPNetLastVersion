@@ -96,9 +96,11 @@ namespace ProjectAspNETv2.Controllers
 
             }
 
+            TopProducts = TopProducts.OrderBy(p => p.Vues.Count).Reverse().ToList();
 
 
-                ViewBag.ProdMois = data2.Count();
+
+            ViewBag.ProdMois = data2.Count();
             ViewBag.RecentProducts = data3;
           
 
@@ -277,15 +279,33 @@ namespace ProjectAspNETv2.Controllers
             Produit p = db.Produits.Find(id);
             if (ModelState.IsValid)
             {
+                Historique h = new Historique();
+                h.Produit = p;
+                h.Proprietaire = p.Proprietaire;
+
                 if (etat == "Confirm")
                 {
                     p.status = "2";
+                    
+                    //------------- Instancier Historique
+
+                    h.operation = "Confirmation";
+                    h.operation_date = DateTime.Now;
+
+                    //-------------------------
+
                 }
-                if (etat == "Reject")
+                else
                 {
                     p.status = "3";
-                }
 
+                    //------------- Instancier Historique
+
+                    h.operation = "Rejet";
+                    h.operation_date = DateTime.Now;
+                    //-------------------------
+                }
+                db.Historiques.Add(h);
                 db.Entry(p).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -409,5 +429,74 @@ namespace ProjectAspNETv2.Controllers
 
             return Redirect(Url.Action("GetSellers", "Admin"));
         }
+
+
+
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Produit produit = db.Produits.Find(id);
+            if (produit == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Produit = produit;
+            return View("Details");
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteConfirmed(int id)
+        {
+
+
+            Produit produit = db.Produits.Find(id);
+            produit.Images.Clear();
+            produit.Historiques.Clear();
+            produit.Vues.Clear();
+
+            /*
+            var images = produit.Images;
+            foreach(var image in images)
+            {
+                //var i = image;
+                db.Images.Remove(image);
+                db.SaveChanges();
+
+            }
+
+            var vues = produit.Vues;
+            foreach (var v in vues)
+            {
+                //var i = image;
+                db.Vues.Remove(v);
+                db.SaveChanges();
+
+            }
+
+            var hs = produit.Historiques;
+            foreach (var h in hs)
+            {
+                //var i = image;
+                db.Historiques.Remove(h);
+                db.SaveChanges();
+
+            }
+
+            */
+
+
+
+
+            db.Produits.Remove(produit);
+
+            db.SaveChanges();
+            return Redirect(Url.Action("GetAllProducts", "Admin"));
+        }
+
     }
 }

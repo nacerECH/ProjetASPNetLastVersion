@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPageDashboard1.cshtml";
+}
+
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ breadcrumb ] end -->
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Details de produit</h5>
+                    </div>
+                    <div class="card-block pb-2 table-border-style">
+                        <div>
+                            <h5 class="mb-2">Images</h5>
+                            <div class="row mb-3">
+                                @foreach (var image in ViewBag.Produit.Images)
+                                {
+                                    <div class="col-4 p-2">
+                                        <img class="w-100 h-100" src="@Url.Content(image.PathName)" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="mb-2">
+
+                                        Titre
+
+                                    </h5>
+                                    <div>
+                                        @ViewBag.Produit.name
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <h5 class="mb-2">
+                                        Category
+                                    </h5>
+                                    <div>
+                                        @ViewBag.Produit.Category.Name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <h5 class="mb-2">
+
+                                Description
+                            </h5>
+                            <div>
+                                @ViewBag.Produit.description_
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    Prix
+                                </h5>
+                                <div>
+                                    @ViewBag.Produit.price
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    Garantee
+                                </h5>
+                                <div>
+                                    @if ((bool)ViewBag.Produit.garantee == true)
+                                    {
+                                        <span>Avec</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Sans</span>
+
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    livraison
+                                </h5>
+                                <div>
+                                    @if ((bool)ViewBag.Produit.livrable == true)
+                                    {
+                                        <span>Possible</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Non</span>
+
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-5" style="justify-content : end;">
+                            <div style="width : fit-content;">
+
+                              
+
+
+                                <div class="col-6">
+                                    <h6 class="text-center m-b-10">
+
+                                        @using (Html.BeginForm("DeleteConfirmed", "Admin", FormMethod.Post))
+                                        {
+
+                                            <input type="hidden" name="id" id="id" value="@ViewBag.Produit.Id" />
+
+                                            <input class="btn btn-primary" type="submit" value="Supprimer" />
+
+                                        }
+                                    </h6>
+
+ 
+                                    <h6 class="text-center  m-b-10">
+
+                                        @using (Html.BeginForm("Confirm_Reject_Product", "Admin", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="id" id="id" value="ViewBag.Produit.Id" />
+
+                                            <input type="hidden" name="etat" id="etat" value="Reject" />
+
+                                            <input class="btn btn-danger" type="submit" value="Bloquer le Produit" />
+
+                                        }
+                                    </h6>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+
+
