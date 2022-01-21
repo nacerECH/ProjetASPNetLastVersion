@@ -25,29 +25,14 @@ namespace ProjectAspNETv2.Controllers
             // var userID = User.Identity.GetUserId();
 
             var data = db.Produits.ToList();
-            var vues = db.Vues.ToList();
-
-            Dictionary<int, int> dicVP= new Dictionary<int, int>();
-
-            int idd;
-            int val;
-            foreach (Vue v in vues)
-            {
-                idd = v.product_id;
-                
-                Vue pp = db.Vues.Find((int)v.id);
-                val = (int)pp.value;
-
-                dicVP.Add(idd, val);
-
-            }
-
+            var vues = new List<int>();
 
 
             var data2 = new List<Produit>();
             var data3 = new List<Produit>();
             var ProductsToday = new List<Produit>();
             var ProductsWeek = new List<Produit>();
+            var TopProducts = new List<Produit>();
 
             foreach (Produit p in data)
             {
@@ -71,7 +56,7 @@ namespace ProjectAspNETv2.Controllers
                     ProductsToday.Add(p);
                 }
 
-
+                vues.Add(p.Vues.Count);
 
             }
 
@@ -81,50 +66,46 @@ namespace ProjectAspNETv2.Controllers
             data3.Add(data[i - 3]);
 
 
-            Dictionary<int, string> dic = new Dictionary<int, string>();
 
-            int id;
-            string NomS;
-            foreach (Produit p in data3)
-            {
-                id = p.Id;
-                int idS = (int)p.propreitaireId;
-                Proprietaire pp = db.Proprietaires.Find(idS);
-                NomS = pp.Name;
+            // get top products (based on views)
 
-                dic.Add(id, NomS);
+
+            // get top products (based on views)
+            int max1 = vues.Max();
+            vues.RemoveAll(item => item == max1);
+            int max2 = vues.Max();
+            vues.RemoveAll(item => item == max2);
+            int max3 = vues.Max();
+            vues.RemoveAll(item => item == max3);
+
+            foreach (Produit p2 in data)
+            { 
+            
+                if(p2.Vues.Count == max1)
+                {
+                    TopProducts.Add(p2);
+                }
+                if (p2.Vues.Count == max2)
+                {
+                    TopProducts.Add(p2);
+                }
+                if (p2.Vues.Count == max3)
+                {
+                    TopProducts.Add(p2);
+                }
 
             }
 
 
-            // get top products (based on views)
-           
-           var items0 = db.Vues.OrderByDescending(u => u.value).Take(3).ToList();
 
-            int id1 = items0[0].product_id;
-            int id2 = items0[1].product_id;
-            int id3 = items0[2].product_id;
-
-            Produit p1 = db.Produits.Find(id1);
-            Produit p2 = db.Produits.Find(id2);
-            Produit p3 = db.Produits.Find(id3);
-
-            var items = new List<Produit>();
-            items.Add(p1);
-            items.Add(p2);
-            items.Add(p3);
-
-            
-
-            ViewBag.ProdMois = data2.Count();
+                ViewBag.ProdMois = data2.Count();
             ViewBag.RecentProducts = data3;
-            ViewBag.Dic = dic;
-            ViewBag.DicVP = dicVP;
-            ViewBag.TopProducts = items;
-            ViewBag.TopProductsVues = items0;
+          
 
             ViewBag.prp = db.Proprietaires.Count();
             ViewBag.produits = db.Produits.Count();
+
+            ViewBag.TopProducts = TopProducts;
 
             ViewBag.ProductsToday = ProductsToday;
             ViewBag.ProductsWeek = ProductsWeek;
@@ -150,27 +131,10 @@ namespace ProjectAspNETv2.Controllers
         {
             
                 // Return the list of data from the database
-                var data = db.Proprietaires.ToList();
+            var data = db.Proprietaires.ToList();
             var supportMsg = db.ContactSupports.ToList();
 
 
-            Dictionary<int, string> dicMP = new Dictionary<int, string>();
-
-            int id;
-            string NomS;
-            foreach (ContactSupport cs in supportMsg)
-            {
-                id = (int)cs.Id;
-                
-
-                
-                int idS = (int)cs.marchandId;
-                Proprietaire pp = db.Proprietaires.Find(idS);
-                NomS = pp.Name;
-
-                dicMP.Add(id, NomS);
-
-            }
 
 
             // Return the list of data from the database
@@ -195,7 +159,6 @@ namespace ProjectAspNETv2.Controllers
                 ViewBag.MyList2 = data2;
                 ViewBag.MyList3 = data3;
             ViewBag.ProbList = supportMsg;
-            ViewBag.DicMP = dicMP;
 
 
             return View("Vendeurs");
@@ -273,35 +236,12 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetAllProducts()
         {
-            using (var context = new Entities1())
-            {
-
-               
-                var data = context.Produits.ToList();
-
-                Dictionary<int, string> dic = new Dictionary<int, string>();
-
-                int id;
-                string NomS;
-                foreach (Produit p in data)
-                {
-                     id = p.Id;
-                    int idS = (int)p.propreitaireId;
-                    Proprietaire pp = db.Proprietaires.Find(idS);
-                     NomS = pp.Name;
-
-                    dic.Add(id, NomS);
-
-                }
-
-
-
+                          
+                var data = db.Produits.ToList();
                 ViewBag.MyList = data;
-                ViewBag.Dic = dic;
-
 
                 return View("Products");
-            }
+            
         }
 
 
@@ -312,37 +252,11 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet]
         public ActionResult GetProductsNoConfirmed()
         {
-            using (var context = new Entities1())
-            {
-
-          
-                var data = context.Produits.Where(p => p.status=="1").ToList();
+                var data = db.Produits.Where(p => p.status=="1").ToList();
                 
-
-                Dictionary<int, string> dic = new Dictionary<int, string>();
-
-                int id;
-                string NomS;
-                foreach (Produit p in data)
-                {
-                    id = p.Id;
-                    int idS = (int)p.propreitaireId;
-                    Proprietaire pp = db.Proprietaires.Find(idS);
-
-                    NomS = pp.Name;
-
-                    dic.Add(id, NomS);
-
-                }
-
-
-
                 ViewBag.MyList = data;
-                ViewBag.Dic = dic;
-
-
                 return View("ProductConfirmation");
-            }
+            
         }
 
 
@@ -387,17 +301,13 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetStatistics()
         {
-            using (var context = new Entities1())
-            {
-
-                
-                var data = context.Proprietaires.ToList();
+           
+                var data = db.Proprietaires.ToList();
 
                 ViewBag.e = new SelectList(data, "Id", "Name");
 
-
                 return View("Statistic");
-            }
+            
         }
 
 
@@ -406,8 +316,6 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult Get_Seller_Statistics(string e)
         {
             var data = db.Proprietaires.ToList();
-
-            
 
             ViewBag.e = new SelectList(data, "Id", "Name");
 
@@ -429,8 +337,15 @@ namespace ProjectAspNETv2.Controllers
 
         public ActionResult MyChart()
         {
+            DateTime dateAuj0 = DateTime.Now;
+            DateTime dateAuj1 = dateAuj0.AddDays(-1);
+            DateTime dateAuj2 = dateAuj0.AddDays(-2);
+            DateTime dateAuj3 = dateAuj0.AddDays(-3);
+            DateTime dateAuj4 = dateAuj0.AddDays(-4);
+            DateTime dateAuj5 = dateAuj0.AddDays(-5);
+            DateTime dateAuj6 = dateAuj0.AddDays(-6);
 
-            string[] xv = { "Lundi", "Mardi", "Mercredi", "jeudi", "Vendredi", "Samedi", "Dimenche" };
+            string[] xv = { dateAuj6.ToString("dd/MM"), dateAuj5.ToString("dd/MM"), dateAuj4.ToString("dd/MM"), dateAuj3.ToString("dd/MM"), dateAuj2.ToString("dd/MM"), dateAuj1.ToString("dd/MM"), dateAuj0.ToString("dd/MM") };
             int[] yv = { 7, 2, 2, 4, 18, 14, 20 };
 
             new System.Web.Helpers.Chart(width: 800, height: 200)
@@ -443,10 +358,7 @@ namespace ProjectAspNETv2.Controllers
                    yFields: "Les jours"
                 ).Write("png");
 
-
-
             return null;
-
 
 
         }
@@ -457,43 +369,11 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet] 
         public ActionResult GetHistorique()
         {
-            using (var context = new Entities1())
-            {
-                Dictionary<int, string> dic = new Dictionary<int, string>();
-                Dictionary<int, string> dic2 = new Dictionary<int, string>();
-                
-                var data = context.Historiques.ToList();
-
-
-                int id;
-                string NomS,NomP;
-                foreach (Historique h in data)
-                {
-                    id = h.Id;
-                    int idS = (int)h.proprietaireId;
-                    int idP = (int)h.produitId;
-                    Proprietaire pp = db.Proprietaires.Find(idS);
-                    Produit pp2 = db.Produits.Find(idP);
-
-
-                    NomS = pp.Name;
-                    NomP = pp2.name;
-
-                    dic.Add(id, NomS);
-                    dic2.Add(id, NomP);
-
-                }
-
-
-
-
+                               
+                var data = db.Historiques.ToList();
                 ViewBag.Operations = data;
-                ViewBag.Dic1 = dic;
-                ViewBag.Dic2 = dic2;
-
-
                 return View("Historique");
-            }
+           
         }
 
 
@@ -510,8 +390,24 @@ namespace ProjectAspNETv2.Controllers
             db.Historiques.Remove(h);
                 db.SaveChanges();
 
-            
             return Redirect(Url.Action("GetHistorique", "Admin"));
+        }
+
+
+
+        [HttpPost]
+
+        public ActionResult DeleteMessageSupport(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            db.ContactSupports.Remove(db.ContactSupports.Find(id));
+            db.SaveChanges();
+
+            return Redirect(Url.Action("GetSellers", "Admin"));
         }
     }
 }

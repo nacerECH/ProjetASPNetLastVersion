@@ -93,11 +93,11 @@
                                                 <p class="m-0"> @item.description_ </p>
                                             </td>
                                             <td>
-                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> @ViewBag.DicVP[@item.Id] Vues</h6>
+                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> @item.status  </h6>
                                             </td>
 
                                             <td>
-                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> ////// </h6>
+                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>  @item.Vues.Count Vues </h6>
                                             </td>
 
 
@@ -149,7 +149,7 @@
                             </div>
                             <div class="col text-right">
                                 <h3> @ViewBag.TopProducts[0].name </h3>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>   @ViewBag.DicVP[ViewBag.TopProducts[0].Id] </h5>
+                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[0].Vues.Count </h5>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                             </div>
                             <div class="col text-right">
                                 <h3>@ViewBag.TopProducts[1].name </h3>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.DicVP[ViewBag.TopProducts[1].Id] </h5>
+                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[1].Vues.Count </h5>
                             </div> </h5>
                         </div>
                         </div>
@@ -184,7 +184,7 @@
                             </div>
                             <div class="col text-right">
                                 <h3> @ViewBag.TopProducts[2].name </h3>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.DicVP[ViewBag.TopProducts[2].Id] </h5>
+                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[2].Vues.Count </h5>
                             </div>
                         </div>
                     </div>
@@ -233,7 +233,7 @@
                                             <h6 class="m-0"> @item2.createdAt</h6>
                                         </td>
                                         <td>
-                                            <h6 class="m-0">  @ViewBag.DicVP[@item2.Id] </h6>
+                                            <h6 class="m-0">  @item2.Vues.Count </h6>
                                         </td>
                                         @if (@item2.status == "3")
                                         {
@@ -304,7 +304,7 @@
                                             <h6 class="m-0"> @item2.createdAt</h6>
                                         </td>
                                         <td>
-                                            <h6 class="m-0"> @ViewBag.DicVP[@item2.Id] </h6>
+                                            <h6 class="m-0"> @item2.Vues.Count </h6>
                                         </td>
                                         @if (@item2.status == "3")
                                         {
@@ -373,7 +373,7 @@
                                             <h6 class="m-0"> @item2.createdAt</h6>
                                         </td>
                                         <td>
-                                            <h6 class="m-0"> @ViewBag.DicVP[@item2.Id] </h6>
+                                            <h6 class="m-0"> @item2.Vues.Count </h6>
                                         </td>
                                         @if (@item2.status == "3")
                                         {

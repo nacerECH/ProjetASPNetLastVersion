@@ -47,7 +47,7 @@
 
                     <tr>
                         <td>
-                            <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">  @ViewBag.DicMP[@item.Id]   </h6>   </a>
+                            <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">  @item.Proprietaire.Name   </h6>   </a>
                         </td>
                         <td>
                             <h6 class="m-0">  @item.Email</h6>
@@ -60,7 +60,21 @@
                         </td>
                         <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
 
-                        <td>  <a href="#!" class="label theme-bg2 text-white f-12">Regler</a> </td>
+                        <td>
+                            
+                            @using (Html.BeginForm("DeleteMessageSupport", "Admin", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" id="id" value="@item.Id" />
+
+
+
+                                <input class="label theme-bg2 text-white f-12" type="submit" value="Regler" />
+
+
+                            }
+
+
+                        </td>
                     </tr>
                             }
                             
