@@ -1,4 +1,5 @@
-﻿using ProjectAspNETv2.Models;
+﻿using Microsoft.AspNet.Identity;
+using ProjectAspNETv2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +11,32 @@ namespace ProjectAspNETv2.Controllers
 {
     public class WelcomeController : Controller
     {
-        private Entities1 db = new Entities1();
+        private Entities1 DB = new Entities1();
 
         // GET: Welcome
         public ActionResult Index()
         {
+            
+
             return View();
         }
-        public ActionResult Signup()
+        /*public JsonResult GetSearchData()
         {
-            return View();
-        }
-        public ActionResult Signin()
-        {
-            return View();
-        }
+
+        }*/
+  
+        
         public ActionResult Shop()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                var id = User.Identity.GetUserId(); 
+            }
+            
+
+            var produits = DB.Produits;
+
+            return View(produits.ToList());
         }
         public ActionResult Product(int? id)
         {
@@ -36,7 +45,7 @@ namespace ProjectAspNETv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Produit produit = db.Produits.Find(id);
+            Produit produit = DB.Produits.Find(id);
             if (produit == null)
             {
                 return HttpNotFound();
@@ -48,5 +57,7 @@ namespace ProjectAspNETv2.Controllers
 
             return View(produit);
         }
+
+        
     }
 }
