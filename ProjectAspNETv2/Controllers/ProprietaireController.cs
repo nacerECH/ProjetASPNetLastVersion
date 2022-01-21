@@ -19,34 +19,20 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult Index()
         {
 
-            var userID = User.Identity.GetUserId();
-
-            Proprietaire prop = db.Proprietaires.Where(pr => pr.UserId == userID).FirstOrDefault();
-
+   
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id);
+           
             int propID = prop.Id;
 
             var data = db.Produits.Where(p => p.propreitaireId== propID).ToList();
-            var vues = db.Vues.ToList();
             var data2 = new List<Produit>();
             var data3 = new List<Produit>();
             var ProductsToday = new List<Produit>();
             var ProductsWeek = new List<Produit>();
-            var VuesProducts = new List<Vue>();
+            var vues = new List<int>();
+            var TopProducts = new List<Produit>();
 
-            Dictionary<int, int> dicVP = new Dictionary<int, int>();
-
-            int idd;
-            int val;
-            foreach (Vue v in vues)
-            {
-                idd = v.product_id;
-
-                Vue pp = db.Vues.Find((int)v.id);
-                val = (int)pp.value;
-
-                dicVP.Add(idd, val);
-
-            }
 
             foreach (Produit p in data)
             {
@@ -70,54 +56,44 @@ namespace ProjectAspNETv2.Controllers
                     ProductsToday.Add(p);
                 }
 
-                //  VuesProducts.Add(dicVP[p.Id]);
+                vues.Add(p.Vues.Count);
 
-                Vue vv = db.Vues.Where(v => v.product_id == p.Id).FirstOrDefault();
-
-                VuesProducts.Add(vv);
 
 
 
             }
+            int i= data.Count();
+            if ( i > 3) {
+                data3.Add(data[i - 1]);
+                data3.Add(data[i - 2]);
+                data3.Add(data[i - 3]);
+            }
 
-            int i = data.Count();
-            data3.Add(data[i - 1]);
-            data3.Add(data[i - 2]);
-            data3.Add(data[i - 3]);
 
-            
-            
 
             // get top products (based on views)
+            int max1 = vues.Max();
+            vues.RemoveAll(item => item == max1);
+            int max2 = vues.Max();
+            vues.RemoveAll(item => item == max2);
+            int max3 = vues.Max();
+            vues.RemoveAll(item => item == max3);
 
-            // get top products (based on views)
+            foreach (Produit p2 in data)
+            {
 
-            
+                if (p2.Vues.Count == max1 || p2.Vues.Count == max2 || p2.Vues.Count == max3)
+                {
+                    TopProducts.Add(p2);
+                }
 
-            var items0 = VuesProducts.OrderByDescending(u => u.value).Take(3).ToList();
+            }
 
-            int id1 = items0[0].product_id;
-            int id2 = items0[1].product_id;
-            int id3 = items0[2].product_id;
-
-            Produit p1 = db.Produits.Find(id1);
-            Produit p2 = db.Produits.Find(id2);
-            Produit p3 = db.Produits.Find(id3);
-
-            var items = new List<Produit>();
-            items.Add(p1);
-            items.Add(p2);
-            items.Add(p3);
-
-
-
-            ViewBag.DicVP = dicVP;
             ViewBag.ProdMois = data2.Count();
             ViewBag.TotalProducts = data.Count();
-            ViewBag.TopProducts = items;
             ViewBag.RecentProducts = data3;
-            
-          //  ViewBag.TopProducts = items;
+
+            ViewBag.TopProducts = TopProducts;
 
             ViewBag.prp = db.Proprietaires.Count();
             ViewBag.produits = db.Produits.Count();
@@ -134,16 +110,7 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet]
         public ActionResult GetAllProducts()
         {
-            Proprietaire prop = db.Proprietaires.Where(pr => pr.UserId == User.Identity.GetUserId()).FirstOrDefault();
-
-            int propID = prop.Id;
-
-            var data = db.Produits.Where(p => p.propreitaireId == prop.Id).ToList();
-
-
-                ViewBag.MyList = data;
-
-                return View("Products");
+           return Redirect(Url.Action("Index", "Produits"));
             
         }
 
@@ -152,19 +119,14 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet]
         public ActionResult GetProductsNoConfirmed()
         {
-
-            Proprietaire prop = db.Proprietaires.Where(pr => pr.UserId == User.Identity.GetUserId()).FirstOrDefault();
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id);
 
             int propID = prop.Id;
 
             var data = db.Produits.Where(p => p.propreitaireId == propID && (p.status == "1"  || p.status == "3")).ToList();
 
-
-
                 ViewBag.MyList = data;
-
-
-
                 return View("ProductsRef");
             
         }
@@ -244,42 +206,15 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet]
         public ActionResult GetHistorique()
         {
-
-            Proprietaire prop = db.Proprietaires.Where(pr => pr.UserId == User.Identity.GetUserId()).FirstOrDefault();
-
+            var id2 = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id2);
             int propID = prop.Id;
-
-            Dictionary<int, string> dic2 = new Dictionary<int, string>();
-
+      
                 var data = db.Historiques.Where(h => h.proprietaireId == propID).ToList();
 
 
-                int id;
-                string NomS, NomP;
-                foreach (Historique h in data)
-                {
-                    id = h.Id;
-                    
-                    int idP = (int)h.produitId;
-                   
-                    Produit pp2 = db.Produits.Find(idP);
-
-
-                   
-                    NomP = pp2.name;
-
-                    
-                    dic2.Add(id, NomP);
-
-                }
-
-
-
-
                 ViewBag.Operations = data;
-                
-                ViewBag.Dic2 = dic2;
-
+              
 
                 return View("Historique");
             
@@ -301,7 +236,6 @@ namespace ProjectAspNETv2.Controllers
             db.Historiques.Remove(h);
             db.SaveChanges();
 
-
             return Redirect(Url.Action("GetHistorique", "Proprietaire"));
         }
 
@@ -313,14 +247,14 @@ namespace ProjectAspNETv2.Controllers
             return View("Support");
         }
 
-
         [HttpPost]
 
         public ActionResult SendMessageToSupport(string email, string subject, string message)
         {
-            Proprietaire prop = db.Proprietaires.Where(pr => pr.UserId == User.Identity.GetUserId()).FirstOrDefault();
-
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id);
             int propID = prop.Id;
+
 
             ContactSupport cs = new ContactSupport();
             cs.Email = email;
@@ -331,16 +265,12 @@ namespace ProjectAspNETv2.Controllers
             cs.Id = ids;
             if (ModelState.IsValid)
             {
-
                 db.ContactSupports.Add(cs);
-
-
                 db.SaveChanges();
 
             }
             return Redirect(Url.Action("Support", "Proprietaire"));
         }
-
 
 
     }
