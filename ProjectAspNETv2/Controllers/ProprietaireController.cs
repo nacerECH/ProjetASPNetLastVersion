@@ -25,12 +25,15 @@ namespace ProjectAspNETv2.Controllers
            
             int propID = prop.Id;
 
-            var data = db.Produits.Where(p => p.propreitaireId== propID).ToList();
+            var data = db.Produits.Where(p => p.propreitaireId == propID).ToList();
+            
             var data2 = new List<Produit>();
             var data3 = new List<Produit>();
             var ProductsToday = new List<Produit>();
             var ProductsWeek = new List<Produit>();
-            var vues = new List<int>();
+            //var vues = new List<int>();
+
+            List<int> vues = new List<int>();
             var TopProducts = new List<Produit>();
 
 
@@ -70,25 +73,31 @@ namespace ProjectAspNETv2.Controllers
             }
 
 
-
+            //vues2 = vues;
             // get top products (based on views)
             int max1 = vues.Max();
             vues.RemoveAll(item => item == max1);
             int max2 = vues.Max();
             vues.RemoveAll(item => item == max2);
             int max3 = vues.Max();
-            vues.RemoveAll(item => item == max3);
+            // vues.RemoveAll(item => item == max3);
 
-            foreach (Produit p2 in data)
+            foreach (Produit p2x in data)
             {
 
-                if (p2.Vues.Count == max1 || p2.Vues.Count == max2 || p2.Vues.Count == max3)
+                if (p2x.Vues.Count == max1 || p2x.Vues.Count == max2 || p2x.Vues.Count == max3)
                 {
-                    TopProducts.Add(p2);
+                    
+                    TopProducts.Add(p2x);
                 }
-
+                
+                
             }
+          TopProducts = TopProducts.OrderBy(p => p.Vues.Count).Reverse().ToList();
+            
 
+
+            ViewBag.AllProducts = data;
             ViewBag.ProdMois = data2.Count();
             ViewBag.TotalProducts = data.Count();
             ViewBag.RecentProducts = data3;
@@ -100,7 +109,7 @@ namespace ProjectAspNETv2.Controllers
 
             ViewBag.ProductsToday = ProductsToday;
             ViewBag.ProductsWeek = ProductsWeek;
-            ViewBag.AllProducts = data;
+            
 
             return View("Home");
 

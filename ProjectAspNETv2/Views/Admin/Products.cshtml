@@ -16,35 +16,40 @@
 <div class="row">
 
     @foreach (var item in ViewBag.MyList)
-    { 
-    
-    <div class="col-md-6 col-xl-3">
-        <div class="card card-social">
-            <div class="card-block border-bottom">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto">
-                        <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">
-                    </div>
-                    <div class="col text-right">
-                        <h3> @item.price DH</h3>
-                        <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @item.Proprietaire.Name </h5>
+    {
+
+        <div class="col-md-6 col-xl-3">
+           
+                <div class="card" style="width: 15rem">
+                    <img class="card-img-top"  src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">@item.name</h4>
+                        <p class="card-text">  @item.description_  tfjbvlsfhkjbk djdbbbbbbbbbbbd doadhcdjcsn dkkddkdka adjcbakjdckaj </p>
+                        <div class="col text-right">
+                            <h4> @item.price DH</h4>
+                            <h6 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @item.Proprietaire.Name </h6>
+                        </div>
+                        <a href="/Admin/Details/@item.Id" class="label theme-bg2 text-white f-12" > Details</a>
+                        
                     </div>
                 </div>
-            </div>
 
+            
         </div>
-    </div>
-    
-    
+
+
+      
+
+
     }
-        
-
-     
 
 
-    
 
-    </div>
+
+
+
+
+</div>
 
 
 

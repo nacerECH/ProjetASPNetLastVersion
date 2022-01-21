@@ -83,7 +83,32 @@ namespace ProjectAspNETv2.Controllers
                     //Where(p => p.UserId == User.Identity.GetUserId());
                     produit.Proprietaire = prop;
                     produit.createdAt = DateTime.Now;
+
+                    //------------- Instancier Historique
+
+                    Historique h = new Historique();
+                    h.operation = "Ajouter";
+                    h.operation_date = DateTime.Now;
+                    h.Produit = produit;
+                    h.Proprietaire = prop;
+
+
+                    //-------------------------
+
+                    //------------- Instancier View
+
+                    Vue v = new Vue();
+                    v.Produit = produit;
+                    v.created_at = DateTime.Now;
+
+
+                    //-------------------------
+
+
+
                     db.Produits.Add(produit);
+                    db.Historiques.Add(h);
+                    db.Vues.Add(v);
                     db.SaveChanges();
 
                     foreach (var file in files)
@@ -149,10 +174,23 @@ namespace ProjectAspNETv2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,description_,createdAt,propreitaireId,price,name,livrable,garantee,categoryId")] Produit produit)
         {
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id);
             if (ModelState.IsValid)
             {
+                //------------- Instancier Historique
 
+                Historique h = new Historique();
+                h.operation = "Editer";
+                h.operation_date = DateTime.Now;
+                h.Produit = produit;
+                h.Proprietaire = prop;
+
+
+                //-------------------------
+                
                 db.Entry(produit).State = EntityState.Modified;
+                db.Historiques.Add(h);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -180,7 +218,11 @@ namespace ProjectAspNETv2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+
             Produit produit = db.Produits.Find(id);
+          
+
             var images = produit.Images;
             //foreach(var image in images)
             //{
@@ -189,7 +231,10 @@ namespace ProjectAspNETv2.Controllers
             //    //db.SaveChanges();
 
             //}
+            
+            
             db.Produits.Remove(produit);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
