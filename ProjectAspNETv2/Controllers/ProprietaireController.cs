@@ -62,12 +62,12 @@ namespace ProjectAspNETv2.Controllers
 
 
             }
-
-            int i = data.Count();
-            data3.Add(data[i - 1]);
-            data3.Add(data[i - 2]);
-            data3.Add(data[i - 3]);
-
+            int i= data.Count();
+            if ( i > 3) {
+                data3.Add(data[i - 1]);
+                data3.Add(data[i - 2]);
+                data3.Add(data[i - 3]);
+            }
 
 
 
