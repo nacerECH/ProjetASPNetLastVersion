@@ -32,8 +32,25 @@ namespace ProjectAspNETv2.Controllers
             {
                 var id = User.Identity.GetUserId(); 
             }
-            
 
+
+            var data = DB.Proprietaires.ToList();
+            var distinctData = new List<Proprietaire>();
+            
+            var villes = DB.Proprietaires.Select(p=> p.Ville).ToList();
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                if (villes.Contains(data[i].Ville))
+                {
+                    distinctData.Add(data[i]);
+                    villes.RemoveAll(item => item == data[i].Ville);
+                }
+
+            }
+
+            ViewBag.Villes = new SelectList(distinctData, "Id", "Ville");
+            ViewBag.Categories = new SelectList(DB.Categories, "CatId", "Name");  
             var produits = DB.Produits;
 
             return View(produits.ToList());

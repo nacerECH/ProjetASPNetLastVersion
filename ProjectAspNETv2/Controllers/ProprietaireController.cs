@@ -70,31 +70,35 @@ namespace ProjectAspNETv2.Controllers
                 data3.Add(data[i - 1]);
                 data3.Add(data[i - 2]);
                 data3.Add(data[i - 3]);
-            }
 
 
-            //vues2 = vues;
-            // get top products (based on views)
-            int max1 = vues.Max();
-            vues.RemoveAll(item => item == max1);
-            int max2 = vues.Max();
-            vues.RemoveAll(item => item == max2);
-            int max3 = vues.Max();
-            // vues.RemoveAll(item => item == max3);
 
-            foreach (Produit p2x in data)
-            {
+                //vues2 = vues;
+                // get top products (based on views)
+                int max1 = vues.Max();
+                vues.RemoveAll(item => item == max1);
+                int max2 = vues.Max();
+                vues.RemoveAll(item => item == max2);
+                int max3 = vues.Max();
+                // vues.RemoveAll(item => item == max3);
 
-                if (p2x.Vues.Count == max1 || p2x.Vues.Count == max2 || p2x.Vues.Count == max3)
+                foreach (Produit p2x in data)
                 {
-                    
-                    TopProducts.Add(p2x);
+
+                    if (p2x.Vues.Count == max1 || p2x.Vues.Count == max2 || p2x.Vues.Count == max3)
+                    {
+
+                        TopProducts.Add(p2x);
+                    }
+
+
                 }
-                
-                
+                TopProducts = TopProducts.OrderBy(p => p.Vues.Count).Reverse().ToList();
+
             }
-          TopProducts = TopProducts.OrderBy(p => p.Vues.Count).Reverse().ToList();
-            
+
+
+
 
 
             ViewBag.AllProducts = data;
