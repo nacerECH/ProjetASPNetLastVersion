@@ -454,43 +454,11 @@ namespace ProjectAspNETv2.Controllers
         {
 
 
-            Produit produit = db.Produits.Find(id);
-            produit.Images.Clear();
-            produit.Historiques.Clear();
-            produit.Vues.Clear();
-
-            /*
-            var images = produit.Images;
-            foreach(var image in images)
-            {
-                //var i = image;
-                db.Images.Remove(image);
-                db.SaveChanges();
-
-            }
-
-            var vues = produit.Vues;
-            foreach (var v in vues)
-            {
-                //var i = image;
-                db.Vues.Remove(v);
-                db.SaveChanges();
-
-            }
-
-            var hs = produit.Historiques;
-            foreach (var h in hs)
-            {
-                //var i = image;
-                db.Historiques.Remove(h);
-                db.SaveChanges();
-
-            }
-
-            */
-
-
-
+          Produit produit = db.Produits.Find(id);
+            produit.Images.ToList().Clear();
+            produit.Historiques.ToList().Clear();
+            produit.Vues.ToList().Clear();
+            db.SaveChanges();
 
             db.Produits.Remove(produit);
 

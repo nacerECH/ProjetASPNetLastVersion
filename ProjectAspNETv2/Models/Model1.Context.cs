@@ -39,5 +39,7 @@ namespace ProjectAspNETv2.Models
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Proprietaire> Proprietaires { get; set; }
         public virtual DbSet<Vue> Vues { get; set; }
+
+      
     }
 }
