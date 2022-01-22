@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link href="images/favicon.png" rel="shortcut icon">
+        <link href='@Url.Content("/Content/theme/images/favicon.png")' rel="shortcut icon">
         <title>@ViewBag.Title - My ASP.NET Application</title>
 
         <!--====== Google Font ======-->
@@ -22,7 +22,7 @@
         <div class="preloader is-active">
             <div class="preloader__wrap">
 
-                <img class="preloader__img" src="images/preloader.png" alt="">
+                <img class="preloader__img" src='@Url.Content("/Content/theme/images/preloader.png")' alt="">
             </div>
         </div>
 
@@ -47,15 +47,6 @@
                         </a>
                         <!--====== End - Main Logo ======-->
                         <!--====== Search Form ======-->
-                        @if (!Request.IsAuthenticated)
-                        {
-
-                            <div>
-                                <button class="btn" style="padding: 15px 35px; border-radius:8px; color: #ffffff; background-color: #fa4400 ">
-                                    <strong>Become a seller</strong>
-                                </button>
-                            </div>
-                            }
 
                             <!--====== End - Search Form ======-->
                             <!--====== Dropdown Main plugin ======-->
