@@ -27,10 +27,10 @@
 
                                         <div class="form-inline z">
                                             <div class="form-group">
-                                                @Html.DropDownList("category", ViewBag.Categories as SelectList, htmlAttributes: new { @class = "form-control border-none select" })
+                                                @Html.DropDownList("category", ViewBag.Categories as SelectList, "--CATEGORIES--",htmlAttributes: new { @class = "form-control border-none select" })
                                             </div>
                                             <div class="form-group">
-                                                @Html.DropDownList("ville", ViewBag.Villes as SelectList, htmlAttributes: new { @class = "form-control border-none select" })
+                                                @Html.DropDownList("ville", ViewBag.Villes as SelectList,"--CITIES--" ,htmlAttributes: new { @class = "form-control border-none select" })
                                             </div>
                                             <div class="form-group">
                                                 @Html.Editor("search", new { htmlAttributes = new { @class = "form-control border-none editor", placeholder = "Search here ...", id = "search-bar" } })
