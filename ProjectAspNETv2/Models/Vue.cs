@@ -15,7 +15,7 @@ namespace ProjectAspNETv2.Models
     public partial class Vue
     {
         public int id { get; set; }
-        public int product_id { get; set; }
+        public Nullable<int> product_id { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<int> value { get; set; }
     

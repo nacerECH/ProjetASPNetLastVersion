@@ -18,7 +18,7 @@
 
                 <div id="search-bar" role="button" style="margin-top:60px" class="shop-p__meta-wrap u-s-m-b-60">
 
-                    <h2 >Welcome To Our <strong style="color: #fa4400">Online</strong><strong style="color:#000">Market</strong> !</h2>
+                    <h2>Welcome To Our <strong style="color: #fa4400">Online</strong><strong style="color:#000">Market</strong> !</h2>
                     <h3>The Home of Decent <strong>Discounts</strong> </h3>
 
                     <div class="form-search-home">
@@ -26,33 +26,33 @@
                         @using (Html.BeginForm(FormMethod.Post))
                         {
 
-                        <div class="form-inline z">
-                            <div class="form-group">
-                                @Html.DropDownList("category", new List<SelectListItem>
-                         {
-                    new SelectListItem { Selected = true, Text = "All categories", Value = "1"},
-                    new SelectListItem { Selected = false, Text = "Electronics", Value ="2" },
-                    new SelectListItem { Selected = false, Text = "Clothing", Value = "3"}
-                          }, htmlAttributes: new { @class = "form-control border-none select" })
+                            <div class="form-inline z">
+                                <div class="form-group">
+                                    @Html.DropDownList("category", new List<SelectListItem>
+                             {
+                        new SelectListItem { Selected = true, Text = "All categories", Value = "1"},
+                        new SelectListItem { Selected = false, Text = "Electronics", Value ="2" },
+                        new SelectListItem { Selected = false, Text = "Clothing", Value = "3"}
+                              }, htmlAttributes: new { @class = "form-control border-none select" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.DropDownList("ville", new List<SelectListItem>
+                             {
+                        new SelectListItem { Selected = true, Text = "All cities", Value = "1"},
+                        new SelectListItem { Selected = false, Text = "Fes", Value ="2" },
+                        new SelectListItem { Selected = false, Text = "Meknes", Value = "3"},
+                        new SelectListItem { Selected = false, Text = "Rabat", Value = "4"}
+                              }, htmlAttributes: new { @class = "form-control border-none select" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Editor("search", new { htmlAttributes = new { @class = "form-control border-none editor", placeholder = "Search here ...", id = "search-bar" } })
+                                </div>
+                                <div class="form-group">
+                                    <button class="form-control  border-none button" type="submit">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                @Html.DropDownList("ville", new List<SelectListItem>
-                         {
-                    new SelectListItem { Selected = true, Text = "All cities", Value = "1"},
-                    new SelectListItem { Selected = false, Text = "Fes", Value ="2" },
-                    new SelectListItem { Selected = false, Text = "Meknes", Value = "3"},
-                    new SelectListItem { Selected = false, Text = "Rabat", Value = "4"}
-                          }, htmlAttributes: new { @class = "form-control border-none select" })
-                            </div>
-                            <div class="form-group">
-                                @Html.Editor("search", new { htmlAttributes = new { @class = "form-control border-none editor", placeholder = "Search here ...",id="search-bar"  } })
-                            </div>
-                            <div class="form-group">
-                                <button class="form-control  border-none button" type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
 
                         }
                     </div>

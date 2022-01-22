@@ -22,7 +22,7 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult Index()
         {
             var id = User.Identity.GetUserId();
-            var prop = db.Proprietaires.Single(p => p.UserId == id);
+            var prop = db.Proprietaires.Where(p => p.UserId == id).FirstOrDefault();
             var produits = prop.Produits;
             //var produits = db.Produits.Include(p => p.Category).Include(p => p.Promotion).Include(p => p.Proprietaire).Include(p => p.Images);
             return View(produits.ToList());
@@ -221,18 +221,13 @@ namespace ProjectAspNETv2.Controllers
 
 
             Produit produit = db.Produits.Find(id);
-          
 
-            var images = produit.Images;
-            //foreach(var image in images)
-            //{
-            //    //var i = image;
-            //    //db.Images.Remove(i);
-            //    //db.SaveChanges();
 
-            //}
-            
-            
+            produit.Images.ToList().Clear();
+            produit.Historiques.ToList().Clear();
+            produit.Vues.ToList().Clear();
+            db.SaveChanges();
+
             db.Produits.Remove(produit);
 
             db.SaveChanges();
