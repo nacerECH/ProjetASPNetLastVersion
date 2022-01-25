@@ -10,7 +10,7 @@
     {
         var id = User.Identity.GetUserId();  //Todo
         ViewBag.pname = db.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Name;
-        ViewBag.img = DB.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Logo;
+        ViewBag.img = db.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Logo;
     }
 
 }
