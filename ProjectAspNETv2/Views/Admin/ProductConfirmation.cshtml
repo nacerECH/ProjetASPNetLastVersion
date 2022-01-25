@@ -18,24 +18,23 @@
 <div class="row">
 
 
-    @foreach (var item in ViewBag.MyList)
+    @foreach (var item in ViewBag.MyList as IList<ProjectAspNETv2.Models.Produit>)
     {
 
 
         <div class="col-md-6 col-xl-3">
-            <div class="card card-social">
-                <div class="card-block border-bottom">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-auto">
-                            <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">
-                        </div>
-                        <div class="col text-right">
-                            <h3>@item.price DH</h3>
-                            <h5 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @item.Proprietaire.Name </h5>
-                        </div>
+            <div class="card" style="width: 15rem;height:30rem">
+                <img class="card-img-top" src="@Url.Content(@item.Images.First().PathName)" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">@item.name</h4>
+                    <p class="card-text">  @(item.description_.Substring(0,15)) ...  </p>
+                    <div class="col text-right">
+                        <h4> @item.price DH</h4>
+                        <h6 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @item.Proprietaire.Name </h6>
                     </div>
-                </div>
+                    <a href="/Admin/Details/@item.Id" class="label theme-bg2 text-white f-12"> Details</a>
 
+                </div>
                 <div class="card-block">
                     <div class="row align-items-center justify-content-center card-active">
                         <div class="col-6">
@@ -47,7 +46,8 @@
                                     <input type="hidden" name="id" id="id2" value="@item.Id" />
 
                                     <input type="hidden" name="etat" id="etst" value="Confirm" />
-                                    <input class="btn btn-primary" type="submit" value="Confirm" />
+                                 
+                                    <button type="submit" class="btn btn-primary btn-sm"> Confirmer</button>
 
                                 }
                             </h6>
@@ -61,8 +61,9 @@
                                     <input type="hidden" name="id" id="id2" value="@item.Id" />
 
                                     <input type="hidden" name="etat" id="etst" value="Reject" />
-                                   
-                                    <input  class="btn btn-danger" type="submit" value="Reject" />
+
+                                    
+                                    <button type="submit" class="btn btn-danger btn-sm" > Rejeter</button>
 
                                 }
                             </h6>
@@ -70,16 +71,13 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+           </div>
+
+            }
+
+
         </div>
-
-
-
-    }
-
-
-</div>
 
 
 

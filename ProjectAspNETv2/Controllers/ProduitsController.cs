@@ -19,13 +19,23 @@ namespace ProjectAspNETv2.Controllers
 
         // GET: Produits
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            var id = User.Identity.GetUserId();
-            var prop = db.Proprietaires.Where(p => p.UserId == id).FirstOrDefault();
-            var produits = prop.Produits;
-            //var produits = db.Produits.Include(p => p.Category).Include(p => p.Promotion).Include(p => p.Proprietaire).Include(p => p.Images);
-            return View(produits.ToList());
+            var idu = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Where(p => p.UserId == idu).FirstOrDefault();
+            if (prop.Id == id)
+            {
+                var produits = prop.Produits;
+
+                //var produits = db.Produits.Include(p => p.Category).Include(p => p.Promotion).Include(p => p.Proprietaire).Include(p => p.Images);
+                return View(produits.ToList());
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
         }
 
         // GET: Produits/Details/5
@@ -83,6 +93,8 @@ namespace ProjectAspNETv2.Controllers
                     //Where(p => p.UserId == User.Identity.GetUserId());
                     produit.Proprietaire = prop;
                     produit.createdAt = DateTime.Now;
+                    produit.status = "1";
+                    
 
                     //------------- Instancier Historique
 

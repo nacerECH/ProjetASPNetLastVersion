@@ -5,61 +5,69 @@
 }
 
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-        <button class="btn btn-primary" type="button">Button</button>
-    </div>
-</div>
+
+
+<div class="col-xl-12 col-md-12">
+    <div class="card Recent-Users">
+        <div class="card-header">
+            <h5>   Les produits rejetees </h5>
+        </div>
+        <div class="card-block px-0 py-3">
+            <div class="table-responsive">
+                
+                <div class="row"  >
+
+
+
+                    @foreach (var item in ViewBag.MyList as IList<ProjectAspNETv2.Models.Produit>)
+                    {
 
 
 
 
-<div class="row">
+                        <div class="col-md-6 col-xl-3" style="margin:10px">
+
+                            <div class="card" style="width: 15rem;height:30rem">
+                                <img class="card-img-top" src="@Url.Content(@item.Images.First().PathName)"  alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">@item.name</h4>
+                                    <p class="card-text">  @(item.description_.Substring(0,15)) ...  </p>
+                                    <div class="col text-right">
+                                        <h4> @item.price DH</h4>
+                                        <h6 class="text-c-purple mb-0">  <span class="text-muted">La date ::</span> @item.createdAt </h6>
+                                    </div>
 
 
-    @foreach (var item in ViewBag.MyList)
-    {
+
+                                    @if (@item.status == "3")
+                                    {
+
+                                        <h6 class="m-0 text-c-red"> <i class="fas fa-circle text-c-red f-10"></i>  refused </h6>
 
 
+                                    }
+                                    @if (@item.status == "1")
+                                    {
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card card-social">
-                <div class="card-block border-bottom">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-auto">
-                            <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-2.jpg")" alt="activity-user">
+                                        <h6 class="m-0 text-primary"> <i class="fas fa-circle text-primary f-10"></i>  en attente de confirmation </h6>
+
+                                    }
+                                    <br />
+
+                                    <a href="/Admin/Details/@item.Id" class="label theme-bg2 text-white f-12"> Details</a>
+
+                                </div>
+                            </div>
+
+
                         </div>
-                        <div class="col text-right">
-                            <h3>1199 DH</h3>
-                            <h5 class="text-c-purple mb-0"> La Date:  <span class="text-muted">22/07/2022</span>  </h5>
 
 
-                            @if (@item.status == "3")
-                            {
-
-                                <h6 class="m-0 text-c-red"> <i class="fas fa-circle text-c-red f-10"></i>  refused </h6>
 
 
-                            }
-                            @if (@item.status == "1")
-                            {
-                                
-                                <h6 class="m-0 text-primary"> <i class="fas fa-circle text-primary f-10"></i>  en attente de confirmation </h6>
-
-                            }
-                        </div>
-                    </div>
+                    }
                 </div>
-
             </div>
         </div>
-
-
-
-
-    }
-
-
     </div>
-
+</div>

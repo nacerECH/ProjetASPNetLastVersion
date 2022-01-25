@@ -39,7 +39,6 @@ namespace ProjectAspNETv2.Controllers
 
             foreach (Produit p in data)
             {
-
                 TimeSpan dif = (TimeSpan)(DateTime.Now - p.createdAt);
 
                 double jr = dif.TotalDays;
@@ -61,46 +60,25 @@ namespace ProjectAspNETv2.Controllers
 
                 vues.Add(p.Vues.Count);
 
-
-
+            }
+            if(data.Count() >= 3)
+            {
+                data3 = db.Produits.OrderByDescending(i => i.createdAt).Take(3).ToList();
+                TopProducts = data.OrderByDescending(i => i.Vues.Count).Take(3).ToList();
 
             }
-            int i= data.Count();
-            if ( i > 3) {
-                data3.Add(data[i - 1]);
-                data3.Add(data[i - 2]);
-                data3.Add(data[i - 3]);
-
-
-
-                //vues2 = vues;
-                // get top products (based on views)
-                int max1 = vues.Max();
-                vues.RemoveAll(item => item == max1);
-                int max2 = vues.Max();
-                vues.RemoveAll(item => item == max2);
-                int max3 = vues.Max();
-                // vues.RemoveAll(item => item == max3);
-
-                foreach (Produit p2x in data)
-                {
-
-                    if (p2x.Vues.Count == max1 || p2x.Vues.Count == max2 || p2x.Vues.Count == max3)
-                    {
-
-                        TopProducts.Add(p2x);
-                    }
-
-
-                }
-                TopProducts = TopProducts.OrderBy(p => p.Vues.Count).Reverse().ToList();
+            else
+            {
+                data3 = db.Produits.OrderByDescending(i => i.createdAt).Take(data.Count()).ToList();
+                TopProducts = data.OrderByDescending(i => i.Vues.Count).Take(data.Count()).ToList();
 
             }
 
+           var  VuesToday = db.Vues.Where(v => v.Produit.propreitaireId == propID && ((DateTime)v.created_at).Day == DateTime.Now.Day).ToList().Count();
+            var VuesMois = db.Vues.Where(v => v.Produit.propreitaireId == propID && ((DateTime)v.created_at).Month == DateTime.Now.Month).ToList().Count();
 
-
-
-
+            ViewBag.VuesToday = VuesToday;
+            ViewBag.VuesMois = VuesMois;
             ViewBag.AllProducts = data;
             ViewBag.ProdMois = data2.Count();
             ViewBag.TotalProducts = data.Count();
@@ -123,7 +101,11 @@ namespace ProjectAspNETv2.Controllers
         [HttpGet]
         public ActionResult GetAllProducts()
         {
-           return Redirect(Url.Action("Index", "Produits"));
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id);
+
+            int propID = prop.Id;
+            return Redirect(Url.Action("Index", "Produits",new { id = propID }));
             
         }
 
@@ -162,6 +144,11 @@ namespace ProjectAspNETv2.Controllers
 
         public ActionResult MyChart()
         {
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p2 => p2.UserId == id);
+
+            int propID = prop.Id;
+
             DateTime dateAuj0 = DateTime.Now;
             DateTime dateAuj1 = dateAuj0.AddDays(-1);
             DateTime dateAuj2 = dateAuj0.AddDays(-2);
@@ -170,8 +157,51 @@ namespace ProjectAspNETv2.Controllers
             DateTime dateAuj5 = dateAuj0.AddDays(-5);
             DateTime dateAuj6 = dateAuj0.AddDays(-6);
 
+            var Dates = new List<DateTime>();
+            Dates.Add(dateAuj0);
+            Dates.Add(dateAuj1);
+            Dates.Add(dateAuj2);
+            Dates.Add(dateAuj3);
+            Dates.Add(dateAuj4);
+            Dates.Add(dateAuj5);
+            Dates.Add(dateAuj6);
+
+            var data = new List<Vue>();
+
+            // initialiser les vues 
+
+            var vues = db.Vues.ToList();
+            foreach(Vue v in vues)
+            {
+                 if(v.Produit.propreitaireId == propID)
+                {
+                    data.Add(v);
+                }
+            }
+
+            var vues2 = new List<int>();
+            
+            int p = 0;
+
+
+            foreach (DateTime dt in Dates)
+            {
+                foreach (var v in data)
+                {
+
+                    DateTime d = (DateTime)v.created_at;
+                    if (d.Day == dt.Day)
+                    {
+                        p++;
+                    }
+
+                }
+                vues2.Add(p);
+
+            }
+
             string[] xv = { dateAuj6.ToString("dd/MM"), dateAuj5.ToString("dd/MM"), dateAuj4.ToString("dd/MM"), dateAuj3.ToString("dd/MM"), dateAuj2.ToString("dd/MM"), dateAuj1.ToString("dd/MM"), dateAuj0.ToString("dd/MM") };
-            int[] yv = { 150, 140, 160, 95, 50, 76, 250 };
+            int[] yv = { vues2[0], vues2[1], vues2[2], vues2[3], vues2[4], vues2[5], vues2[6] };
 
             new System.Web.Helpers.Chart(width: 800, height: 200)
                 .AddTitle("Les vues dans les 7 derniers jours")
@@ -192,9 +222,51 @@ namespace ProjectAspNETv2.Controllers
 
         public ActionResult MyChart2()
         {
+            var id = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == id);
 
-            string[] xv = { "Cat1", "Cat2", "Cat3", "Cat4", "Cat5", "Cat6", "Cat7" };
-            int[] yv = { 250, 100, 12, 75, 5, 200, 850 };
+            int propID = prop.Id;
+
+            // initialiser les vues 
+
+            var vues = db.Vues.ToList();
+            var vues2 = new List<int>();
+            var cats = db.Categories.ToList();
+
+            
+
+
+
+            foreach (Category cat in cats)
+            {
+                int s = 0;
+                foreach (Produit pr in cat.Produits)
+                {
+                     if(pr.propreitaireId == propID)
+                     {
+                         s = s + pr.Vues.Count;
+                     }
+
+                }
+                vues2.Add(s);
+
+            }
+
+
+            List<string> xv = new List<string>();
+            List<int> yv = new List<int>();
+
+            foreach(Category cat in cats)
+            {
+                xv.Add(cat.Name);
+            
+            }
+            foreach (int vu in vues2)
+            {
+                yv.Add(vu);
+            }
+
+
 
             new System.Web.Helpers.Chart(width: 800, height: 200)
                 .AddTitle("Total des vues selon les categories")
