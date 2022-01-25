@@ -13,18 +13,27 @@
             <div class="col-md-6 col-xl-4">
                 <div class="card daily-sales">
                     <div class="card-block">
-                        <h6 class="mb-4">Les vendeurs abonnes </h6>
+                        <h6 class="mb-4"> Nombre de propriétaires enregistrés </h6>
                         <div class="row d-flex align-items-center">
                             <div class="col-9">
                                 <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>@ViewBag.prp </h3>
                             </div>
 
-                            <div class="col-3 text-right">
-                                <p class="m-b-0">67%</p>
-                            </div>
+
                         </div>
-                        <div class="progress m-t-30" style="height: 7px;">
-                            <div class="progress-bar progress-c-theme" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="row align-items-center justify-content-center card-active">
+                            <div class="col-6">
+                                <h6 class="text-center m-b-10"><span class="text-muted m-r-5"> Société </span> @ViewBag.soc</h6>
+                                <div class="progress">
+                                    <div class="progress-bar progress-c-theme" role="progressbar" style="width:60%;height:6px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-center  m-b-10"><span class="text-muted m-r-5"> Particulier </span> @ViewBag.par</h6>
+                                <div class="progress">
+                                    <div class="progress-bar progress-c-theme2" role="progressbar" style="width:45%;height:6px;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -34,18 +43,34 @@
             <div class="col-md-6 col-xl-4">
                 <div class="card Monthly-sales">
                     <div class="card-block">
-                        <h6 class="mb-4">Les produits ajoutes</h6>
+                        <h6 class="mb-4">Les biens ajoutés</h6>
                         <div class="row d-flex align-items-center">
                             <div class="col-9">
                                 <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i> @ViewBag.produits </h3>
                             </div>
-                            <div class="col-3 text-right">
-                                <p class="m-b-0">36%</p>
+
+                        </div>
+                        <div class="row align-items-center justify-content-center card-active">
+                            <div class="col-4">
+                                <h6 class="text-center m-b-10"><span class="text-muted m-r-5"> Acceptées</span> @ViewBag.Acc </h6>
+                                <div class="progress">
+                                    <div class="progress-bar progress-c-theme" role="progressbar" style="width:60%;height:6px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="text-center  m-b-10"><span class="text-muted m-r-5"> en attente </span> @ViewBag.Att</h6>
+                                <div class="progress">
+                                    <div class="progress-bar progress-c-theme2" role="progressbar" style="width:45%;height:6px;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="text-center  m-b-10"><span class="text-muted m-r-5"> Rejetées <br /> </span>  @ViewBag.Ref</h6>
+                                <div class="progress">
+                                    <div class="progress-bar progress-c-theme2" role="progressbar" style="width:45%;height:6px;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="progress m-t-30" style="height: 7px;">
-                            <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -54,7 +79,7 @@
             <div class="col-md-12 col-xl-4">
                 <div class="card yearly-sales">
                     <div class="card-block">
-                        <h6 class="mb-4"> les produits ajoutes ce mois </h6>
+                        <h6 class="mb-4"> Les biens ajoutés ce mois </h6>
                         <div class="row d-flex align-items-center">
                             <div class="col-9">
                                 <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i> @ViewBag.ProdMois </h3>
@@ -63,9 +88,7 @@
                                 <p class="m-b-0">80%</p>
                             </div>
                         </div>
-                        <div class="progress m-t-30" style="height: 7px;">
-                            <div class="progress-bar progress-c-theme" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -75,40 +98,40 @@
             <div class="col-xl-8 col-md-6">
                 <div class="card Recent-Users">
                     <div class="card-header">
-                        <h5>Les prrsuits ajoutees recement</h5>
+                        <h5> Les Propriétaires abonnées récemment</h5>
                     </div>
                     <div class="card-block px-0 py-3">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <tbody>
 
-                                    @foreach (var item in ViewBag.RecentProducts)
+                                    @foreach (var item in ViewBag.NV)
                                     {
-
                                         <tr class="unread">
-                                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
+                                            <td><img class="rounded-circle" style="width:40px;" src="@Url.Content(@item.Logo)" alt="activity-user"></td>
                                             <td>
-                                                <h6 class="mb-1"> @item.name </h6>
-                                                <p class="m-0"> @item.description_ </p>
+                                                <h6 class="mb-1"> @item.Name </h6>
+                                                @if (item.isCompany == true)
+                                                {<p class="m-0">Societe </p>}
+                                                @if (item.isCompany == false)
+                                                {<p class="m-0"> Particulier </p>}
                                             </td>
                                             <td>
-                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> @item.Vues.Count Vues</h6>
+                                                <h6 class="text-muted">  @item.Produits.Count Produits </h6>
                                             </td>
 
                                             <td>
-                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> @item.Proprietaire.Name </h6>
+                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> @item.created_at </h6>
                                             </td>
 
 
                                         </tr>
+
                                     }
 
-                                        
-
-      
 
 
-                                    </tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -117,6 +140,7 @@
             <!--[ Recent Users ] end-->
             <!-- [ statistics year chart ] start -->
             <div class="col-xl-4 col-md-6">
+
 
                 <div class="card">
                     <div class="card-block border-bottom">
@@ -145,10 +169,11 @@
                                 <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">
                             </div>
                             <div class="col text-right">
-                                <h3> @ViewBag.TopProducts[0].name </h3>
+                                <h4> @ViewBag.TopProducts[0].name </h4>
                                 <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[0].Vues.Count </h5>
                             </div>
                         </div>
+                        <a href="/Admin/Details/@ViewBag.TopProducts[0].Id" class="label theme-bg2 text-white f-12"> Details</a>
                     </div>
 
                 </div>
@@ -162,14 +187,16 @@
                                 <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">
                             </div>
                             <div class="col text-right">
-                                <h3>@ViewBag.TopProducts[1].name </h3>
+                                <h4>@ViewBag.TopProducts[1].name </h4>
                                 <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[1].Vues.Count </h5>
                             </div>
                         </div>
+                        <a href="/Admin/Details/@ViewBag.TopProducts[1].Id" class="label theme-bg2 text-white f-12"> Details</a>
                     </div>
 
                 </div>
             </div>
+
 
             <div class="col-md-12 col-xl-4">
                 <div class="card card-social">
@@ -179,14 +206,18 @@
                                 <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">
                             </div>
                             <div class="col text-right">
-                                <h3> @ViewBag.TopProducts[2].name </h3>
+                                <h4> @ViewBag.TopProducts[2].name </h4>
                                 <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[2].Vues.Count </h5>
                             </div>
+
                         </div>
+                        <a href="/Admin/Details/@ViewBag.TopProducts[2].Id" class="label theme-bg2 text-white f-12"> Details</a>
                     </div>
+
 
                 </div>
             </div>
+
             <!--[social-media section] end-->
 
             <div class="col-xl-12 col-md-12 m-b-30">
@@ -216,58 +247,60 @@
                             </thead>
                             <tbody>
 
-                                @foreach (var item2 in ViewBag.ProductsToday)
+                                @foreach (var item2 in ViewBag.ProductsToday as IList<ProjectAspNETv2.Models.Produit>)
                                 {
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user"> @item2.name</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.price </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.createdAt</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.Vues.Count </h6>
-                                    </td>
-                                    @if (@item2.status == "3")
-                                    {
-
+                                    <tr>
                                         <td>
-                                            <h6 class="m-0 text-c-red">  refused </h6>
+                                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)"  alt="activity-user"> @item2.name</h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-
-
-                                    }
-                                    @if (@item2.status == "1")
-                                    {
-
                                         <td>
-                                            <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                            <h6 class="m-0"> @item2.price </h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
-
-
-                                    }@if (@item2.status == "2")
-                                    {
-
                                         <td>
-                                            <h6 class="m-0 text-c-green">  confirmed </h6>
+                                            <h6 class="m-0"> @item2.createdAt</h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+                                        <td>
+                                            <h6 class="m-0"> @item2.Vues.Count </h6>
+                                        </td>
+                                        @if (@item2.status == "3")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-c-red">  refused </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
 
 
-                                    }
+                                        }
+                                        @if (@item2.status == "1")
+                                        {
 
-                                </tr>
+                                            <td>
+                                                <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                        }@if (@item2.status == "2")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-c-green">  confirmed </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                        }
+
+                                        <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
+
+                                    </tr>
 
 
                                 }
 
 
-                                </tbody>
+                            </tbody>
                         </table>
 
                     </div>
@@ -287,51 +320,52 @@
 
 
 
-                                @foreach (var item2 in ViewBag.ProductsWeek)
+                                @foreach (var item2 in ViewBag.ProductsWeek as IList<ProjectAspNETv2.Models.Produit>)
                                 {
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user"> @item2.name</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.price </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.createdAt</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.Vues.Count  </h6>
-                                    </td>
-                                    @if (@item2.status == "3")
-                                    {
-
+                                    <tr>
                                         <td>
-                                            <h6 class="m-0 text-c-red">  refused </h6>
+                                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)"  alt="activity-user"> @item2.name</h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-
-
-                                    }
-                                    @if (@item2.status == "1")
-                                    {
-
                                         <td>
-                                            <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                            <h6 class="m-0"> @item2.price </h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
-
-
-                                    }@if (@item2.status == "2")
-                                    {
-
                                         <td>
-                                            <h6 class="m-0 text-c-green">  confirmed </h6>
+                                            <h6 class="m-0"> @item2.createdAt</h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+                                        <td>
+                                            <h6 class="m-0"> @item2.Vues.Count  </h6>
+                                        </td>
+                                        @if (@item2.status == "3")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-c-red">  refused </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
 
 
-                                    }
-                                </tr>
+                                        }
+                                        @if (@item2.status == "1")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                        }@if (@item2.status == "2")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-c-green">  confirmed </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                        }
+                                        <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
+                                    </tr>
 
 
                                 }
@@ -356,57 +390,62 @@
 
 
 
-                                @foreach (var item2 in ViewBag.AllProducts)
+                                @foreach (var item2 in ViewBag.AllProducts as IList<ProjectAspNETv2.Models.Produit>)
                                 {
-                                <tr>
-                                    <td>
-                                        <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user"> @item2.name</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.price </h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.createdAt</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="m-0"> @item2.Vues.Count  </h6>
-                                    </td>
-                                    @if (@item2.status == "3")
-                                    {
-
+                                    <tr>
                                         <td>
-                                            <h6 class="m-0 text-c-red">  refused </h6>
+                                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)"  alt="activity-user"> @item2.name</h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-
-
-                                    }
-                                    @if (@item2.status == "1")
-                                    {
-
                                         <td>
-                                            <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                            <h6 class="m-0"> @item2.price </h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
-
-
-                                    }@if (@item2.status == "2")
-                                    {
-
                                         <td>
-                                            <h6 class="m-0 text-c-green">  confirmed </h6>
+                                            <h6 class="m-0"> @item2.createdAt</h6>
                                         </td>
-                                        <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+                                        <td>
+                                            <h6 class="m-0"> @item2.Vues.Count  </h6>
+                                        </td>
+                                        @if (@item2.status == "3")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-c-red">  refused </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
 
 
-                                    }
-                                </tr>
+                                        }
+                                        @if (@item2.status == "1")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                        }@if (@item2.status == "2")
+                                        {
+
+                                            <td>
+                                                <h6 class="m-0 text-c-green">  confirmed </h6>
+                                            </td>
+                                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                        }
+                                        <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
+                                    </tr>
+
+
 
 
                                 }
 
                             </tbody>
                         </table>
+
+
                     </div>
                 </div>
             </div>
@@ -414,6 +453,9 @@
         </div>
         <!-- [ Main Content ] end -->
     </div>
+
+
+
 </div>
 
 

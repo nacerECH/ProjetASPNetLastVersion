@@ -4,11 +4,32 @@
     Layout = "~/Views/Shared/_LayoutPageDashboard2.cshtml";
 }
 
-<h2>Statistic</h2>
 
-<img  src="@Url.Action("MyChart")" />
 
-<br />
 
-<img src="@Url.Action("MyChart2")" />
 
+
+
+                    <div class="col-xl-12 col-md-12">
+                        <div class="card Recent-Users">
+                            <div class="card-header">
+                                <h5>   Les Statistiques </h5>
+                            </div>
+                            <div class="card-block px-0 py-3">
+
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <img src="@Url.Action("MyChart")" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <img src="@Url.Action("MyChart2")" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Message";
+    Layout = "~/Views/Shared/_LayoutPageDashboard1.cshtml";
+}
+
+
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5> @ViewBag.h.Proprietaire.Name</h5>
+                    </div>
+                    <div class="card-block">
+                        <h6> <b>L'objet : </b>  @ViewBag.h.subject  </h6>
+                        <h6>   <b> Message :</b>  </h6>
+                        <p>
+
+                            @ViewBag.h.message
+                        </p>
+                        <br /><br />
+                        <h6>  <b>Tel : </b> @ViewBag.h.Proprietaire.Tel  </h6>
+
+                        <br /><br /><br />
+                        @{
+                            string s = "mailto:" + @ViewBag.h.Email;
+                        }
+
+                        @using (Html.BeginForm("DeleteMessageSupport", "Admin", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" id="id" value="@ViewBag.h.Id" />
+
+
+
+                            <input class="label theme-bg2 text-white f-12" type="submit" value="Regler" />
+
+
+                        }
+
+                        <a style="float:right" href="@s"> Contacter le proprietaire par mail  </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
