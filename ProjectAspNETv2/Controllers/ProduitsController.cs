@@ -141,7 +141,8 @@ namespace ProjectAspNETv2.Controllers
 
 
 
-                    return RedirectToAction("Index");
+                   
+                    return Redirect(Url.Action("Index", "Produits", new { id = prop.Id }));
                 }
 
                 ViewBag.categoryId = new SelectList(db.Categories, "CatId", "Name", produit.categoryId);
