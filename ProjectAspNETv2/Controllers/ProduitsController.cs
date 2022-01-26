@@ -133,10 +133,11 @@ namespace ProjectAspNETv2.Controllers
                         image.PathName = "/propimages/Products/" + filename;
                         image.Produit = produit;
                         db.Images.Add(image);
+                        db.SaveChanges();
 
                         //proprietaire.Logo = filename;
                     }
-                    db.SaveChanges();
+                    
                     ViewBag.FileStatus = "File uploaded successfully.";
 
 
@@ -187,8 +188,8 @@ namespace ProjectAspNETv2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,description_,createdAt,propreitaireId,price,name,livrable,garantee,categoryId")] Produit produit)
         {
-            var id = User.Identity.GetUserId();
-            var prop = db.Proprietaires.Single(p => p.UserId == id);
+            var idu = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == idu);
             if (ModelState.IsValid)
             {
                 //------------- Instancier Historique
@@ -198,14 +199,16 @@ namespace ProjectAspNETv2.Controllers
                 h.operation_date = DateTime.Now;
                 h.Produit = produit;
                 h.Proprietaire = prop;
+                db.Historiques.Add(h);
+                db.SaveChanges();
 
 
                 //-------------------------
-                
+
                 db.Entry(produit).State = EntityState.Modified;
-                db.Historiques.Add(h);
+               
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(Url.Action("Index", "Produits", new { id = prop.Id }));
             }
             ViewBag.categoryId = new SelectList(db.Categories, "CatId", "Name", produit.categoryId);
             return View(produit);
@@ -232,7 +235,8 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
 
-
+            var idu = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == idu);
             Produit produit = db.Produits.Find(id);
 
 
@@ -244,7 +248,7 @@ namespace ProjectAspNETv2.Controllers
             db.Produits.Remove(produit);
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(Url.Action("Index", "Produits", new { id = prop.Id }));
         }
 
         protected override void Dispose(bool disposing)
