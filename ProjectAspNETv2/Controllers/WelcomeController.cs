@@ -42,8 +42,6 @@ namespace ProjectAspNETv2.Controllers
             var Villes = new SelectList(distinctData, "Id", "Ville"); 
             
 
-
-
             ViewBag.Villes = new SelectList(distinctData, "Id", "Ville");
             ViewBag.Categories = new SelectList(DB.Categories, "CatId", "Name");
            
@@ -90,7 +88,7 @@ namespace ProjectAspNETv2.Controllers
         }*/
   
         
-        public ActionResult Shop(int page = 1, int pageSize = 8)
+        public ActionResult Shop( int? cat, int page = 1, int pageSize = 8)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -117,16 +115,55 @@ namespace ProjectAspNETv2.Controllers
            
 
             ViewBag.Villes = new SelectList(distinctData, "Id", "Ville");
-            ViewBag.Categories = new SelectList(DB.Categories, "CatId", "Name");
+            
+
+            List<Produit> produits1 = new List<Produit>();
 
 
+            if (cat != null)
+            {
+                List<SelectListItem> newList = new List<SelectListItem>();
+                foreach (var item in DB.Categories.ToList())
+                {
+                    newList.Add(new SelectListItem()
+                    {
+                        Text = item.Name,
+                        Value = Convert.ToString(item.CatId),
+                        Selected = item.CatId == cat ? true: false
+                    });
+                }
+                
+                var listcat = new SelectList(newList, "Value", "Text", null);
+                ViewBag.Categories = listcat;
+                
+
+                produits1 = DB.Produits.Where(p => p.categoryId == cat && p.status == "2").OrderByDescending(p => p.createdAt).ToList();
+            }
+            else
+            {
+                List<SelectListItem> newList = new List<SelectListItem>();
+                foreach (var item in DB.Categories.ToList())
+                {
+                    newList.Add(new SelectListItem()
+                    {
+                        Text = item.Name,
+                        Value = Convert.ToString(item.CatId),
+
+                    });
+
+                }
+
+                ViewBag.Categories = new SelectList(newList, "Value", "Text", null);
+
+
+                produits1 = DB.Produits.Where(p => p.status == "2").OrderByDescending(p => p.createdAt).ToList();
+            }
            
-            var produits1 = DB.Produits.Where(p => p.status == "2").OrderByDescending(p =>p.createdAt).ToList();
             PagedList<Produit> produits = new PagedList<Produit>(produits1, page, pageSize); 
             return View(produits);
         }
 
-
+       
 
         public ActionResult Product(int? id)
         {
@@ -171,6 +208,29 @@ namespace ProjectAspNETv2.Controllers
             return View(produit);
         }
 
-        
+
+        public JsonResult GetSearchData(string sText)
+        {
+            List<Produit> result = new List<Produit>();
+
+            try {
+                result = DB.Produits.Where(p => p.name.Contains(sText) || sText == null).ToList();
+
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("sText : " + sText);
+            }
+            
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+
+
     }
 }

@@ -78,9 +78,11 @@ body {
   margin-top: 20px;
   background-color: white;
   border: 2px solid #fa4400;
+  border-radius: 10px;
   width: auto;
   display: flex;
   justify-content: center;
+
   
   -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.23); 
 box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.23);
