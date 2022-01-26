@@ -169,16 +169,6 @@ namespace ProjectAspNETv2.Controllers
             var data = new List<Vue>();
 
             // initialiser les vues 
-
-            var vues = db.Vues.ToList();
-            foreach(Vue v in vues)
-            {
-                 if(v.Produit.propreitaireId == propID)
-                {
-                    data.Add(v);
-                }
-            }
-
             var vues2 = new List<int>();
             
             int p = 0;
@@ -186,22 +176,14 @@ namespace ProjectAspNETv2.Controllers
 
             foreach (DateTime dt in Dates)
             {
-                foreach (var v in data)
-                {
-
-                    DateTime d = (DateTime)v.created_at;
-                    if (d.Day == dt.Day)
-                    {
-                        p++;
-                    }
-
-                }
+              p =  db.Vues.Where(v => ((DateTime)v.created_at).Day == dt.Day  && v.Produit.propreitaireId == propID).Count();
                 vues2.Add(p);
 
             }
+           
 
             string[] xv = { dateAuj6.ToString("dd/MM"), dateAuj5.ToString("dd/MM"), dateAuj4.ToString("dd/MM"), dateAuj3.ToString("dd/MM"), dateAuj2.ToString("dd/MM"), dateAuj1.ToString("dd/MM"), dateAuj0.ToString("dd/MM") };
-            int[] yv = { vues2[0], vues2[1], vues2[2], vues2[3], vues2[4], vues2[5], vues2[6] };
+            int[] yv = { vues2[6], vues2[5], vues2[4], vues2[3], vues2[2], vues2[1], vues2[0] };
 
             new System.Web.Helpers.Chart(width: 800, height: 200)
                 .AddTitle("Les vues dans les 7 derniers jours")

@@ -119,64 +119,65 @@
                     <div>
                         <div class="slider-fouc">
                             <div class="owl-carousel tab-slider" data-item="4">
+                               
                                 @foreach (var newp in ViewBag.newestProducts as IList<ProjectAspNETv2.Models.Produit>)
                                 {
-                                        <div class="u-s-m-b-30">
-                                            <div class="product-o product-o--hover-on">
-                                                <div class="product-o__wrap">
+                                    <div class="u-s-m-b-30">
+                                        <div class="product-o product-o--hover-on">
+                                            <div class="product-o__wrap">
 
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
 
-                                                        <img class="aspect__img" src="@Url.Content(newp.Images.ElementAt(1).PathName)" alt="">
-                                                    </a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
+                                                    <img class="aspect__img" src="@Url.Content(newp.Images.First().PathName)" alt="">
+                                                </a>
+                                                <div class="product-o__action-wrap">
+                                                    <ul class="product-o__action-list">
+                                                        <li>
 
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a>
-                                                            </li>
-                                                            <li>
+                                                            <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a>
+                                                        </li>
+                                                        <li>
 
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a>
-                                                            </li>
+                                                            <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a>
+                                                        </li>
 
-                                                        </ul>
-                                                    </div>
-                                                    <div style="position:absolute; top:0; background-color:orangered; color:#ffffff; float: right;">
-                                                        NEW!
-                                                    </div>
+                                                    </ul>
                                                 </div>
-
-                                                @*<span class="product-o__category">
-
-                            <a href="shop-side-version-2.html"></a>
-                        </span>*@
-
-                                                <span class="product-o__name">
-
-                                                    <a href="product-detail.html">@newp.name</a>
-                                                   
-                                                </span>
-                                                <span style="color: #ff9e14;" class="product-o__category">
-
-                                                    Impressions (@newp.Vues.Count)
-
-                                                </span>
-
-
-
-                                                <span class="product-o__price">
-                                                    MAD@(newp.price)
-
-                                                    
-                                                </span>
-
-                                                <span class="product-o__category">
-
-                                                    @newp.createdAt
-                                                </span>
+                                                <div style="position:absolute; top:0; background-color:orangered; color:#ffffff; float: right;">
+                                                    NEW!
+                                                </div>
                                             </div>
+
+                                            @*<span class="product-o__category">
+
+                        <a href="shop-side-version-2.html"></a>
+                    </span>*@
+
+                                            <span class="product-o__name">
+
+                                                <a href="product-detail.html">@newp.name</a>
+
+                                            </span>
+                                            <span style="color: #ff9e14;" class="product-o__category">
+
+                                                Impressions (@newp.Vues.Count)
+
+                                            </span>
+
+
+
+                                            <span class="product-o__price">
+                                                MAD@(newp.price)
+
+
+                                            </span>
+
+                                            <span class="product-o__category">
+
+                                                @newp.createdAt
+                                            </span>
                                         </div>
+                                    </div>
                                 }
 
 
@@ -297,7 +298,7 @@
 
                                                                         <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
 
-                                                                            <img class="aspect__img" src="@Url.Content(newp.Images.ElementAt(1).PathName)" alt="">
+                                                                            <img class="aspect__img" src="@Url.Content(newp.Images.First().PathName)" alt="">
                                                                         </a>
                                                                         <div class="product-o__action-wrap">
                                                                             <ul class="product-o__action-list">
@@ -378,7 +379,7 @@
 
                                                                         <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
 
-                                                                            <img class="aspect__img" src="@Url.Content(newp.Images.ElementAt(1).PathName)" alt="">
+                                                                            <img class="aspect__img" src="@Url.Content(newp.Images.First().PathName)" alt="">
                                                                         </a>
                                                                         <div class="product-o__action-wrap">
                                                                             <ul class="product-o__action-list">
@@ -458,7 +459,7 @@
 
                                                                         <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
 
-                                                                            <img class="aspect__img" src="@Url.Content(sp.Images.ElementAt(1).PathName)" alt="">
+                                                                            <img class="aspect__img" src="@Url.Content(sp.Images.First().PathName)" alt="">
                                                                         </a>
                                                                         <div class="product-o__action-wrap">
                                                                             <ul class="product-o__action-list">

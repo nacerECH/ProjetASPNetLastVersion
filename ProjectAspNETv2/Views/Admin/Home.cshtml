@@ -160,297 +160,268 @@
             <!-- [ statistics year chart ] end -->
             <!--[social-media section] start-->
 
-            <div class="col-md-12 col-xl-4">
 
-                <div class="card card-social">
-                    <div class="card-block border-bottom">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-auto">
-                                <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-6.jpg")" alt="activity-user">
+            @foreach (var item2 in ViewBag.TopProducts as IList<ProjectAspNETv2.Models.Produit>)
+            {
+
+                <div class="col-md-12 col-xl-4">
+
+                    <div class="card card-social">
+                        <div class="card-block border-bottom">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-auto">
+                                    <img class="rounded-circle" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)"  alt="activity-user">
+                                </div>
+                                <div class="col text-right">
+                                    <h4> @item2.name </h4>
+                                    <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @item2.Vues.Count </h5>
+                                </div>
                             </div>
-                            <div class="col text-right">
-                                <h4> @ViewBag.TopProducts[0].name </h4>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[0].Vues.Count </h5>
-                            </div>
+                            <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> Details</a>
                         </div>
-                        <a href="/Admin/Details/@ViewBag.TopProducts[0].Id" class="label theme-bg2 text-white f-12"> Details</a>
+
                     </div>
-
                 </div>
-            </div>
 
-            <div class="col-md-12 col-xl-4">
-                <div class="card card-social">
-                    <div class="card-block border-bottom">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-auto">
-                                <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">
-                            </div>
-                            <div class="col text-right">
-                                <h4>@ViewBag.TopProducts[1].name </h4>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[1].Vues.Count </h5>
-                            </div>
+            }
+
+
+
+
+
+                <!--[social-media section] end-->
+
+                <div class="col-xl-12 col-md-12 m-b-30">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Today</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">This Week</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">All</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Date D'ajout</th>
+                                        <th> Vues</th>
+                                        <th>Etat</th>
+                                        <th class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item2 in ViewBag.ProductsToday as IList<ProjectAspNETv2.Models.Produit>)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)" alt="activity-user"> @item2.name</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0"> @item2.price </h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0"> @item2.createdAt</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0"> @item2.Vues.Count </h6>
+                                            </td>
+                                            @if (@item2.status == "3")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-c-red">  refused </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
+
+
+                                            }
+                                            @if (@item2.status == "1")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                            }@if (@item2.status == "2")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-c-green">  confirmed </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                            }
+
+                                            <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
+
+                                        </tr>
+
+
+                                    }
+
+
+                                </tbody>
+                            </table>
+
                         </div>
-                        <a href="/Admin/Details/@ViewBag.TopProducts[1].Id" class="label theme-bg2 text-white f-12"> Details</a>
-                    </div>
+                        <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Date D'ajout</th>
+                                        <th> Vues</th>
+                                        <th>Etat</th>
+                                        <th class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                </div>
-            </div>
 
 
-            <div class="col-md-12 col-xl-4">
-                <div class="card card-social">
-                    <div class="card-block border-bottom">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-auto">
-                                <img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="activity-user">
-                            </div>
-                            <div class="col text-right">
-                                <h4> @ViewBag.TopProducts[2].name </h4>
-                                <h5 class="text-c-green mb-0"> <span class="text-muted">Vues:</span>  @ViewBag.TopProducts[2].Vues.Count </h5>
-                            </div>
+                                    @foreach (var item2 in ViewBag.ProductsWeek as IList<ProjectAspNETv2.Models.Produit>)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)" alt="activity-user"> @item2.name</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0"> @item2.price </h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0"> @item2.createdAt</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0"> @item2.Vues.Count  </h6>
+                                            </td>
+                                            @if (@item2.status == "3")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-c-red">  refused </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
+
+
+                                            }
+                                            @if (@item2.status == "1")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
+
+
+                                            }@if (@item2.status == "2")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-c-green">  confirmed </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                            }
+                                            <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
+                                        </tr>
+
+
+                                    }
+
+                                </tbody>
+                            </table>
 
                         </div>
-                        <a href="/Admin/Details/@ViewBag.TopProducts[2].Id" class="label theme-bg2 text-white f-12"> Details</a>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <!--[social-media section] end-->
-
-            <div class="col-xl-12 col-md-12 m-b-30">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Today</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">This Week</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">All</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Prix</th>
-                                    <th>Date D'ajout</th>
-                                    <th> Vues</th>
-                                    <th>Etat</th>
-                                    <th class="text-right"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach (var item2 in ViewBag.ProductsToday as IList<ProjectAspNETv2.Models.Produit>)
-                                {
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <table class="table table-hover">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)"  alt="activity-user"> @item2.name</h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.price </h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.createdAt</h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.Vues.Count </h6>
-                                        </td>
-                                        @if (@item2.status == "3")
-                                        {
-
-                                            <td>
-                                                <h6 class="m-0 text-c-red">  refused </h6>
-                                            </td>
-                                            <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-
-
-                                        }
-                                        @if (@item2.status == "1")
-                                        {
-
-                                            <td>
-                                                <h6 class="m-0 text-primary">  en attente de confirmation </h6>
-                                            </td>
-                                            <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
-
-
-                                        }@if (@item2.status == "2")
-                                        {
-
-                                            <td>
-                                                <h6 class="m-0 text-c-green">  confirmed </h6>
-                                            </td>
-                                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-
-
-                                        }
-
-                                        <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
-
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Date D'ajout</th>
+                                        <th> Vues</th>
+                                        <th>Etat</th>
+                                        <th class="text-right"></th>
                                     </tr>
-
-
-                                }
-
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Prix</th>
-                                    <th>Date D'ajout</th>
-                                    <th> Vues</th>
-                                    <th>Etat</th>
-                                    <th class="text-right"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
 
 
 
-                                @foreach (var item2 in ViewBag.ProductsWeek as IList<ProjectAspNETv2.Models.Produit>)
-                                {
-                                    <tr>
-                                        <td>
-                                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)"  alt="activity-user"> @item2.name</h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.price </h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.createdAt</h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.Vues.Count  </h6>
-                                        </td>
-                                        @if (@item2.status == "3")
-                                        {
-
+                                    @foreach (var item2 in ViewBag.AllProducts as IList<ProjectAspNETv2.Models.Produit>)
+                                    {
+                                        <tr>
                                             <td>
-                                                <h6 class="m-0 text-c-red">  refused </h6>
+                                                <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)" alt="activity-user"> @item2.name</h6>
                                             </td>
-                                            <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-
-
-                                        }
-                                        @if (@item2.status == "1")
-                                        {
-
                                             <td>
-                                                <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                                <h6 class="m-0"> @item2.price </h6>
                                             </td>
-                                            <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
-
-
-                                        }@if (@item2.status == "2")
-                                        {
-
                                             <td>
-                                                <h6 class="m-0 text-c-green">  confirmed </h6>
+                                                <h6 class="m-0"> @item2.createdAt</h6>
                                             </td>
-                                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-
-
-                                        }
-                                        <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
-                                    </tr>
-
-
-                                }
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Prix</th>
-                                    <th>Date D'ajout</th>
-                                    <th> Vues</th>
-                                    <th>Etat</th>
-                                    <th class="text-right"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-
-
-                                @foreach (var item2 in ViewBag.AllProducts as IList<ProjectAspNETv2.Models.Produit>)
-                                {
-                                    <tr>
-                                        <td>
-                                            <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Images.First().PathName)"  alt="activity-user"> @item2.name</h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.price </h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.createdAt</h6>
-                                        </td>
-                                        <td>
-                                            <h6 class="m-0"> @item2.Vues.Count  </h6>
-                                        </td>
-                                        @if (@item2.status == "3")
-                                        {
-
                                             <td>
-                                                <h6 class="m-0 text-c-red">  refused </h6>
+                                                <h6 class="m-0"> @item2.Vues.Count  </h6>
                                             </td>
-                                            <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
+                                            @if (@item2.status == "3")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-c-red">  refused </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
 
 
-                                        }
-                                        @if (@item2.status == "1")
-                                        {
+                                            }
+                                            @if (@item2.status == "1")
+                                            {
 
-                                            <td>
-                                                <h6 class="m-0 text-primary">  en attente de confirmation </h6>
-                                            </td>
-                                            <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
-
-
-                                        }@if (@item2.status == "2")
-                                        {
-
-                                            <td>
-                                                <h6 class="m-0 text-c-green">  confirmed </h6>
-                                            </td>
-                                            <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+                                                <td>
+                                                    <h6 class="m-0 text-primary">  en attente de confirmation </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-primary f-10"></i></td>
 
 
-                                        }
-                                        <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
-                                    </tr>
+                                            }@if (@item2.status == "2")
+                                            {
+
+                                                <td>
+                                                    <h6 class="m-0 text-c-green">  confirmed </h6>
+                                                </td>
+                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
+
+
+                                            }
+                                            <td>  <a href="/Admin/Details/@item2.Id" class="label theme-bg2 text-white f-12"> <i class="feather icon-chevrons-right"></i> </a> </td>
+                                        </tr>
 
 
 
 
-                                }
+                                    }
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
 
 
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
         <!-- [ Main Content ] end -->
     </div>
 

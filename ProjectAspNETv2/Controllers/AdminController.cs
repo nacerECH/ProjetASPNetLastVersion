@@ -32,7 +32,9 @@ namespace ProjectAspNETv2.Controllers
             var data2 = new List<Produit>();
             var ProductsToday = new List<Produit>();
             var ProductsWeek = new List<Produit>();
-         
+            var  TopProducts = new List<Produit>();
+
+
 
             foreach (Produit p in data)
             {
@@ -63,7 +65,20 @@ namespace ProjectAspNETv2.Controllers
 
             // get top sellers (based on views)
 
-            var TopProducts = db.Produits.OrderByDescending(i => i.Vues.Count).Take(3).ToList();
+            if (data.Count() >= 3)
+            {
+              
+              TopProducts = data.OrderByDescending(i => i.Vues.Count).Take(3).ToList();
+
+            }
+            else
+            {
+               
+                TopProducts = data.OrderByDescending(i => i.Vues.Count).Take(data.Count()).ToList();
+
+            }
+
+            
             var nv = db.Proprietaires.OrderByDescending(i => i.created_at).Take(3).ToList();
             var par = db.Proprietaires.Where(p => p.isCompany == false).Count();
             var soc = db.Proprietaires.Where(p => p.isCompany == true).Count();
