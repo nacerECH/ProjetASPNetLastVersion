@@ -5,9 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
@@ -420,8 +417,6 @@ namespace ProjectAspNETv2.Controllers
 
 
                 //----------------------------
-
-
 
 
 
