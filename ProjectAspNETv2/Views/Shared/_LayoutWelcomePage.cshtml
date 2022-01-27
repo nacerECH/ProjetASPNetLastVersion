@@ -2,15 +2,24 @@
 @using Microsoft.AspNet.Identity;
 @using ProjectAspNETv2.Models;
 @{ 
-    
 
-                Entities1 DB = new Entities1();
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var id = User.Identity.GetUserId();
-                    ViewBag.pname = DB.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Name;
-                }
+    Entities1 DB = new Entities1();
+
+    if (User.Identity.IsAuthenticated)
+    {
+        var id = User.Identity.GetUserId();
+
+        if(DB.Proprietaires.Where(p => p.UserId == id).ToList().Count != 0)
+        {
+            ViewBag.pname = DB.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Name;
+        }
+        else
+        {
+            ViewBag.pname = "Auth";
+        }
+
+    }
 
 }
 
