@@ -2592,8 +2592,13 @@ box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16);
 --------------------------------------------------------------*/
 /* 7.1 Outer-Footer */
 .outer-footer {
-  padding: 80px 0;
-  background-color: #000000;
+  
+  bottom:-100%;
+  width:100%;
+  padding: 30px 0;
+  background-color: #242424;
+  margin-bottom:0;
+
 }
 .outer-footer__content-title {
   display: block;

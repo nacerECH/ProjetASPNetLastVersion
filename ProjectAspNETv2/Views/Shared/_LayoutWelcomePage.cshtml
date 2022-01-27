@@ -31,6 +31,29 @@
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
+    <style>
+        /* Works on Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #ffffff #fa4400;
+        }
+
+            /* Works on Chrome, Edge, and Safari */
+            *::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            *::-webkit-scrollbar-track {
+                background: #ffffff;
+            }
+
+            *::-webkit-scrollbar-thumb {
+                background-color: #fa4400;
+                border-radius: 20px;
+               
+            }
+    </style>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -153,17 +176,17 @@
                             <div class="outer-footer__text-wrap">
                                 <i class="fas fa-home"></i>
 
-                                <span>4247 Ashford Drive Virginia VA-20006 USA</span>
+                                <span></span>
                             </div>
                             <div class="outer-footer__text-wrap">
                                 <i class="fas fa-phone-volume"></i>
 
-                                <span>(+0) 900 901 904</span>
+                                <span></span>
                             </div>
                             <div class="outer-footer__text-wrap">
                                 <i class="far fa-envelope"></i>
 
-                                <span>contact@domain.com</span>
+                                <span>contact@onlineMarket.com</span>
                             </div>
 
                         </div>
@@ -180,55 +203,35 @@
 
                                                 <a href="cart.html">Electronics</a>
                                             </li>
-                                            <li>
 
-                                                <a href="dashboard.html">Men's Clothing</a>
-                                            </li>
-                                            <li>
-
-                                                <a href="shop-side-version-2.html">Manufacturer</a>
-                                            </li>
-                                            <li>
-
-                                                <a href="dash-payment-option.html">Finance</a>
-                                            </li>
-                                            <li>
-
-                                                <a href="shop-side-version-2.html">Shop</a>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="outer-footer__content u-s-m-b-40">
-                                    <div class="outer-footer__list-wrap">
 
-                                        <span class="outer-footer__content-title">Our Company</span>
-                                        <ul>
-                                            <li>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="outer-footer__content u-s-m-b-40">
+                            <div class="outer-footer__list-wrap">
 
-                                                <a href="about.html">About us</a>
-                                            </li>
-                                            <li>
+                                <span class="outer-footer__content-title">Our Company</span>
+                                <ul>
+                                    <li>
 
-                                                <a href="contact.html">Contact Us</a>
-                                            </li>
-                                            <li>
+                                        <a href="">About us</a>
+                                    </li>
+                                    <li>
 
-                                                <a href="index-2.html">Sitemap</a>
-                                            </li>
-                                            <li>
+                                        <a href="">Contact Us</a>
+                                    </li>
 
-                                                <a href="dash-my-order.html">Delivery</a>
-                                            </li>
-                                            <li>
+                                    <li>
 
-                                                <a href="shop-side-version-2.html">Store</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                        <a href="">Delivery</a>
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -239,7 +242,7 @@
 
     </footer>
 
-    </div>
+   
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -248,7 +251,7 @@
 
 
     @RenderSection("scripts", required: false)
-    <script>
+   @* <script>
         window.ga = function () {
             ga.q.push(arguments)
         };
@@ -256,7 +259,7 @@
         ga.l = +new Date;
         ga('create', 'UA-XXXXX-Y', 'auto');
         ga('send', 'pageview')
-    </script>
+    </script>*@
     <noscript>
         <div class="app-setting">
             <div class="container">

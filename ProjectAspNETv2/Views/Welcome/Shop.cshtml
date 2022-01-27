@@ -24,18 +24,20 @@
 
                                 <div class="form-search-home">
                                     <div id="pCol" class="form-inline z">
-                                            <div class="form-group">
-                                                @Html.DropDownList("category", ViewBag.Categories as SelectList,"Choose a category", htmlAttributes: new { @class = "form-control border-none select" })
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.DropDownList("ville", ViewBag.Villes as SelectList, "Choose a city", htmlAttributes: new { @class = "form-control border-none select" })
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.Editor("search", new { htmlAttributes = new { @class = "form-control border-none editor", placeholder = "Search here ...", id = "search-bar" } })
-                                            </div>
-                                            
+                                        <div class="form-group">
+                                            @Html.DropDownList("category", ViewBag.Categories as SelectList, "Choose a category", htmlAttributes: new { @class = "form-control border-none select" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.DropDownList("ville", ViewBag.Villes as SelectList, "Choose a city", htmlAttributes: new { @class = "form-control border-none select" })
+                                        </div>
+                                        <div class="form-group">
+
+                                            <input id="textsearch" type="text" class="form-control border-none editor" placeholder="Search here ..." />
+
+                                        </div>
                                     </div>
                                 </div>
+
 
                             </div>
 
@@ -50,12 +52,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div  class="shop-p__collection">
-                            <div id="DataSearching_" class="row is-grid-active">
-                                @foreach (var produit in Model)
-                                {
-                                    
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="original_data">
+                            <div class="shop-p__collection">
+                                <div class="row is-grid-active">
+                                    @foreach (var produit in Model)
+                                    {
+
+                                        <div class="col-lg-3 col-md-4 col-sm-6 ">
                                             <div class="product-m">
                                                 <div class="product-m__thumb">
 
@@ -75,6 +78,7 @@
                                                         @produit.Category.Name
                                                     </div>
                                                     <div class="product-m__name">
+                                                        <p style="display:none;" class="searchitem">@produit.name</p>
                                                         @if (produit.name.Length >= 17)
                                                         {
                                                             <a href="/Welcome/Product/@produit.Id" target="_blank">@produit.name.Substring(0, 17) ...</a>
@@ -122,18 +126,30 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                }
 
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="u-s-p-y-60">
+
+                                <!--====== Pagination ======-->
+                                @Html.PagedListPager(Model, page => Url.Action("Shop", new { page, pageSize = Model.PageSize }))
+                                Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Products
+                                <!--====== End - Pagination ======-->
+                            </div>
+
+
+
+                        </div>
+                        @*search result here*@
+                        <div class="shop-p__collection" style="margin-bottom:350px;">
+                            
+                            <div class="row is-grid-active searchresult" style="margin-bottom:70%;">
+                                
                             </div>
                         </div>
-                        <div class="u-s-p-y-60">
 
-                            <!--====== Pagination ======-->
-                            @Html.PagedListPager(Model, page => Url.Action("Shop", new {  page, pageSize = Model.PageSize}))
-                            Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Products
-                            <!--====== End - Pagination ======-->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -145,29 +161,154 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script>
-    $(document).ready(function () {
 
-        $("#search").change(function () {
-            @*var sCat = $("#category").val();
-            var sCity = $("#ville").val();*@
-            var sText = $("$search").val();
-            var SetData = $("DataSearching_");
-            SetData.html(" ");
 
-            $.ajax({
-                type: "post",
-                url: "/Welcome/GetSearchData?sText=" + sText,
-                contentType: "html",
-                success: function (result){
 
-                    if (result.length == 0) {
-                        SetData.append('<h3>No Result Found</h3>');
+
+    $("#textsearch").on("keyup", function () {
+        var textenter = $(this).val();
+        var data = $(".searchresult");
+        var CatId = $("#category").val();
+        var CityId = $("#ville").val();
+        data.html(" ");
+
+        $.ajax({
+            method: "GET",
+            url: "/Welcome/GetSearchData?textenter="+textenter,
+            contentType: "html",
+            success: function (result) {
+                if (result.length == 0) {
+                    if (textenter == "") {
+                        $(".original_data").show();
+                        $(".searchresult").hide();
                     }
                     else {
-                        SetData.append('<h3>Result will be shown here !!!! </h3>');
+                        $(".searchresult").show();
+                        $(".original_data").hide();
+                        data.html('<h2>Result not found </h2>');
                     }
+                    
+                } else {
+                    $(".searchresult").show();
+                    $(".original_data").hide();
+                    $.each(result, function (index, value) {
+                        data.append('<div class="col-lg-3 col-md-4 col-sm-6 ">'+
+                                        '<div class="product-m">'+
+                                            '<div class="product-m__thumb">'+
+
+                            ' <a class="aspect aspect--bg-grey aspect--square u-d-block" href="/Welcome/Product/' + value.Id +'" target="_blank">'+
+
+                            ' <img class="aspect__img" src="' + value.imagePath +' " alt="">'+
+                                                '</a>'+
+
+                                                '<div class="product-m__add-cart">'+
+
+                            '<a class="btn--e-brand" href="/Welcome/Product/' + value.Id + '" target="_blank">Show Details</a>'+
+                                                '</div>'+
+                                           ' </div>'+
+                                           ' <div class="product-m__content">'+
+                                                '<div class="product-m__category">'+
+
+                            value.category
+                                                +'</div>'+
+                            '<div class="product-m__name">' +
+                            '<p style="display:none;" class="searchitem">' + value.name +'</p >'+
+                                                   
+                            ' <a href="/Welcome/Product/' + value.Id +'" target="_blank">'+value.name +'</a>'+
+                                                    
+                                                    
+
+                                               ' </div>'+
+                            ' <div class="product-m__rating ">' +
+                            '<span>Seller :' + value.sellerName + '</span >'+
+                                                    '<span style="color:green;">'+
+
+                                                       ' <i class="fa fa-check" aria-hidden="true"></i>'+
+                                                  '  </span>'+
+
+                                                    
+
+                                                '</div>'+
+                            ' <div class="product-m__price">MAD ' +value.price+'</div>'+
+                                                '<div class="product-m__hover">'+
+                            '<div class="product-m__preview-description">'+
+                            '<span>'+value.description+'</span>'+
+                                                    
+                                           ' </div>'+
+                                        '</div>'+
+                                    '</div>');
+                    });
+
                 }
-            });
+            },
+            error: function (err) {
+                data.append('');
+            }
         });
+
+
+
+
     });
+
+    $("#category").on("change", function () {
+
+        var selected = $(this).val();
+        var data = $(".searchresult");
+        data.html(" ");
+
+        $.ajax({
+            method: "GET",
+            url: "/Welcome/GetSearchData?catId=" + selected,
+            contentType: "html",
+            success: function (result) {
+                if (result.length == 0) {
+                    if (textenter == "") {
+                        $(".original_data").show();
+                        $(".searchresult").hide();
+                    }
+                    else {
+                        $(".searchresult").show();
+                        $(".original_data").hide();
+                        data.html('<h2>Result not found </h2>');
+                    }
+
+                } else {
+                    $(".searchresult").show();
+                    $(".original_data").hide();
+                    
+                }
+            },
+            error: function (err) {
+                data.append('');
+            }
+
+        });
+
+    });
+
+
+
 </script>
+
+
+
+
+
+
+@* $(".DataSearching").each(function (results) {
+
+        var searchitem = $(this).find(".searchitem").text();
+        if (searchitem.toLowerCase().indexOf(textenter.toLowerCase()) < 0) {
+
+            $(this).hide();
+
+            }
+            else {
+
+            $(this).show();
+
+            }
+
+
+    });*@

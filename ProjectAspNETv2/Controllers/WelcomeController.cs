@@ -88,7 +88,7 @@ namespace ProjectAspNETv2.Controllers
         }*/
   
         
-        public ActionResult Shop( int? cat, int page = 1, int pageSize = 8)
+        public ActionResult Shop( int? cat, int page = 1, int pageSize = 20)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -209,23 +209,60 @@ namespace ProjectAspNETv2.Controllers
         }
 
 
-        public JsonResult GetSearchData(string sText)
+        public JsonResult GetSearchData(string textenter , string catId )
         {
-            List<Produit> result = new List<Produit>();
-
-            try {
-                result = DB.Produits.Where(p => p.name.Contains(sText) || sText == null).ToList();
-
-            }
-            catch (FormatException)
+              if(textenter != null)
             {
-                Console.WriteLine("sText : " + sText);
+                var resultProduct = DB.Produits.Where(p => p.name.Contains(textenter.ToLower()) ||
+                                                       p.description_.Contains(textenter.ToLower()) ||
+                                                       textenter == null)
+
+                                           .Select(p => new MinimizeProduct
+                                           {
+                                               Id = p.Id,
+                                               name = p.name,
+                                               description = p.description_,
+                                               imagePath = p.Images.FirstOrDefault().PathName,
+                                               category = p.Category.Name,
+                                               price = (decimal)p.price,
+                                               sellerId = (int)p.propreitaireId,
+                                               sellerName = p.Proprietaire.Name,
+                                               created_at = (DateTime)p.createdAt
+
+                                           }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
             }
-            
+              if(catId != null)
+            {
+                var catID = Convert.ToInt32(catId);
+                var catProducts = DB.Produits.Where(p => p.categoryId == catID)
+                    .Select(p => new MinimizeProduct
+                {
+                    Id = p.Id,
+                    name = p.name,
+                    description = p.description_,
+                    imagePath = p.Images.FirstOrDefault().PathName,
+                    category = p.Category.Name,
+                    price = (decimal)p.price,
+                    sellerId = (int)p.propreitaireId,
+                    sellerName = p.Proprietaire.Name,
+                    created_at = (DateTime)p.createdAt
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+                }).OrderByDescending(p => p.created_at).ToList();
+                return Json(catProducts, JsonRequestBehavior.AllowGet);
 
+            }
+
+            else
+            {
+                var videlist = new List<string>();
+
+                return Json(videlist, JsonRequestBehavior.AllowGet);
+            }
+
+                
         }
+
 
 
 
