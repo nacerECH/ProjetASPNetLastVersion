@@ -6,8 +6,8 @@
     Layout = "~/Views/Shared/_LayoutWelcomePage.cshtml";
 }
 
-<!--====== App Content ======-->
-<div class="app-content">
+<!--====== App Content = =====-->
+<div class="app-content" style="margin-top:150px;background-color:white;">
 
     <!--====== Section 1 ======-->
     <div class="u-s-p-t-90">
@@ -69,14 +69,14 @@
                     <div class="pd-detail">
                         <div>
 
-                            <span class="pd-detail__name">@Model.name</span>
+                            <span class="pd-detail__name"><strong>@Model.name</strong></span>
                         </div>
                         <div>
                             <div class="pd-detail__inline">
 
                                 <span class="pd-detail__price">@Model.price Dhs</span>
 
-                                <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del>
+                                <span class="pd-detail__discount"></span><del class="pd-detail__del"></del>
                             </div>
                         </div>
                         <div class="u-s-m-b-15">
@@ -136,11 +136,11 @@
                                         Livraison :
                                         @if ((bool)Model.livrable == true)
                                         {
-                                            <span>Possible</span>
+                                            <span>Free Shipping</span>
                                         }
                                         else
                                         {
-                                            <span>Non</span>
+                                            <span>No Shipping</span>
 
                                         }
                                     </span>

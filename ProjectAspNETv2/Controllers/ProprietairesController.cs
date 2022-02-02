@@ -98,7 +98,7 @@ namespace ProjectAspNETv2.Controllers
 
                 await db.SaveChangesAsync();
                 ModelState.Clear();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Proprietaire");
             }
 
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", proprietaire.UserId);
