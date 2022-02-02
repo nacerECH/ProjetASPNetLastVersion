@@ -339,6 +339,11 @@ namespace ProjectAspNETv2.Controllers
             return Redirect(Url.Action("Support", "Proprietaire"));
         }
 
-
+        public ActionResult Profile()
+        {
+            var idu = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Where(p => p.UserId == idu).FirstOrDefault();
+            return View(prop);
+        }
     }
 }

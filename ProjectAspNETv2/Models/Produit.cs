@@ -56,6 +56,7 @@ namespace ProjectAspNETv2.Models
         public Nullable<bool> garantee { get; set; }
         public Nullable<int> promoId { get; set; }
 
+        [Display(Name = "Proprietaire")]
         public Nullable<int> propreitaireId { get; set; }
 
 

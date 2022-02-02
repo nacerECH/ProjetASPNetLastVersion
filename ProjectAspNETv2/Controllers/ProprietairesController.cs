@@ -67,11 +67,14 @@ namespace ProjectAspNETv2.Controllers
                     if (Logo != null && Logo.ContentLength > 0)
                     {
 
+
                         string extension = Path.GetExtension(Logo.FileName);
                         var filename = DateTime.Now.ToString("yymmssfff") + extension;
-                        filename = Path.Combine(Server.MapPath("~/propimages/"), filename);
-                        Logo.SaveAs(filename);
-                        proprietaire.Logo = filename;
+                        var savePath = Path.Combine(Server.MapPath("~/propimages/Logos"), filename);
+
+                        Logo.SaveAs(savePath);
+                        proprietaire.Logo = "/propimages/Logos/" + filename;
+                        proprietaire.isHonored = false;
                         ViewBag.FileStatus = "File uploaded successfully.";
                     } else
                     {
@@ -94,11 +97,11 @@ namespace ProjectAspNETv2.Controllers
                 db.Proprietaires.Add(proprietaire);
 
                 var userManager = new UserManager<ApplicationUser, string>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                var result = userManager.AddToRole(User.Identity.GetUserId(), "Marchand");
+                //await userManager.AddToRole(User.Identity.GetUserId(), "Marchand");
 
                 await db.SaveChangesAsync();
                 ModelState.Clear();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Welcome");
             }
 
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", proprietaire.UserId);

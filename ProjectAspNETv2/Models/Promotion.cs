@@ -11,7 +11,8 @@ namespace ProjectAspNETv2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Promotion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,18 @@ namespace ProjectAspNETv2.Models
         }
     
         public int Id { get; set; }
+
+        [StringLength(256, ErrorMessage = "le nom de la promotion doit avoir au minimum 3 lettres", MinimumLength = 3)]
+        [Display(Name = "Description")]
+        [Required(ErrorMessage = "la description est obligatoire")]
         public string Name { get; set; }
+
+        [Range(1, 99, ErrorMessage = "le prix doit etre entre 1 et 99 ")]
+        [Required(ErrorMessage = "le pourcentage est obligatoire")]
         public Nullable<int> Pourcentage { get; set; }
+
+        [Display(Name = "Date de fin de validite")]
+        [Required(ErrorMessage = "cette date est obligatoire")]
         public Nullable<System.DateTime> Date_Validite { get; set; }
         public Nullable<System.DateTime> Date_Creation { get; set; }
     

@@ -162,11 +162,8 @@ namespace ProjectAspNETv2.Controllers
 
                     //var currentUser = UserManager.FindByName(user.UserName);
                     //var roleresult = UserManager.AddToRole(currentUser.Id, "Marchand");
+                    await UserManager.AddToRoleAsync(user.Id, "Marchand");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-
-
-                    /*await UserManager.AddToRoleAsync(user.Id, "Marchand");*/
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

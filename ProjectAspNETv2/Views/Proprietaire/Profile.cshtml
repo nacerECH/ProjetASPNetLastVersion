@@ -1,0 +1,137 @@
+﻿@model ProjectAspNETv2.Models.Proprietaire
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutPageDashboard2.cshtml";
+}
+
+
+
+
+
+
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ breadcrumb ] end -->
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Profile</h5>
+                    </div>
+                    <div class="card-block pb-2 table-border-style">
+                        <div class="row mb-4">
+                            <div class="col-12 col-sm-5"
+                                    <div class="col-4 p-2">
+                                        <img class="w-100 h-100" style="border-radius : 50%" src="@Url.Content(Model.Logo)" />
+                                    </div
+                            </div>
+                            <div class="col-12 col-sm-7">
+                                <div class="row">
+                                    <div class="col-6 mb-2">
+                                        <h5 class="mb-2">
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </h5>
+                                        <div>
+                                            @Html.DisplayFor(model => model.Name)
+                                        </div>
+                                    </div>
+                                    <div class="col-6  mb-2">
+                                        <h5 class="mb-2">
+                                            @Html.DisplayNameFor(model => model.Tel)
+                                        </h5>
+                                        <div>
+                                            @Html.DisplayFor(model => model.Tel)
+                                        </div>
+                                    </div>
+                                    <div class="col-6  mb-2">
+                                        <h5 class="mb-2">
+                                            @Html.DisplayNameFor(model => model.Adresse)
+                                        </h5>
+                                        <div>
+                                            @Html.DisplayFor(model => model.Adresse)
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h5 class="mb-2  mb-2">
+                                            @Html.DisplayNameFor(model => model.Ville)
+                                        </h5>
+                                        <div>
+                                            @Html.DisplayFor(model => model.Ville)
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <h5 class="mb-2">
+                                            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+                                        </h5>
+                                        <div>
+                                            @Html.DisplayFor(model => model.AspNetUser.Email)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    @Html.DisplayNameFor(model => model.isHonored)
+                                </h5>
+                                <div>
+                                    @if (Model.isHonored == null)
+                                    {
+                                        <span>Unset</span>
+                                    }
+                                    else if((bool)Model.isHonored == true)
+                                    {
+                                        <span>Oui</span>
+
+                                    }
+                                    else 
+                                    {
+                                        <span>Nom</span>
+
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="mb-2">
+                                    @Html.DisplayNameFor(model => model.isCompany)
+                                </h5>
+                                <div>
+                                    @if ((bool)Model.isCompany == true)
+                                    {
+                                        <span>Societe</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Individu</span>
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+
+
