@@ -27,7 +27,13 @@
                 <img class="card-img-top" src="@Url.Content(@item.Images.First().PathName)" alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">@item.name</h4>
-                    <p class="card-text">  @(item.description_.Substring(0,15)) ...  </p>
+                    <p class="card-text">
+
+                        @if (item.description_.Count() > 16)
+                        {@(item.description_.Substring(0,15)) <span>... </span>} @if (item.description_.Count() <= 16)
+                        {<span> @item.description_  </span>}
+
+                    </p>
                     <div class="col text-right">
                         <h4> @item.price DH</h4>
                         <h6 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @item.Proprietaire.Name </h6>

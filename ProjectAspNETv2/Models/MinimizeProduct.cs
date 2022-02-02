@@ -17,5 +17,7 @@ namespace ProjectAspNETv2.Models
         public string sellerName { get; set; }
         public DateTime created_at { get; set; }
 
+        public string city { get; set; }
+
     }
 }
