@@ -39,10 +39,10 @@ namespace ProjectAspNETv2.Controllers
 
             }
 
-            var Villes = new SelectList(distinctData, "Id", "Ville"); 
+            var Villes = new SelectList(distinctData, "Ville", "Ville"); 
             
 
-            ViewBag.Villes = new SelectList(distinctData, "Id", "Ville");
+            ViewBag.Villes = new SelectList(distinctData, "Ville", "Ville");
             ViewBag.Categories = new SelectList(DB.Categories, "CatId", "Name");
            
             ViewBag.NewProducts = DB.Produits.OrderByDescending(p => p.createdAt).ToList();
@@ -114,7 +114,7 @@ namespace ProjectAspNETv2.Controllers
             }
            
 
-            ViewBag.Villes = new SelectList(distinctData, "Id", "Ville");
+            ViewBag.Villes = new SelectList(distinctData, "Ville", "Ville");
             
 
             List<Produit> produits1 = new List<Produit>();
@@ -209,50 +209,179 @@ namespace ProjectAspNETv2.Controllers
         }
 
 
-        public JsonResult GetSearchData(string textenter , string catId )
+        public JsonResult GetSearchData(string ville, string textenter, string catId)
         {
-              if(textenter != null)
-            {
-                var resultProduct = DB.Produits.Where(p => p.name.Contains(textenter.ToLower()) ||
-                                                       p.description_.Contains(textenter.ToLower()) ||
-                                                       textenter == null)
 
-                                           .Select(p => new MinimizeProduct
-                                           {
-                                               Id = p.Id,
-                                               name = p.name,
-                                               description = p.description_,
-                                               imagePath = p.Images.FirstOrDefault().PathName,
-                                               category = p.Category.Name,
-                                               price = (decimal)p.price,
-                                               sellerId = (int)p.propreitaireId,
-                                               sellerName = p.Proprietaire.Name,
-                                               created_at = (DateTime)p.createdAt
 
-                                           }).OrderByDescending(p => p.created_at).ToList();
-                return Json(resultProduct, JsonRequestBehavior.AllowGet);
-            }
-              if(catId != null)
+
+
+
+            if (textenter != "" && ville != "" && catId != "")
             {
                 var catID = Convert.ToInt32(catId);
-                var catProducts = DB.Produits.Where(p => p.categoryId == catID)
-                    .Select(p => new MinimizeProduct
-                {
-                    Id = p.Id,
-                    name = p.name,
-                    description = p.description_,
-                    imagePath = p.Images.FirstOrDefault().PathName,
-                    category = p.Category.Name,
-                    price = (decimal)p.price,
-                    sellerId = (int)p.propreitaireId,
-                    sellerName = p.Proprietaire.Name,
-                    created_at = (DateTime)p.createdAt
+                var resultProduct = DB.Produits.Where(p => (p.name.Contains(textenter.ToLower()) ||
+                                                   p.description_.Contains(textenter.ToLower())) && (p.categoryId == catID) && (p.Proprietaire.Ville.Contains(ville))
+                                                   )
 
-                }).OrderByDescending(p => p.created_at).ToList();
-                return Json(catProducts, JsonRequestBehavior.AllowGet);
+                                       .Select(p => new MinimizeProduct
+                                       {
+                                           Id = p.Id,
+                                           name = p.name,
+                                           description = p.description_,
+                                           imagePath = p.Images.FirstOrDefault().PathName,
+                                           category = p.Category.Name,
+                                           price = (decimal)p.price,
+                                           sellerId = (int)p.propreitaireId,
+                                           sellerName = p.Proprietaire.Name,
+                                           created_at = (DateTime)p.createdAt,
+                                           city= p.Proprietaire.Ville
+
+                                       }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
 
             }
+            if (textenter != "" && ville == "" && catId != "")
+            {
+                var catID = Convert.ToInt32(catId);
+                var resultProduct = DB.Produits.Where(p => (p.name.Contains(textenter.ToLower()) ||
+                                                   p.description_.Contains(textenter.ToLower())) && (p.categoryId == catID)
+                                                   )
 
+                                       .Select(p => new MinimizeProduct
+                                       {
+                                           Id = p.Id,
+                                           name = p.name,
+                                           description = p.description_,
+                                           imagePath = p.Images.FirstOrDefault().PathName,
+                                           category = p.Category.Name,
+                                           price = (decimal)p.price,
+                                           sellerId = (int)p.propreitaireId,
+                                           sellerName = p.Proprietaire.Name,
+                                           created_at = (DateTime)p.createdAt,
+                                           city = p.Proprietaire.Ville
+
+                                       }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
+
+            }
+            if (textenter != "" && ville != "" && catId == "")
+            {
+                
+                var resultProduct = DB.Produits.Where(p => (p.name.Contains(textenter.ToLower()) ||
+                                                   p.description_.Contains(textenter.ToLower())) && (p.Proprietaire.Ville.Contains(ville))
+                                                   )
+
+                                       .Select(p => new MinimizeProduct
+                                       {
+                                           Id = p.Id,
+                                           name = p.name,
+                                           description = p.description_,
+                                           imagePath = p.Images.FirstOrDefault().PathName,
+                                           category = p.Category.Name,
+                                           price = (decimal)p.price,
+                                           sellerId = (int)p.propreitaireId,
+                                           sellerName = p.Proprietaire.Name,
+                                           created_at = (DateTime)p.createdAt,
+                                           city = p.Proprietaire.Ville
+
+                                       }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
+
+            }
+            if (textenter != "" && ville == "" && catId == "")
+            {
+
+                var resultProduct = DB.Produits.Where(p => (p.name.Contains(textenter.ToLower()) ||
+                                                   p.description_.Contains(textenter.ToLower())) && (p.Proprietaire.Ville.Contains(ville))
+                                                   )
+
+                                       .Select(p => new MinimizeProduct
+                                       {
+                                           Id = p.Id,
+                                           name = p.name,
+                                           description = p.description_,
+                                           imagePath = p.Images.FirstOrDefault().PathName,
+                                           category = p.Category.Name,
+                                           price = (decimal)p.price,
+                                           sellerId = (int)p.propreitaireId,
+                                           sellerName = p.Proprietaire.Name,
+                                           created_at = (DateTime)p.createdAt,
+                                           city = p.Proprietaire.Ville
+
+                                       }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
+
+            }
+            if (textenter == "" && ville != "" && catId != "")
+            {
+                var catID = Convert.ToInt32(catId);
+                var resultProduct = DB.Produits.Where(p =>  (p.categoryId == catID) && (p.Proprietaire.Ville.Contains(ville))
+                                                   )
+
+                                       .Select(p => new MinimizeProduct
+                                       {
+                                           Id = p.Id,
+                                           name = p.name,
+                                           description = p.description_,
+                                           imagePath = p.Images.FirstOrDefault().PathName,
+                                           category = p.Category.Name,
+                                           price = (decimal)p.price,
+                                           sellerId = (int)p.propreitaireId,
+                                           sellerName = p.Proprietaire.Name,
+                                           created_at = (DateTime)p.createdAt,
+                                           city = p.Proprietaire.Ville
+
+                                       }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
+
+            }
+            if (textenter == "" && ville == "" && catId != "")
+            {
+                var catID = Convert.ToInt32(catId);
+                var resultProduct = DB.Produits.Where(p =>  (p.categoryId == catID)
+                                                   )
+
+                                       .Select(p => new MinimizeProduct
+                                       {
+                                           Id = p.Id,
+                                           name = p.name,
+                                           description = p.description_,
+                                           imagePath = p.Images.FirstOrDefault().PathName,
+                                           category = p.Category.Name,
+                                           price = (decimal)p.price,
+                                           sellerId = (int)p.propreitaireId,
+                                           sellerName = p.Proprietaire.Name,
+                                           created_at = (DateTime)p.createdAt,
+                                           city = p.Proprietaire.Ville
+
+                                       }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
+
+            }
+            if (textenter == "" && ville != "" && catId == "")
+            {
+                
+                var resultProduct = DB.Produits.Where(p => (p.Proprietaire.Ville.Contains(ville))
+                                                   )
+
+                                       .Select(p => new MinimizeProduct
+                                       {
+                                           Id = p.Id,
+                                           name = p.name,
+                                           description = p.description_,
+                                           imagePath = p.Images.FirstOrDefault().PathName,
+                                           category = p.Category.Name,
+                                           price = (decimal)p.price,
+                                           sellerId = (int)p.propreitaireId,
+                                           sellerName = p.Proprietaire.Name,
+                                           created_at = (DateTime)p.createdAt,
+                                           city = p.Proprietaire.Ville
+
+                                       }).OrderByDescending(p => p.created_at).ToList();
+                return Json(resultProduct, JsonRequestBehavior.AllowGet);
+
+            }
+            
             else
             {
                 var videlist = new List<string>();
