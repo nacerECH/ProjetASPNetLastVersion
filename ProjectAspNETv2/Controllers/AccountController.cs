@@ -403,7 +403,7 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Shop", "Welcome");
         }
 
         //

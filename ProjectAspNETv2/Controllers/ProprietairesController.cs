@@ -88,6 +88,9 @@ namespace ProjectAspNETv2.Controllers
 
                 /**/
                 proprietaire.UserId = User.Identity.GetUserId();
+                proprietaire.isBlocked = false;
+                proprietaire.created_at = DateTime.Now;
+                proprietaire.isHonored = false;
                 db.Proprietaires.Add(proprietaire);
 
                 var userManager = new UserManager<ApplicationUser, string>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -156,6 +159,24 @@ namespace ProjectAspNETv2.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Proprietaire proprietaire = await db.Proprietaires.FindAsync(id);
+
+
+            foreach(Produit pp in proprietaire.Produits)
+            {
+               pp.Images.ToList().Clear();
+               pp.Historiques.ToList().Clear();
+               pp.Vues.ToList().Clear();
+                db.SaveChanges();
+
+                db.Produits.Remove(pp);
+
+                db.SaveChanges();
+            }
+
+            proprietaire.ContactSupports.ToList().Clear();
+            
+
+            
             db.Proprietaires.Remove(proprietaire);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

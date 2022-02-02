@@ -28,7 +28,7 @@ namespace ProjectAspNETv2.Models
     
         public int Id { get; set; }
 
-        [StringLength(250, ErrorMessage = "la description du produit doit avoir entre 4 et 250 caracteres", MinimumLength = 3)]
+        [StringLength(256, ErrorMessage = "la description du produit doit avoir au minimum 20 lettres", MinimumLength = 3)]
         [Display(Name = "Description")]
         [Required(ErrorMessage = "la description est obligatoire")]
         public string description_ { get; set; }

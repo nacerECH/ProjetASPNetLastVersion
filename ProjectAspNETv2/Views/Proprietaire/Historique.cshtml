@@ -35,11 +35,11 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in ViewBag.Operations)
+                        @foreach (var item in ViewBag.Operations as IList<ProjectAspNETv2.Models.Historique>)
                         {
 
                             <tr class="unread">
-                                <td><img class="rounded-circle" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"></td>
+                                <td><img class="rounded-circle" style="width:40px;" src="@Url.Content(@item.Produit.Images.First().PathName)"  alt="activity-user"></td>
                                 <td>
                                     <h6 class="mb-1">@item.Produit.name </h6>
                                     

@@ -15,27 +15,27 @@
 
 <div class="row">
 
-    @foreach (var item in ViewBag.MyList)
+    @foreach (var item in ViewBag.MyList as IList<ProjectAspNETv2.Models.Produit>)
     {
 
-        <div class="col-md-6 col-xl-3">
-           
-                <div class="card" style="width: 15rem">
-                    <img class="card-img-top"  src="@Url.Content("~/Content/assets/images/user/avatar-7.jpg")" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">@item.name</h4>
-                        <p class="card-text">  @item.description_  tfjbvlsfhkjbk djdbbbbbbbbbbbd doadhcdjcsn dkkddkdka adjcbakjdckaj </p>
-                        <div class="col text-right">
-                            <h4> @item.price DH</h4>
-                            <h6 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @item.Proprietaire.Name </h6>
-                        </div>
-                        <a href="/Admin/Details/@item.Id" class="label theme-bg2 text-white f-12" > Details</a>
-                        
-                    </div>
-                </div>
+    <div class="col-md-6 col-xl-3" >
 
-            
+        <div class="card" style="width: 15rem;height:30rem">
+            <img class="card-img-top" src="@Url.Content(@item.Images.First().PathName)" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">@item.name</h4>
+                <p class="card-text">  @(item.description_.Substring(0,15)) ...  </p>
+                <div class="col text-right">
+                    <h4> @item.price DH</h4>
+                    <h6 class="text-c-purple mb-0">  <span class="text-muted">Vendeur:</span> @item.Proprietaire.Name </h6>
+                </div>
+                <a href="/Admin/Details/@item.Id" class="label theme-bg2 text-white f-12"> Details</a>
+
+            </div>
         </div>
+
+
+    </div>
 
 
       

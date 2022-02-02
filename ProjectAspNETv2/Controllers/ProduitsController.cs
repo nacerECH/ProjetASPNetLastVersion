@@ -19,13 +19,23 @@ namespace ProjectAspNETv2.Controllers
 
         // GET: Produits
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            var id = User.Identity.GetUserId();
-            var prop = db.Proprietaires.Single(p => p.UserId == id);
-            var produits = prop.Produits;
-            //var produits = db.Produits.Include(p => p.Category).Include(p => p.Promotion).Include(p => p.Proprietaire).Include(p => p.Images);
-            return View(produits.ToList());
+            var idu = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Where(p => p.UserId == idu).FirstOrDefault();
+            if (prop.Id == id)
+            {
+                var produits = prop.Produits;
+
+                //var produits = db.Produits.Include(p => p.Category).Include(p => p.Promotion).Include(p => p.Proprietaire).Include(p => p.Images);
+                return View(produits.ToList());
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
         }
 
         // GET: Produits/Details/5
@@ -83,6 +93,8 @@ namespace ProjectAspNETv2.Controllers
                     //Where(p => p.UserId == User.Identity.GetUserId());
                     produit.Proprietaire = prop;
                     produit.createdAt = DateTime.Now;
+                    produit.status = "1";
+                    
 
                     //------------- Instancier Historique
 
@@ -121,15 +133,17 @@ namespace ProjectAspNETv2.Controllers
                         image.PathName = "/propimages/Products/" + filename;
                         image.Produit = produit;
                         db.Images.Add(image);
+                        db.SaveChanges();
 
                         //proprietaire.Logo = filename;
                     }
-                    db.SaveChanges();
+                    
                     ViewBag.FileStatus = "File uploaded successfully.";
 
 
 
-                    return RedirectToAction("Index");
+                   
+                    return Redirect(Url.Action("Index", "Produits", new { id = prop.Id }));
                 }
 
                 ViewBag.categoryId = new SelectList(db.Categories, "CatId", "Name", produit.categoryId);
@@ -174,8 +188,8 @@ namespace ProjectAspNETv2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,description_,createdAt,propreitaireId,price,name,livrable,garantee,categoryId")] Produit produit)
         {
-            var id = User.Identity.GetUserId();
-            var prop = db.Proprietaires.Single(p => p.UserId == id);
+            var idu = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == idu);
             if (ModelState.IsValid)
             {
                 //------------- Instancier Historique
@@ -185,14 +199,16 @@ namespace ProjectAspNETv2.Controllers
                 h.operation_date = DateTime.Now;
                 h.Produit = produit;
                 h.Proprietaire = prop;
+                db.Historiques.Add(h);
+                db.SaveChanges();
 
 
                 //-------------------------
-                
+
                 db.Entry(produit).State = EntityState.Modified;
-                db.Historiques.Add(h);
+               
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(Url.Action("Index", "Produits", new { id = prop.Id }));
             }
             ViewBag.categoryId = new SelectList(db.Categories, "CatId", "Name", produit.categoryId);
             return View(produit);
@@ -219,24 +235,20 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
 
-
+            var idu = User.Identity.GetUserId();
+            var prop = db.Proprietaires.Single(p => p.UserId == idu);
             Produit produit = db.Produits.Find(id);
-          
 
-            var images = produit.Images;
-            //foreach(var image in images)
-            //{
-            //    //var i = image;
-            //    //db.Images.Remove(i);
-            //    //db.SaveChanges();
 
-            //}
-            
-            
+            produit.Images.ToList().Clear();
+            produit.Historiques.ToList().Clear();
+            produit.Vues.ToList().Clear();
+            db.SaveChanges();
+
             db.Produits.Remove(produit);
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(Url.Action("Index", "Produits", new { id = prop.Id }));
         }
 
         protected override void Dispose(bool disposing)

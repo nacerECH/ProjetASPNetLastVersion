@@ -1,111 +1,139 @@
-﻿@using Microsoft.AspNet.Identity
+﻿
+@using Microsoft.AspNet.Identity;
+@using ProjectAspNETv2.Models;
+@{ 
 
-    <!DOCTYPE html>
 
-    <html class="no-js" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link href='@Url.Content("/Content/theme/images/favicon.png")' rel="shortcut icon">
-        <title>@ViewBag.Title - My ASP.NET Application</title>
+    Entities1 DB = new Entities1();
 
-        <!--====== Google Font ======-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+    if (User.Identity.IsAuthenticated)
+    {
+        var id = User.Identity.GetUserId();
 
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body class="config" id="js-scrollspy-trigger">
-        <div class="preloader is-active">
-            <div class="preloader__wrap">
+        if(DB.Proprietaires.Where(p => p.UserId == id).ToList().Count != 0)
+        {
+            ViewBag.pname = DB.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Name;
+        }
+        else
+        {
+            ViewBag.pname = "Auth";
+        }
 
-                <img class="preloader__img" src='@Url.Content("/Content/theme/images/preloader.png")' alt="">
-            </div>
+    }
+
+}
+
+
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='@Url.Content("/Content/theme/images/favicon.png")' rel="shortcut icon">
+    <title>@ViewBag.Title - OnlineMarket</title>
+
+    <!--====== Google Font ======-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+
+    <style>
+        /* Works on Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #ffffff #fa4400;
+        }
+
+            /* Works on Chrome, Edge, and Safari */
+            *::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            *::-webkit-scrollbar-track {
+                background: #ffffff;
+            }
+
+            *::-webkit-scrollbar-thumb {
+                background-color: #fa4400;
+                border-radius: 20px;
+               
+            }
+    </style>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="config" id="js-scrollspy-trigger">
+    <div class="preloader is-active">
+        <div class="preloader__wrap">
+
+            <img class="preloader__img" src='@Url.Content("/Content/theme/images/preloader.png")' alt="">
         </div>
+    </div>
 
-        <!--====== Main Header ======-->
-        <header class="header--style-2">
+    <!--====== Main Header ======-->
+    <header class="header--style-2">
 
-            <!--====== Nav 1 ======-->
-            <nav class="primary-nav-wrapper">
-                <div class="container">
+        <!--====== Nav 1 ======-->
+        <nav class="primary-nav-wrapper">
+            <div class="container">
 
-                    <!--====== Primary Nav ======-->
-                    <div class="primary-nav">
+                <!--====== Primary Nav ======-->
+                <div class="primary-nav">
 
-                        <!--====== Main Logo ======-->
+                    <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index-2.html">
+                    <a class="main-logo" href="/Welcome/Index">
 
-                            <h2 style="color: #ff4500; font-weight:bolder;
-                                        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
-                                Online<strong style="color:white">Market</strong>
-                            </h2>
-                        </a>
-                        <!--====== End - Main Logo ======-->
-                        <!--====== Search Form ======-->
+                        <img width="30%" height="100%" src="@Url.Content("/Content/theme/images/projectLogo.png")" alt="OnlineMarket" />
+                        
+                    </a>
+                    <!--====== End - Main Logo ======-->
+                    <!--====== Search Form ======-->
+                    <!--====== End - Search Form ======-->
+                    <!--====== Dropdown Main plugin ======-->
+                    <div class="menu-init" id="navigation">
 
-                            <!--====== End - Search Form ======-->
-                            <!--====== Dropdown Main plugin ======-->
-                            <div class="menu-init" id="navigation">
+                        <button class="btn btn--icon toggle-button toggle-button--white fas fa-cogs" type="button"></button>
 
-                                <button class="btn btn--icon toggle-button toggle-button--white fas fa-cogs" type="button"></button>
+                        <!--====== Menu ======-->
+                        <div class="ah-lg-mode">
 
-                                <!--====== Menu ======-->
-                                <div class="ah-lg-mode">
+                            <span class="ah-close">✕ Close</span>
 
-                                    <span class="ah-close">✕ Close</span>
+                            <!--====== List ======-->
+                            <ul class="ah-list ah-list--design1 ah-list--link-color-white">
+                                <li data-tooltip="tooltip" data-placement="left" title="Search">
 
-                                    <!--====== List ======-->
-                                    <ul class="ah-list ah-list--design1 ah-list--link-color-white">
-                                        <li data-tooltip="tooltip" data-placement="left" title="Search">
+                                    <a href="/Welcome/Shop#search-bar"><i class="fas fa-search"></i></a>
+                                </li>
+                                <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Language">
 
-                                            <a href="#search-bar"><i class="fas fa-search"></i></a>
-                                        </li>
+                                    <a><i class="fas fa-globe-africa"></i></a>
 
-                                        <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Account">
+                                    <!--====== Dropdown ======-->
 
-                                            <a><i class="far fa-user-circle"></i></a>
+                                    <span class="js-menu-toggle"></span>
+                                    <ul style="width:120px">
+                                        <li class="has-dropdown has-dropdown--ul-right-100">
 
-                                            <!--====== Dropdown ======-->
-
-                                            <span class="js-menu-toggle"></span>
-
-                                            <!--====== End - Dropdown ======-->
-                                            @Html.Partial("_LoginPartial")
-
-                                        </li>
-                                        <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Language">
-
-                                            <a><i class="fas fa-globe-africa"></i></a>
+                                            <a>Language<i class="fas fa-angle-down u-s-m-l-6"></i></a>
 
                                             <!--====== Dropdown ======-->
 
                                             <span class="js-menu-toggle"></span>
                                             <ul style="width:120px">
-                                                <li class="has-dropdown has-dropdown--ul-right-100">
+                                                <li>
 
-                                                    <a>Language<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+                                                    <a class="u-c-brand">ENGLISH</a>
+                                                </li>
 
-                                                    <!--====== Dropdown ======-->
+                                                <li>
 
-                                                    <span class="js-menu-toggle"></span>
-                                                    <ul style="width:120px">
-                                                        <li>
-
-                                                            <a class="u-c-brand">ENGLISH</a>
-                                                        </li>
-                                                        
-                                                        <li>
-
-                                                            <a>FRANCAIS</a>
-                                                        </li>
-                                                        
-                                                    </ul>
-                                                    <!--====== End - Dropdown ======-->
+                                                    <a>FRANCAIS</a>
                                                 </li>
 
                                             </ul>
@@ -113,151 +141,149 @@
                                         </li>
 
                                     </ul>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                </div>
-            </nav>
-           </header> 
-            <!--====== End - Main Header ======-->
-            @RenderBody()
+                                    <!--====== End - Dropdown ======-->
+                                </li>
 
 
-            <!--====== Main Footer ======-->
-            <footer>
-                <div class="outer-footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="outer-footer__content u-s-m-b-40">
+                                <li class="has-dropdown"  data-tooltip="tooltip" data-placement="left" title="Account">
 
-                                    <span class="outer-footer__content-title">Contact Us</span>
-                                    <div class="outer-footer__text-wrap">
-                                        <i class="fas fa-home"></i>
+                                    <a style="display:flex; align-items: center; justify-content:center;"><i class="far fa-user-circle"></i>&nbsp;<p style="float:right;">@ViewBag.pname</p></a>
 
-                                        <span>4247 Ashford Drive Virginia VA-20006 USA</span>
-                                    </div>
-                                    <div class="outer-footer__text-wrap">
-                                        <i class="fas fa-phone-volume"></i>
+                                    <!--====== Dropdown ======-->
 
-                                        <span>(+0) 900 901 904</span>
-                                    </div>
-                                    <div class="outer-footer__text-wrap">
-                                        <i class="far fa-envelope"></i>
+                                    <span class="js-menu-toggle"></span>
 
-                                        <span>contact@domain.com</span>
-                                    </div>
+                                    <!--====== End - Dropdown ======-->
+                                    @Html.Partial("_LoginPartial")
 
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="outer-footer__content u-s-m-b-40">
+                                </li>
 
-                                            <span class="outer-footer__content-title">Categories</span>
-                                            <div class="outer-footer__list-wrap">
-                                                <ul>
-                                                    <li>
-
-                                                        <a href="cart.html">Electronics</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="dashboard.html">Men's Clothing</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="shop-side-version-2.html">Manufacturer</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="dash-payment-option.html">Finance</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="shop-side-version-2.html">Shop</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="outer-footer__content u-s-m-b-40">
-                                            <div class="outer-footer__list-wrap">
-
-                                                <span class="outer-footer__content-title">Our Company</span>
-                                                <ul>
-                                                    <li>
-
-                                                        <a href="about.html">About us</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="contact.html">Contact Us</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="index-2.html">Sitemap</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="dash-my-order.html">Delivery</a>
-                                                    </li>
-                                                    <li>
-
-                                                        <a href="shop-side-version-2.html">Store</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </ul>
 
                         </div>
+
                     </div>
-                </div>
 
-            </footer>
+                </div>
 
             </div>
+        </nav>
+    </header>
+    <!--====== End - Main Header ======-->
+    @RenderBody()
 
 
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/bootstrap")
-            @Scripts.Render("~/bundles/scripts")
+    <!--====== Main Footer ======-->
+    <footer>
+        <div class="outer-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="outer-footer__content u-s-m-b-40">
 
+                            <span class="outer-footer__content-title">Contact Us</span>
+                            <div class="outer-footer__text-wrap">
+                                <i class="fas fa-home"></i>
 
-            @RenderSection("scripts", required: false)
-            <script>
-                window.ga = function () {
-                    ga.q.push(arguments)
-                };
-                ga.q = [];
-                ga.l = +new Date;
-                ga('create', 'UA-XXXXX-Y', 'auto');
-                ga('send', 'pageview')
-            </script>
-            <noscript>
-                <div class="app-setting">
-                    <div class="container">
+                                <span></span>
+                            </div>
+                            <div class="outer-footer__text-wrap">
+                                <i class="fas fa-phone-volume"></i>
+
+                                <span></span>
+                            </div>
+                            <div class="outer-footer__text-wrap">
+                                <i class="far fa-envelope"></i>
+
+                                <span>contact@onlineMarket.com</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="app-setting__wrap">
-                                    <h1 class="app-setting__h1">JavaScript is disabled in your browser.</h1>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="outer-footer__content u-s-m-b-40">
 
-                                    <span class="app-setting__text">Please enable JavaScript in your browser or upgrade to a JavaScript-capable browser.</span>
+                                    <span class="outer-footer__content-title">Categories</span>
+                                    <div class="outer-footer__list-wrap">
+                                        <ul>
+                                            <li>
+
+                                                <a href="cart.html">Electronics</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
                                 </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="outer-footer__content u-s-m-b-40">
+                            <div class="outer-footer__list-wrap">
+
+                                <span class="outer-footer__content-title">Our Company</span>
+                                <ul>
+                                    <li>
+
+                                        <a href="">About us</a>
+                                    </li>
+                                    <li>
+
+                                        <a href="">Contact Us</a>
+                                    </li>
+
+                                    <li>
+
+                                        <a href="">Delivery</a>
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </noscript>
-    </body>
+            </div>
+        </div>
+
+    </footer>
+
+   
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/scripts")
+
+
+    @RenderSection("scripts", required: false)
+   @* <script>
+        window.ga = function () {
+            ga.q.push(arguments)
+        };
+        ga.q = [];
+        ga.l = +new Date;
+        ga('create', 'UA-XXXXX-Y', 'auto');
+        ga('send', 'pageview')
+    </script>*@
+    <noscript>
+        <div class="app-setting">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="app-setting__wrap">
+                            <h1 class="app-setting__h1">JavaScript is disabled in your browser.</h1>
+
+                            <span class="app-setting__text">Please enable JavaScript in your browser or upgrade to a JavaScript-capable browser.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </noscript>
+</body>
 </html>
 

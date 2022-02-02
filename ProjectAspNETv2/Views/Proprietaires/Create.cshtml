@@ -124,14 +124,14 @@
                                     <div class="u-s-m-b-30">
 
                                         @Html.LabelFor(model => model.Ville, new { @class = "gl-label" })
-                                        @Html.PasswordFor(model => model.Ville, new { @class = "input-text input-text--primary-style", placeholder = "exemple : Fes" })
+                                        @Html.TextBoxFor(model => model.Ville, new { @class = "input-text input-text--primary-style", placeholder = "exemple : Fes" })
                                         @Html.ValidationMessageFor(model => model.Ville, "", new { @class = "text-danger" })
 
                                     </div>
                                     <div class="u-s-m-b-30">
 
                                         @Html.LabelFor(model => model.Logo, new { @class = "gl-label" })
-                                        @Html.PasswordFor(model => model.Logo, new { @class = "input-text input-text--primary-style", @type = "file" })
+                                        @Html.TextBoxFor(model => model.Logo, new { @class = "input-text input-text--primary-style", @type = "file" })
                                         @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
 
                                     </div>

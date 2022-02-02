@@ -1,4 +1,24 @@
-﻿<!DOCTYPE html>
+﻿
+
+@using Microsoft.AspNet.Identity;
+@using ProjectAspNETv2.Models;
+@{ ViewBag.Title = "Index";
+
+    Entities1 db = new Entities1();
+
+    if (User.Identity.IsAuthenticated)
+    {
+        var id = User.Identity.GetUserId();  //Todo
+        ViewBag.pname = db.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Name;
+        ViewBag.img = db.Proprietaires.Where(p => p.UserId == id).FirstOrDefault().Logo;
+    }
+
+}
+
+
+
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -16,7 +36,7 @@
     <!-- animation css -->
     <link rel="stylesheet" href="@Url.Content("~/Content/assets/plugins/animation/css/animate.min.css")">
     <!-- vendor css -->
-    <link rel="stylesheet" href="@Url.Content("~/Content/assets/css/style.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/css/style2.css")">
 
 </head>
 <body>
@@ -40,7 +60,7 @@
                     <div class="b-bg">
                         <i class="feather icon-trending-up"></i>
                     </div>
-                    <span class="b-title">Nacer Market </span>
+                    <span class="b-title"></span>
                 </a>
                 <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
             </div>
@@ -56,27 +76,27 @@
 
 
                     <li class="nav-item">
-                        <a href="/Proprietaire/GetAllProducts" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Produits</span></a>
+                        <a href="/Proprietaire/GetAllProducts" class="nav-link "><span class="pcoded-micon">    <i class="feather icon-shopping-cart"></i>    </span><span class="pcoded-mtext">Produits</span></a>
                     </li>
 
 
 
                     <li class="nav-item">
-                        <a href="/Proprietaire/GetProductsNoConfirmed" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Les produits non confirmes </span></a>
+                        <a href="/Proprietaire/GetProductsNoConfirmed" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-plus"></i></span><span class="pcoded-mtext">Les produits non confirmes </span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="/Proprietaire/GetStatistics" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Statistiques</span></a>
+                        <a href="/Proprietaire/GetStatistics" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Statistiques</span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="/Proprietaire/GetHistorique" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Historiques</span></a>
+                        <a href="/Proprietaire/GetHistorique" class="nav-link "><span class="pcoded-micon"><i class="feather icon-clock"></i></span><span class="pcoded-mtext">Historiques</span></a>
                     </li>
 
 
 
                     <li class="nav-item">
-                        <a href="/Proprietaire/Support" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Support</span></a>
+                        <a href="/Proprietaire/Support" class="nav-link "><span class="pcoded-micon"><i class="feather icon-message-square"></i></span><span class="pcoded-mtext">Support</span></a>
                     </li>
 
 
@@ -125,9 +145,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-notification">
                             <div class="pro-head">
-                                <img src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" class="img-radius" alt="User-Profile-Image">
-                                <span>John Doe</span>
-                                <a href="auth-signin.html" class="dud-logout" title="Logout">
+                                <img src="@Url.Content(@ViewBag.img)" class="img-radius" alt="User-Profile-Image">
+                                <span> @ViewBag.pname  </span>
+                                <a href="/Account/LogOff" " class="dud-logout" title="Logout">
                                     <i class="feather icon-log-out"></i>
                                 </a>
                             </div>

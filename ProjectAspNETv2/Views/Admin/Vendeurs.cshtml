@@ -15,7 +15,7 @@
             <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Liste des utilisateurs avec problemes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">liste noire</a>
+            <a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Liste noire</a>
         </li>
 
         <li class="nav-item">
@@ -23,7 +23,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact" aria-selected="false">All users</a>
+            <a class="nav-link active show" id="contact-tab" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact" aria-selected="false">Tous les utilisateurs</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -43,11 +43,11 @@
                 <tbody>
 
                     
-                            @foreach (var item in ViewBag.ProbList) { 
+                            @foreach (var item in ViewBag.ProbList as IList<ProjectAspNETv2.Models.ContactSupport>) {
 
                     <tr>
                         <td>
-                            <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user">  @item.Proprietaire.Name   </h6>   </a>
+                            <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item.Proprietaire.Logo)" alt="activity-user">  @item.Proprietaire.Name   </h6>   </a>
                         </td>
                         <td>
                             <h6 class="m-0">  @item.Email</h6>
@@ -75,6 +75,7 @@
 
 
                         </td>
+                        <td>  <a  href="/Admin/Message/@item.Id"> voir </a> </td>
                     </tr>
                             }
                             
@@ -87,7 +88,7 @@
 
         </div>
 
-        <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
            
             <table class="table table-hover">
                 <thead>
@@ -100,13 +101,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item2 in ViewBag.MyList3)
+                    @foreach (var item2 in ViewBag.MyList2)
                     {
 
 
                         <tr>
                             <td>
-                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item2.Name </h6>   </a>
+                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Logo)" alt="activity-user"> @item2.Name </h6>   </a>
                             </td>
                             <td>
                                 <h6 class="m-0">  @item2.isCompany</h6>
@@ -158,13 +159,13 @@
                 </thead>
                 <tbody>
 
-                    @foreach (var item2 in ViewBag.MyList2)
+                    @foreach (var item2 in ViewBag.MyList3)
                     {
 
 
                         <tr>
                             <td>
-                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item2.Name </h6>   </a>
+                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item2.Logo)" alt="activity-user"> @item2.Name </h6>   </a>
                             </td>
                             <td>
                                 <h6 class="m-0">  @item2.isCompany</h6>
@@ -204,7 +205,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="tab-pane fade active show" id="contact2" role="tabpanel" aria-labelledby="contact-tab">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -225,7 +226,7 @@
 
                         <tr>
                             <td>
-                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content("~/Content/assets/images/user/avatar-1.jpg")" alt="activity-user"> @item.Name </h6>   </a>
+                                <a href="/Proprietaires/Details/1"> <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="@Url.Content(@item.Logo)" alt="activity-user"> @item.Name </h6>   </a>
                             </td>
                             <td>
                                 <h6 class="m-0">  @item.isCompany</h6>
