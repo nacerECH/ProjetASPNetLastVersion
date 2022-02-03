@@ -5,6 +5,26 @@
     Layout = "~/Views/Shared/_LayoutPageDashboard2.cshtml";
 }
 
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#promotion").hide();
+           
+            $('#isPr').val("false");
+            
+  $("#hide").click(function(){
+      $("#promotion").hide(1000);
+      $('#isPr').val("false");
+  });
+  $("#show").click(function(){
+      $("#promotion").show(1000);
+      $('#isPr').val("true");
+  });
+});
+    </script>
+</head>
 <!-- [ breadcrumb ] start -->
 <div class="page-header">
     <div class="page-block">
@@ -37,104 +57,149 @@
                         {
                             @Html.AntiForgeryToken()
 
-                            <div class="form-horizontal">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.description_, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        <div class="form-group">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.description_, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="form-group">
 
-                                            @Html.TextAreaFor(model => model.description_, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.description_, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.livrable, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        <div class="checkbox">
-
-                                            <div class="form-check">
-                                                @Html.RadioButtonFor(model => model.livrable, true, new { @class = "form-check-input" })
-                                                <label class="form-check-label">
-                                                    Possible
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                @Html.RadioButtonFor(model => model.livrable, false, new { @class = "form-check-input" })
-                                                <label class="form-check-label">
-                                                    Non
-                                                </label>
-                                            </div>
-
-                                            @Html.ValidationMessageFor(model => model.livrable, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.garantee, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        <div class="checkbox">
-
-                                            <div class="form-check">
-                                                @Html.RadioButtonFor(model => model.garantee, true, new { @class = "form-check-input" })
-                                                <label class="form-check-label">
-                                                    Avec
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                @Html.RadioButtonFor(model => model.garantee, false, new { @class = "form-check-input" })
-                                                <label class="form-check-label">
-                                                    Sans
-                                                </label>
-                                            </div>
-
-                                            @Html.ValidationMessageFor(model => model.garantee, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.categoryId, "categoryId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="file" multiple="multiple" name="files" class="form-control" id="files">
-                                        <label class="control-label" for="files">Choose file</label>
-                                    </div>
-                                    <span class="text-danger">
-                                        @ViewBag.FileStatus
-                                    </span>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Create" class="btn btn-default" />
+                                        @Html.TextAreaFor(model => model.description_, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.description_, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <button class="btn btn-warning" id="show">Ajouter une promotion</button>
+                            <button class="btn btn-danger" id="hide"> X </button>
+
+
+                            <div id="promotion">
+
+                                <input class="form-control" id="isPr" type="hidden" name="isPr" />
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2"> Choisir un nom pour votre promotion </label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" id="prName" type="text" name="prName" />
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2"> Pourcentage : </label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" id="pr" type="text" name="pr" />
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2"> Date de debut : </label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" id="DD" type="date" name="DD" />
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2"> Date de fin : </label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" id="DF" type="date" name="DF" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.livrable, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+
+                                        <div class="form-check">
+                                            @Html.RadioButtonFor(model => model.livrable, true, new { @class = "form-check-input" })
+                                            <label class="form-check-label">
+                                                Possible
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.RadioButtonFor(model => model.livrable, false, new { @class = "form-check-input" })
+                                            <label class="form-check-label">
+                                                Non
+                                            </label>
+                                        </div>
+
+                                        @Html.ValidationMessageFor(model => model.livrable, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.garantee, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+
+                                        <div class="form-check">
+                                            @Html.RadioButtonFor(model => model.garantee, true, new { @class = "form-check-input" })
+                                            <label class="form-check-label">
+                                                Avec
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.RadioButtonFor(model => model.garantee, false, new { @class = "form-check-input" })
+                                            <label class="form-check-label">
+                                                Sans
+                                            </label>
+                                        </div>
+
+                                        @Html.ValidationMessageFor(model => model.garantee, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.categoryId, "categoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="file" multiple="multiple" name="files" class="form-control" id="files">
+                                    <label class="control-label" for="files">Choose file</label>
+                                </div>
+                                <span class="text-danger">
+                                    @ViewBag.FileStatus
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+
+
+                        </div>
                         }
 
                         <div class="row mt-5" style="justify-content : end;">

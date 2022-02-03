@@ -67,7 +67,7 @@ namespace ProjectAspNETv2.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,description_,price,name,livrable,garantee,categoryId,isConfirmed")] Produit produit, HttpPostedFileBase[] files)
+        public ActionResult Create([Bind(Include = "Id,description_,price,name,livrable,garantee,categoryId,isConfirmed")] Produit produit,string isPr,string prName,string pr,string DD,string DF, HttpPostedFileBase[] files)
         {
             var f = files;
             if (files != null && files.Length > 0)
@@ -107,6 +107,25 @@ namespace ProjectAspNETv2.Controllers
 
                     //-------------------------
 
+                    //------------- Instancier Historique
+                    if (isPr == "true") {
+                        Promotion prom = new Promotion();
+                        prom.Name = prName;
+                        prom.Date_Creation = Convert.ToDateTime(DD);
+                        prom.Date_Validite = Convert.ToDateTime(DF);
+                        prom.Pourcentage = int.Parse(pr);
+
+                        /*  prom.Date_Creation = new DateTime(2022,2,3) ;
+                          prom.Date_Validite = new DateTime(2022, 2, 4);
+                          prom.Pourcentage = 50;*/
+                        prom.Name = "nadi";
+                        db.Promotions.Add(prom);
+                        produit.Promotion = prom;
+                    }
+
+
+                    //-------------------------
+
                     //------------- Instancier View
 
                     Vue v = new Vue();
@@ -117,7 +136,7 @@ namespace ProjectAspNETv2.Controllers
                     //-------------------------
 
 
-
+                    
                     db.Produits.Add(produit);
                     db.Historiques.Add(h);
                     db.Vues.Add(v);
