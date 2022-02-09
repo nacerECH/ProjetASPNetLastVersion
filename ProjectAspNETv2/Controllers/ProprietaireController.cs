@@ -19,22 +19,23 @@ namespace ProjectAspNETv2.Controllers
         public ActionResult Index()
         {
 
-   
+            // get l'utlisateur auth
             var id = User.Identity.GetUserId();
             var prop = db.Proprietaires.Single(p => p.UserId == id);
            
             int propID = prop.Id;
 
+            // get les produit de l'utilisateur auth
             var data = db.Produits.Where(p => p.propreitaireId == propID).ToList();
             
-            var data2 = new List<Produit>();
-            var data3 = new List<Produit>();
-            var ProductsToday = new List<Produit>();
+            var data2 = new List<Produit>();  // les produits ajoutes ce mois
+            var data3 = new List<Produit>();  // les 3 produits ajoutes recement
+            var ProductsToday = new List<Produit>(); // les produits de ce jour
             var ProductsWeek = new List<Produit>();
             //var vues = new List<int>();
 
-            List<int> vues = new List<int>();
-            var TopProducts = new List<Produit>();
+            List<int> vues = new List<int>();    // liste des vues des produits
+            var TopProducts = new List<Produit>();  // top product basee sur les vues
 
 
             foreach (Produit p in data)
@@ -65,30 +66,26 @@ namespace ProjectAspNETv2.Controllers
             {
                 data3 = db.Produits.OrderByDescending(i => i.createdAt).Take(3).ToList();
                 TopProducts = data.OrderByDescending(i => i.Vues.Count).Take(3).ToList();
-
             }
             else
             {
                 data3 = db.Produits.OrderByDescending(i => i.createdAt).Take(data.Count()).ToList();
                 TopProducts = data.OrderByDescending(i => i.Vues.Count).Take(data.Count()).ToList();
-
             }
 
-           var  VuesToday = db.Vues.Where(v => v.Produit.propreitaireId == propID && ((DateTime)v.created_at).Day == DateTime.Now.Day).ToList().Count();
+            var VuesToday = db.Vues.Where(v => v.Produit.propreitaireId == propID && ((DateTime)v.created_at).Day == DateTime.Now.Day).ToList().Count();
             var VuesMois = db.Vues.Where(v => v.Produit.propreitaireId == propID && ((DateTime)v.created_at).Month == DateTime.Now.Month).ToList().Count();
 
+            
             ViewBag.VuesToday = VuesToday;
             ViewBag.VuesMois = VuesMois;
             ViewBag.AllProducts = data;
             ViewBag.ProdMois = data2.Count();
             ViewBag.TotalProducts = data.Count();
             ViewBag.RecentProducts = data3;
-
             ViewBag.TopProducts = TopProducts;
-
             ViewBag.prp = db.Proprietaires.Count();
             ViewBag.produits = db.Produits.Count();
-
             ViewBag.ProductsToday = ProductsToday;
             ViewBag.ProductsWeek = ProductsWeek;
             
