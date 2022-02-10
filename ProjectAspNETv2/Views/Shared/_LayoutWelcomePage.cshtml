@@ -68,7 +68,7 @@
 </head>
 <body class="config" id="js-scrollspy-trigger">
 
-    <div style="float:left; margin:20px; bottom:20px; z-index:100; left: 20px; position:fixed; " id="google_translate_element">
+    <div style="float:left; bottom:20px; z-index:1000; left: 20px; position:fixed; " id="google_translate_element">
 
 
 
@@ -95,7 +95,7 @@
     </div>
 
     <!--====== Main Header ======-->
-    <header class="header--style-2" style="top :20px;">
+    <header class="header--style-2">
 
 
         <!--====== Nav 1 ======-->
@@ -290,7 +290,21 @@
             ga('create', 'UA-XXXXX-Y', 'auto');
             ga('send', 'pageview')
         </script>*@
+     
 
+    <script>
+
+        $(document).ready(function () {
+
+            $(".goog-te-banner-frame.skiptranslate").hide();
+
+            $("select.goog-te-combo").on("change", function () {
+
+                $(".goog-te-banner-frame.skiptranslate").remove();
+            });
+
+        });
+    </script>
 
 
     <noscript>

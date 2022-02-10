@@ -39,8 +39,8 @@
                             <div id="pd-o-initiate">
                                 @foreach (var image in Model.Images)
                                 {
-                                    <div class="pd-o-img-wrap" data-src="images/product/product-d-1.jpg">
-                                        <img class="u-img-fluid" src="@Url.Content(image.PathName)" data-zoom-image="@Url.Content(image.PathName)" alt="">
+                                    <div class="pd-o-img-wrap" data-src="https://localhost:44304@(Url.Content(image.PathName))">
+                                        <img class="u-img-fluid" src="https://localhost:44304@(Url.Content(image.PathName))" data-zoom-image="https://localhost:44304@(Url.Content(image.PathName))" alt="">
                                     </div>
                                 }
                             </div>
@@ -54,7 +54,7 @@
                                     {
                                         <div>
 
-                                            <img class="u-img-fluid" src="@Url.Content(image.PathName)" alt="">
+                                            <img class="u-img-fluid" src="https://localhost:44304(@Url.Content(image.PathName))" alt="">
                                         </div>
                                     }
                                 </div>
