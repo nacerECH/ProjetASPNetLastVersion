@@ -88,7 +88,7 @@ namespace ProjectAspNETv2.Controllers
         }*/
   
         
-        public ActionResult Shop( int? cat, int page = 1, int pageSize = 20)
+        public ActionResult Shop( int? cat, int page = 1, int pageSize = 10)
         {
             if (User.Identity.IsAuthenticated)
             {

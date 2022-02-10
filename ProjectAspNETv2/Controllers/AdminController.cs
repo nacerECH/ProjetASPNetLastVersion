@@ -328,7 +328,7 @@ namespace ProjectAspNETv2.Controllers
                 int Selected_Value = int.Parse(e);
 
                 Proprietaire p = db.Proprietaires.Find(Selected_Value);
-                ViewBag.s = Selected_Value;
+                
 
                 // ------------------------ STATS1 CAT/VUES
 
@@ -384,6 +384,7 @@ namespace ProjectAspNETv2.Controllers
                 var data2 = new List<Vue>();
 
                 // initialiser les vues 
+               
 
                 foreach (Vue v in vues)
                 {
@@ -399,7 +400,8 @@ namespace ProjectAspNETv2.Controllers
 
                 foreach (DateTime dt in Dates)
                 {
-                    foreach (var v in vues)
+                    p2 = 0;
+                    foreach (var v in data2)
                     {
 
                         DateTime d = (DateTime)v.created_at;
@@ -407,6 +409,7 @@ namespace ProjectAspNETv2.Controllers
                         {
                             p2++;
                         }
+                       
 
                     }
 
@@ -455,26 +458,27 @@ namespace ProjectAspNETv2.Controllers
             string[] xv = { dateAuj6.ToString("dd/MM"), dateAuj5.ToString("dd/MM"), dateAuj4.ToString("dd/MM"), dateAuj3.ToString("dd/MM"), dateAuj2.ToString("dd/MM"), dateAuj1.ToString("dd/MM"), dateAuj0.ToString("dd/MM") };
             var yv = new List<int>();
             int c;
+            DateTime ddt;
 
-            foreach(Proprietaire p in data)
-            {
 
-            }
 
-            foreach(DateTime dt in Dates)
+           
+            foreach (DateTime dt in Dates)
             {
                 c = 0;
                 foreach (Proprietaire p in data)
                 {
-                    DateTime ddt = (DateTime)p.created_at;
-                    if (dt.Month == ddt.Month || dt.Day == ddt.Day || dt.Day == ddt.Day)
+                     ddt = (DateTime)p.created_at;
+                    if ( dt.Day == ddt.Day)
                     {
                         c++;
                     }
+                    
+                    
                 }
-
                 yv.Add(c);
-                
+
+
             }
 
             new System.Web.Helpers.Chart(width: 800, height: 200)

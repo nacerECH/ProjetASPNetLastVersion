@@ -26,21 +26,7 @@
     </script>
 </head>
 <!-- [ breadcrumb ] start -->
-<div class="page-header">
-    <div class="page-block">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="page-header-title">
-                </div>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- [ breadcrumb ] end -->
 <div class="main-body">
     <div class="page-wrapper">
@@ -60,9 +46,9 @@
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
-                                @Html.LabelFor(model => model.description_, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.description_, htmlAttributes: new { @class = "control-label col-md-2", style = "color:#242424;" })
                                 <div class="col-md-10">
-                                    <div class="form-group">
+                                    <div class="form-group" >
 
                                         @Html.TextAreaFor(model => model.description_, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.description_, "", new { @class = "text-danger" })
@@ -71,9 +57,9 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2", style = "color:#242424;" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control"} })
                                     @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -119,9 +105,9 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2", style = "color:#242424;" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", style = "color:#242424;" } })
                                     @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -129,7 +115,7 @@
 
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.livrable, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.livrable, htmlAttributes: new { @class = "control-label col-md-2", style = "color:#242424;" })
                                 <div class="col-md-10">
                                     <div class="checkbox">
 
@@ -152,7 +138,7 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.garantee, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.garantee, htmlAttributes: new { @class = "control-label col-md-2", style = "color:#242424;" })
                                 <div class="col-md-10">
                                     <div class="checkbox">
 
@@ -175,7 +161,7 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.categoryId, "categoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.categoryId, "categoryId", htmlAttributes: new { @class = "control-label col-md-2", style = "color:#242424;" })
                                 <div class="col-md-10">
                                     @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
@@ -185,7 +171,7 @@
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
                                     <input type="file" multiple="multiple" name="files" class="form-control" id="files">
-                                    <label class="control-label" for="files">Choose file</label>
+                                    <label class="control-label" for="files" style="color:#242424;">Choose file</label>
                                 </div>
                                 <span class="text-danger">
                                     @ViewBag.FileStatus

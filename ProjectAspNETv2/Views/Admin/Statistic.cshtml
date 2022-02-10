@@ -69,27 +69,32 @@ chart2.render();
     <img src="@Url.Action("MyChart")" />
     <hr>
 
-    <h5 class="tab-content">  Selectionner  un proprietaire pour voir leur statistiques </h5>
-    @using (Html.BeginForm("Get_Seller_Statistics", "Admin", FormMethod.Get))
-    {
+   
+    <div class="tab-content">
+        <h3> Selectionner  un proprietaire pour voir leur statistiques: </h3>  <br />
+        @using (Html.BeginForm("Get_Seller_Statistics", "Admin", FormMethod.Get))
+        {
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
+            <div class="input-group mb-3" style="background-color:white">
+                <div style="margin-left:25px" class="input-group-prepend">
 
-                <input class="btn btn-outline-secondary" type="submit" value="Voir" />
+                    <input class="btn btn-outline-primary" type="submit" value="Voir" />
+                </div>
+
+                @Html.DropDownList("e", "Select Seller")
+
+
             </div>
+        }
+    </div>
 
-            @Html.DropDownList("e", "Select Seller")
-
-
-        </div>
-    }
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
         <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Vues/jours</a>
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Vues/Category</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Vues/Category</a>
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"> Vues/Jours</a>
         </li>
 
     </ul>

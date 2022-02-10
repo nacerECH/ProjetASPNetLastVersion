@@ -8,12 +8,7 @@
 
 
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-        <button class="btn btn-primary" type="button">Button</button>
-    </div>
-</div>
+
 
 <div class="row">
 
@@ -40,9 +35,9 @@
                     </div>
                     <a href="/Admin/Details/@item.Id" class="label theme-bg2 text-white f-12"> Details</a>
 
-                </div>
-                <div class="card-block">
-                    <div class="row align-items-center justify-content-center card-active">
+                
+               
+                    <div style="margin: 10px" class="row align-items-center justify-content-center card-active">
                         <div class="col-6">
                             <h6 class="text-center m-b-10">
 
@@ -52,8 +47,8 @@
                                     <input type="hidden" name="id" id="id2" value="@item.Id" />
 
                                     <input type="hidden" name="etat" id="etst" value="Confirm" />
-                                 
-                                    <button type="submit" class="btn btn-primary btn-sm"> Confirmer</button>
+
+                                    <button type="submit" class="label theme-bg2 text-white f-12"> Confirmer</button>
 
                                 }
                             </h6>
@@ -68,11 +63,12 @@
 
                                     <input type="hidden" name="etat" id="etst" value="Reject" />
 
-                                    
-                                    <button type="submit" class="btn btn-danger btn-sm" > Rejeter</button>
+
+                                    <button type="submit" class="label theme-bg2 text-white f-12"> Rejeter</button>
 
                                 }
                             </h6>
+
 
                         </div>
                     </div>
