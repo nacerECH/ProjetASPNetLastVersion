@@ -147,9 +147,17 @@
                             <div class="pro-head">
                                 <img src="@Url.Content(@ViewBag.img)" class="img-radius" alt="User-Profile-Image">
                                 <span> @ViewBag.pname  </span>
-                                <a href="/Account/LogOff" " class="dud-logout" title="Logout">
-                                    <i class="feather icon-log-out"></i>
-                                </a>
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="dud-logout" title="Logout">
+                                        <i class="feather icon-log-out"></i>
+
+
+                                    </a>
+                                }
+
                             </div>
                             <ul class="pro-body">
                                 <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
@@ -165,7 +173,7 @@
     <!-- [ Header ] end -->
     <!-- [ Main Content ] start -->
     <div class="pcoded-main-container">
-        <div style="float:right ; margin:20px" id="google_translate_element">
+        <div style="float:left; position:fixed; bottom:50px; left:20px; z-index:1150;" id="google_translate_element">
 
 
 

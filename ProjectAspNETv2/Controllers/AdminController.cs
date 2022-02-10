@@ -12,6 +12,7 @@ using ProjectAspNETv2.Models;
 
 namespace ProjectAspNETv2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
 
