@@ -397,7 +397,7 @@ namespace ProjectAspNETv2.Controllers
 
                 int p2 = 0;
 
-
+                 Dates.Reverse();
                 foreach (DateTime dt in Dates)
                 {
                     p2 = 0;

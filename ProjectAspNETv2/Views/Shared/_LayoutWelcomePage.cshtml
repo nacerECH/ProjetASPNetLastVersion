@@ -68,6 +68,7 @@
 </head>
 <body class="config" id="js-scrollspy-trigger">
 
+    @if (!Request.Url.ToString().Contains("/Welcome/Product")) { 
     <div style="float:left; bottom:20px; z-index:1000; left: 20px; position:fixed; " id="google_translate_element">
 
 
@@ -85,6 +86,7 @@
 
         <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </div>
+    } 
 
 
     <div class="preloader is-active">
@@ -296,11 +298,11 @@
 
         $(document).ready(function () {
 
-            $(".goog-te-banner-frame.skiptranslate").hide();
+           
 
             $("select.goog-te-combo").on("change", function () {
 
-                $(".goog-te-banner-frame.skiptranslate").remove();
+                $(".goog-te-banner-frame.skiptranslate").hide();
             });
 
         });
