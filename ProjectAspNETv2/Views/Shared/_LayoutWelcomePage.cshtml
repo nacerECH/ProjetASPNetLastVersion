@@ -67,6 +67,26 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="config" id="js-scrollspy-trigger">
+
+    <div style="float:left; margin:20px; bottom:20px; z-index:100; left: 20px; position:fixed; " id="google_translate_element">
+
+
+
+
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement(
+                    { pageLanguage: 'en' },
+                    'google_translate_element'
+
+                );
+            }
+        </script>
+
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </div>
+
+
     <div class="preloader is-active">
         <div class="preloader__wrap">
 
@@ -75,7 +95,8 @@
     </div>
 
     <!--====== Main Header ======-->
-    <header class="header--style-2">
+    <header class="header--style-2" style="top :20px;">
+
 
         <!--====== Nav 1 ======-->
         <nav class="primary-nav-wrapper">
@@ -89,7 +110,7 @@
                     <a class="main-logo" href="/Welcome/Index">
 
                         <img width="30%" height="100%" src="@Url.Content("/Content/theme/images/projectLogo.png")" alt="OnlineMarket" />
-                        
+
                     </a>
                     <!--====== End - Main Logo ======-->
                     <!--====== Search Form ======-->
@@ -145,7 +166,7 @@
                                 </li>
 
 
-                                <li class="has-dropdown"  data-tooltip="tooltip" data-placement="left" title="Account">
+                                <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Account">
 
                                     <a style="display:flex; align-items: center; justify-content:center;"><i class="far fa-user-circle"></i>&nbsp;<p style="float:right;">@ViewBag.pname</p></a>
 
@@ -251,7 +272,7 @@
 
     </footer>
 
-   
+
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -260,15 +281,18 @@
 
 
     @RenderSection("scripts", required: false)
-   @* <script>
-        window.ga = function () {
-            ga.q.push(arguments)
-        };
-        ga.q = [];
-        ga.l = +new Date;
-        ga('create', 'UA-XXXXX-Y', 'auto');
-        ga('send', 'pageview')
-    </script>*@
+    @* <script>
+            window.ga = function () {
+                ga.q.push(arguments)
+            };
+            ga.q = [];
+            ga.l = +new Date;
+            ga('create', 'UA-XXXXX-Y', 'auto');
+            ga('send', 'pageview')
+        </script>*@
+
+
+
     <noscript>
         <div class="app-setting">
             <div class="container">
@@ -284,6 +308,7 @@
             </div>
         </div>
     </noscript>
+
 </body>
 </html>
 

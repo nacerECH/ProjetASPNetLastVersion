@@ -53,7 +53,7 @@ namespace ProjectAspNETv2.Controllers
             DateTime now = DateTime.Now;
             /*------- getting the newest products section----------*/
 
-            ViewBag.newestProducts = DB.Produits.Where(p => DbFunctions.DiffHours((DateTime)p.createdAt,now) < 24).OrderByDescending(p=>(DateTime)p.createdAt).ToList();
+            ViewBag.newestProducts = DB.Produits.Where(p => DbFunctions.DiffDays((DateTime)p.createdAt,now) < 7).OrderByDescending(p=>(DateTime)p.createdAt).ToList();
 
             /*-------end - getting the newest products section----------*/
 
